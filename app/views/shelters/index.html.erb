@@ -4,7 +4,7 @@
 
 <% @shelters.each do |shelter| %>
   <hr>
-  <h2><%= shelter.name %></h2>
+  <h2><a href="/shelters/<%= shelter.id %>"><%= shelter.name %></a></h2>
   <h3><%= shelter.address %></h3>
   <h3><%= shelter.city %>, <%= shelter.state %> <%= shelter.zip %></h3>
 <% end %>
