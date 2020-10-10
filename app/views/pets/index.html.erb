@@ -1,17 +1,14 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Pets</h1>
 
 <% @pets.each do |pet| %>
   <hr>
-  <%= image_tag "#{pet.image}" %>
-  <%= pet.name %>
+  <%= image_tag pet.image %>
+  <%= link_to pet.name, "/pets/#{pet.id}" %>
   <%= pet.age %>
   <%= pet.sex %>
-  <%= pet.adoptable %>
+  <%= pet.adoptable ? "Adoptable" : "Pending Adoption" %>
   <%= pet.shelter.name %>
 
-  <%= link_to 'Show', pet %>
   <%= link_to 'Edit', edit_pet_path(pet) %>
   <%= link_to 'Destroy', pet, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
