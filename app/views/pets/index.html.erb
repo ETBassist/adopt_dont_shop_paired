@@ -6,7 +6,7 @@
   <%= link_to pet.name, "/pets/#{pet.id}" %>
   <%= pet.age %>
   <%= pet.sex %>
-  <%= pet.adoptable ? "Adoptable" : "Pending Adoption" %>
+  <%= pet.status %>
   <%= pet.shelter.name %>
 
   <%= link_to 'Edit', edit_pet_path(pet) %>

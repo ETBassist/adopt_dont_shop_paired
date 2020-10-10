@@ -45,6 +45,7 @@ pet_1 = Pet.create!(
   name: "Max",
   age: "14",
   sex: "Female",
+  description: "A nice doggo",
   adoptable: false,
   shelter: shelter_1
 )
@@ -54,6 +55,7 @@ pet_2 = Pet.create!(
   name: "Toby",
   age: "7",
   sex: "Male",
+  description: "A nice doggo",
   adoptable: true,
   shelter: shelter_1
 )
@@ -63,6 +65,7 @@ pet_3 = Pet.create!(
   name: "Mojo",
   age: "11",
   sex: "Female",
+  description: "A nice doggo",
   adoptable: true,
   shelter: shelter_2
 )
@@ -72,6 +75,7 @@ pet_4 = Pet.create!(
   name: "Harper",
   age: "5",
   sex: "Female",
+  description: "A nice doggo",
   adoptable: true,
   shelter: shelter_2
 )
@@ -81,6 +85,7 @@ pet_5 = Pet.create!(
   name: "Fido",
   age: "2",
   sex: "Male",
+  description: "A nice doggo",
   adoptable: true,
   shelter: shelter_3
 )
@@ -90,6 +95,7 @@ pet_6 = Pet.create!(
   name: "Eli",
   age: "9",
   sex: "Male",
+  description: "A nice doggo",
   adoptable: false,
   shelter: shelter_4
 )

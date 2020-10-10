@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @pet.image %>
-</p>
+<%= image_tag @pet.image %>
 
 <p>
   <strong>Name:</strong>
   <%= @pet.name %>
 </p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @pet.description %>
+</p>
+
 
 <p>
   <strong>Age:</strong>
@@ -21,13 +23,13 @@
 </p>
 
 <p>
-  <strong>Adoptable:</strong>
-  <%= @pet.adoptable %>
+  <strong>Status:</strong>
+  <%= @pet.status %>
 </p>
 
 <p>
   <strong>Shelter:</strong>
-  <%= @pet.shelter %>
+  <%= @pet.shelter.name %>
 </p>
 
 <%= link_to 'Edit', edit_pet_path(@pet) %> |

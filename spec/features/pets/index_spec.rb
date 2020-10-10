@@ -15,6 +15,7 @@ describe "When I visit /pets" do
       name: "Max",
       age: "14",
       sex: "Female",
+      description: "A nice doggo",
       adoptable: false,
       shelter: shelter
     )
@@ -24,6 +25,7 @@ describe "When I visit /pets" do
       name: "Toby",
       age: "7",
       sex: "Male",
+      description: "A nice doggo",
       adoptable: true,
       shelter: shelter
     )

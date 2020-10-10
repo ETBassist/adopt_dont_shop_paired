@@ -1,24 +1,33 @@
 require 'rails_helper'
 
-RSpec.describe "pets/show", type: :view do
-  before(:each) do
-    @pet = assign(:pet, Pet.create!(
-      image: "Image",
-      name: "Name",
-      age: "Age",
-      sex: "Sex",
-      adoptable: false,
-      shelter: nil
-    ))
-  end
+describe "When I visit pets/:id" do
 
-  it "renders attributes in <p>" do
-    render
-    expect(rendered).to match(/Image/)
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Age/)
-    expect(rendered).to match(/Sex/)
-    expect(rendered).to match(/false/)
-    expect(rendered).to match(//)
+  let(:shelter) { Shelter.create!(
+    name: "Will's Pet Shelter",
+    address: "123 Main St",
+    city: "Boulder",
+    state: "CO",
+    zip: "80309"
+  ) }
+
+  let(:pet) { Pet.create!(
+    image: "https://placedog.net/280?id=1",
+    name: "Max",
+    age: "14",
+    sex: "Female",
+    description: "A nice doggo",
+    adoptable: false,
+    shelter: shelter
+  ) }
+
+  it "I see the pet image, name, description, age, sex, status" do
+    visit "/pets/#{pet.id}"
+
+    expect(page).to have_xpath("//img[contains(@src,'#{pet.image}')]")
+    expect(page).to have_content(pet.name)
+    expect(page).to have_content(pet.description)
+    expect(page).to have_content(pet.age)
+    expect(page).to have_content(pet.sex)
+    expect(page).to have_content(pet.status)
   end
 end
