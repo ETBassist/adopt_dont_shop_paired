@@ -1,34 +1,40 @@
 require 'rails_helper'
 
-RSpec.describe "pets/index", type: :view do
-  before(:each) do
-    assign(:pets, [
-      Pet.create!(
-        image: "Image",
-        name: "Name",
-        age: "Age",
-        sex: "Sex",
-        adoptable: false,
-        shelter: nil
-      ),
-      Pet.create!(
-        image: "Image",
-        name: "Name",
-        age: "Age",
-        sex: "Sex",
-        adoptable: false,
-        shelter: nil
-      )
-    ])
-  end
+describe "When I visit /pets" do
+  it "I see each pet and their info" do
+    shelter = Shelter.create!(
+      name: "Will's Pet Shelter",
+      address: "123 Main St",
+      city: "Boulder",
+      state: "CO",
+      zip: "80309"
+    )
 
-  it "renders a list of pets" do
-    render
-    assert_select "tr>td", text: "Image".to_s, count: 2
-    assert_select "tr>td", text: "Name".to_s, count: 2
-    assert_select "tr>td", text: "Age".to_s, count: 2
-    assert_select "tr>td", text: "Sex".to_s, count: 2
-    assert_select "tr>td", text: false.to_s, count: 2
-    assert_select "tr>td", text: nil.to_s, count: 2
+    pet_1 = Pet.create!(
+      image: "https://placedog.net/280?id=1",
+      name: "Max",
+      age: "14",
+      sex: "Female",
+      adoptable: false,
+      shelter: shelter
+    )
+
+    pet_2 = Pet.create!(
+      image: "https://placedog.net/280?id=2",
+      name: "Toby",
+      age: "7",
+      sex: "Male",
+      adoptable: true,
+      shelter: shelter
+    )
+
+    visit '/pets'
+
+    expect(page).to have_xpath("//img[contains(@src,'#{pet_1.image}')]")
+    expect(page).to have_content(pet_1.name)
+    expect(page).to have_content(pet_1.age)
+    expect(page).to have_content(pet_1.sex)
+    expect(page).to have_content(pet_1.shelter.name)
+
   end
 end
