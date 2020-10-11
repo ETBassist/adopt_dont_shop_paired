@@ -1,5 +1,6 @@
 <h1>All Shelters</h1>
 
+<%= link_to 'Sort By: Number of Adoptable Pets', "/shelters/?sort=true"%> |
 <%= link_to 'New Shelter', "/shelters/new"%>
 
 <% @shelters.each do |shelter| %>
