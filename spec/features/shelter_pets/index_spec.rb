@@ -70,4 +70,9 @@ describe "When I visit /shelter/:shelter_id/pets" do
     expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets")
     expect(page).to have_content('Roxie')
   end
+
+  it 'I see a count of pets' do
+    visit "/shelters/#{@shelter_1.id}/pets"
+    expect(page).to have_content('Total pets: 1')
+  end
 end
