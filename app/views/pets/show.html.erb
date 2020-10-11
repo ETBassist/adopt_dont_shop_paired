@@ -32,5 +32,5 @@
   <%= @pet.shelter.name %>
 </p>
 
-<%= link_to 'Edit', edit_pet_path(@pet) %> |
-<%= link_to 'Back', pets_path %>
+<%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> |
+<%= link_to 'To all pets', "/pets" %>

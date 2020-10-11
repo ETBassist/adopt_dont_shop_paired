@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Pets Index" do
+describe "When I visit /shelter/:shelter_id/pets" do
   before (:each) do
     @shelter_1 = Shelter.create!(
       name: "Will's Pet Shelter",
@@ -39,21 +39,19 @@ describe "Pets Index" do
     )
   end
 
-  describe "When I visit /pets" do
-    it "I see each pet and their info" do
-      visit '/pets'
+  it "I see each pet in that shelter and their info" do
+    visit "/shelters/#{@shelter_1.id}/pets"
 
-      expect(page).to have_xpath("//img[contains(@src,'#{@pet_1.image}')]")
-      expect(page).to have_content(@pet_1.name)
-      expect(page).to have_content(@pet_1.age)
-      expect(page).to have_content(@pet_1.sex)
-      expect(page).to have_content(@pet_1.shelter.name)
+    expect(page).to have_xpath("//img[contains(@src,'#{@pet_1.image}')]")
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_1.age)
+    expect(page).to have_content(@pet_1.sex)
+    expect(page).to have_content(@pet_1.shelter.name)
 
-      expect(page).to have_xpath("//img[contains(@src,'#{@pet_2.image}')]")
-      expect(page).to have_content(@pet_2.name)
-      expect(page).to have_content(@pet_2.age)
-      expect(page).to have_content(@pet_2.sex)
-      expect(page).to have_content(@pet_2.shelter.name)
-    end
+    expect(page).to_not have_xpath("//img[contains(@src,'#{@pet_2.image}')]")
+    expect(page).to_not have_content(@pet_2.name)
+    expect(page).to_not have_content(@pet_2.age)
+    expect(page).to_not have_content(@pet_2.sex)
+    expect(page).to_not have_content(@pet_2.shelter.name)
   end
 end

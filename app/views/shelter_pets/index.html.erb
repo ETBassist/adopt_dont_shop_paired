@@ -1,4 +1,4 @@
-<h1>Pets</h1>
+<h1>Shelter Pets</h1>
 
 <% @pets.each do |pet| %>
   <hr>
@@ -6,8 +6,6 @@
   <%= link_to pet.name, "/pets/#{pet.id}" %>
   <%= pet.age %>
   <%= pet.sex %>
-  <%= pet.status %>
-  <%= pet.shelter.name %>
 
   <%= link_to 'Destroy', "/pets/#{pet.id}", method: :delete %>
 <% end %>
