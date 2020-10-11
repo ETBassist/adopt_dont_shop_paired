@@ -90,4 +90,18 @@ describe "When I visit /shelter/:shelter_id/pets" do
     visit "/shelters/#{@shelter_1.id}/pets"
     expect(@pet_3.name). to appear_before(@pet_1.name)
   end
+
+  it 'I see filter by adoption status' do
+    visit "/shelters/#{@shelter_1.id}/pets"
+
+    click_link 'Adoptable Pets'
+
+    expect(page).to have_content(@pet_3.name)
+    expect(page).to_not have_content(@pet_1.name)
+
+    click_link 'Pets Pending Adoption'
+
+    expect(page).to_not have_content(@pet_3.name)
+    expect(page).to have_content(@pet_1.name)
+  end
 end
