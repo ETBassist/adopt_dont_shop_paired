@@ -3,6 +3,11 @@
 <%= link_to 'Adoptable Pets', "/pets?adoptable=true" %> |
 <%= link_to 'Pets Pending Adoption', "/pets?adoptable=false" %>
 
+<p>
+  <strong>
+    Total pets: <%= @pets.count %>
+  </strong>
+</p>
 
 <% @pets.each do |pet| %>
   <hr>
