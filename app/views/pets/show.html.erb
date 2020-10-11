@@ -32,5 +32,11 @@
   <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %>
 </p>
 
+<% if @pet.adoptable? %>
+  <%= link_to "Change to Pending Adoption", "/pets/#{@pet.id}/pending", method: :patch %> |
+<% else %>
+  <%= link_to "Change to Adoptable", "/pets/#{@pet.id}/adoptable", method: :patch %> |
+<% end %>
+
 <%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> |
 <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %> |

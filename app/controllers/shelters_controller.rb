@@ -1,6 +1,14 @@
 class SheltersController < ApplicationController
   def index
-    @shelters = Shelter.all
+    if params[:sort].nil?
+      @shelters = Shelter.all
+    elsif params[:sort] == "adoptable"
+      @shelters = Shelter.all.sort_by do |shelter|
+        shelter.pets.count(&:adoptable)
+      end.reverse
+    else #alphabetical
+      @shelters = Shelter.all.sort_by(&:name)
+    end
   end
 
   def show

@@ -3,28 +3,28 @@
 <%= form_tag "/pets/#{@pet.id}", method: :patch do %>
   <div class="field">
     <%= label_tag :image %>
-    <%= text_field_tag :image %>
+    <%= text_field_tag :image, "#{@pet.image}" %>
   </div>
 
   <div class="field">
     <%= label_tag :name %>
-    <%= text_field_tag :name %>
+    <%= text_field_tag :name, "#{@pet.name}" %>
   </div>
 
   <div class="field">
     <%= label_tag :description %>
-    <%= text_area_tag :description %>
+    <%= text_area_tag :description, "#{@pet.description}" %>
   </div>
 
   <div class="field">
     <%= label_tag :age %>
-    <%= text_field_tag :age %>
+    <%= text_field_tag :age, "#{@pet.age}" %>
   </div>
 
   <div class="field">
-    <%= radio_button_tag(:sex, "Male") %>
+    <%= radio_button_tag(:sex, "Male", @pet.sex == "Male") %>
       <%= label_tag(:sex_Male, "Male") %>
-    <%= radio_button_tag(:sex, "Female") %>
+    <%= radio_button_tag(:sex, "Female", @pet.sex == "Female") %>
       <%= label_tag(:sex_Female, "Female") %>
   </div>
 

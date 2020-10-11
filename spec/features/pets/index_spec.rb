@@ -55,5 +55,29 @@ describe "Pets Index" do
       expect(page).to have_content(@pet_2.sex)
       expect(page).to have_content(@pet_2.shelter.name)
     end
+
+    it 'I see a count of pets' do
+      visit "/pets"
+      expect(page).to have_content('Total pets: 2')
+    end
+
+    it 'I see adoptable pets listed before pending' do
+      visit "/pets"
+      expect(@pet_2.name). to appear_before(@pet_1.name)
+    end
+
+    it 'I see filter by adoption status' do
+      visit "/pets"
+
+      click_link 'Adoptable Pets'
+
+      expect(page).to have_content(@pet_2.name)
+      expect(page).to_not have_content(@pet_1.name)
+
+      click_link 'Pets Pending Adoption'
+
+      expect(page).to_not have_content(@pet_2.name)
+      expect(page).to have_content(@pet_1.name)
+    end
   end
 end

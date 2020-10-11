@@ -99,3 +99,13 @@ pet_6 = Pet.create!(
   adoptable: false,
   shelter: shelter_4
 )
+
+pet_7 = Pet.create!(
+  image: "https://placedog.net/280?id=7",
+  name: "Boogie",
+  age: "5",
+  sex: "Male",
+  description: "A nice doggo",
+  adoptable: true,
+  shelter: shelter_2
+)
