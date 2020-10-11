@@ -1,0 +1,37 @@
+
+<%= image_tag @pet.image %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pet.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @pet.description %>
+</p>
+
+
+<p>
+  <strong>Age:</strong>
+  <%= @pet.age %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @pet.sex %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @pet.status %>
+</p>
+
+<p>
+  <strong>Shelter:</strong>
+  <%= @pet.shelter.name %>
+</p>
+
+<%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> |
+<%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %> |
+<%= link_to 'To all pets', "/pets" %>

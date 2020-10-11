@@ -1,0 +1,32 @@
+<h1>Pets</h1>
+
+<% @pets.each do |pet| %>
+  <hr>
+  <%= image_tag pet.image %>
+  <p>
+    <strong>Name:</strong>
+    <%= link_to pet.name, "/pets/#{pet.id}" %>
+  </p>
+
+  <p>
+    <strong>Age:</strong>
+    <%= pet.age %>
+  </p>
+
+  <p>
+    <strong>Sex:</strong>
+    <%= pet.sex %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= pet.status %>
+  </p>
+
+  <p>
+    <strong>Shelter:</strong>
+    <%= pet.shelter.name %>
+  </p>
+
+  <%= link_to 'Destroy', "/pets/#{pet.id}", method: :delete %>
+<% end %>

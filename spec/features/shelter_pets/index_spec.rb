@@ -1,0 +1,73 @@
+require 'rails_helper'
+
+describe "When I visit /shelter/:shelter_id/pets" do
+  before (:each) do
+    @shelter_1 = Shelter.create!(
+      name: "Will's Pet Shelter",
+      address: "123 Main St",
+      city: "Boulder",
+      state: "CO",
+      zip: "80309"
+    )
+
+    @shelter_2 = Shelter.create!(
+      name: "Pet Rescue",
+      address: "10 Normal Rd",
+      city: "Denver",
+      state: "CO",
+      zip: "80249"
+    )
+
+    @pet_1 = Pet.create!(
+      image: "https://placedog.net/280?id=1",
+      name: "Max",
+      age: "14",
+      sex: "Female",
+      description: "A nice doggo",
+      adoptable: false,
+      shelter: @shelter_1
+    )
+
+    @pet_2 = Pet.create!(
+      image: "https://placedog.net/280?id=2",
+      name: "Toby",
+      age: "7",
+      sex: "Male",
+      description: "A nice doggo",
+      adoptable: true,
+      shelter: @shelter_2
+    )
+  end
+
+  it "I see each pet in that shelter and their info" do
+    visit "/shelters/#{@shelter_1.id}/pets"
+
+    expect(page).to have_xpath("//img[contains(@src,'#{@pet_1.image}')]")
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_1.age)
+    expect(page).to have_content(@pet_1.sex)
+
+    expect(page).to_not have_xpath("//img[contains(@src,'#{@pet_2.image}')]")
+    expect(page).to_not have_content(@pet_2.name)
+    expect(page).to_not have_content(@pet_2.age)
+    expect(page).to_not have_content(@pet_2.sex)
+  end
+
+  it 'I can add a new pet' do
+    visit "/shelters/#{@shelter_1.id}/pets"
+
+    click_link 'Create Pet'
+
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets/new")
+
+    fill_in 'Image', with: "https://placedog.net/280?id=1"
+    fill_in 'Name', with: 'Roxie'
+    fill_in 'Age', with: '14'
+    fill_in 'Description', with: "A nice doggo"
+    choose 'Male'
+    click_on 'Create Pet'
+
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets")
+    expect(page).to have_content('Roxie')
+  end
+end
