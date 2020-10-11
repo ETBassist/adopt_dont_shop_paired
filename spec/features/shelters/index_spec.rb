@@ -75,5 +75,15 @@ describe 'As a visitor' do
 
       expect(@shelter_1.name).to_not appear_before(@shelter_2.name)
     end
+
+    it 'I can sort by alphabetical order' do
+      visit '/shelters'
+
+      expect(@shelter_1.name).to appear_before(@shelter_2.name)
+
+      click_on 'Sort By: Alphabetical'
+
+      expect(@shelter_1.name).to_not appear_before(@shelter_2.name)
+    end
   end
 end

@@ -2,10 +2,12 @@ class SheltersController < ApplicationController
   def index
     if params[:sort].nil?
       @shelters = Shelter.all
-    else
+    elsif params[:sort] == "adoptable"
       @shelters = Shelter.all.sort_by do |shelter|
         shelter.pets.count(&:adoptable)
       end.reverse
+    else #alphabetical
+      @shelters = Shelter.all.sort_by(&:name)
     end
   end
 
