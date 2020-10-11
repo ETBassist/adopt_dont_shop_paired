@@ -46,12 +46,28 @@ describe "When I visit /shelter/:shelter_id/pets" do
     expect(page).to have_content(@pet_1.name)
     expect(page).to have_content(@pet_1.age)
     expect(page).to have_content(@pet_1.sex)
-    expect(page).to have_content(@pet_1.shelter.name)
 
     expect(page).to_not have_xpath("//img[contains(@src,'#{@pet_2.image}')]")
     expect(page).to_not have_content(@pet_2.name)
     expect(page).to_not have_content(@pet_2.age)
     expect(page).to_not have_content(@pet_2.sex)
-    expect(page).to_not have_content(@pet_2.shelter.name)
+  end
+
+  it 'I can add a new pet' do
+    visit "/shelters/#{@shelter_1.id}/pets"
+
+    click_link 'Create Pet'
+
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets/new")
+
+    fill_in 'Image', with: "https://placedog.net/280?id=1"
+    fill_in 'Name', with: 'Roxie'
+    fill_in 'Age', with: '14'
+    fill_in 'Description', with: "A nice doggo"
+    choose 'Male'
+    click_on 'Create Pet'
+
+    expect(current_path).to eq("/shelters/#{@shelter_1.id}/pets")
+    expect(page).to have_content('Roxie')
   end
 end

@@ -30,4 +30,13 @@ describe "When I visit pets/:id" do
     expect(page).to have_content(pet.sex)
     expect(page).to have_content(pet.status)
   end
+
+  it "I can delete the pet" do
+    visit "/pets/#{pet.id}"
+
+    click_on 'Delete Pet'
+
+    expect(current_path).to eq('/pets')
+    expect(page).to_not have_content(pet.name)
+  end
 end

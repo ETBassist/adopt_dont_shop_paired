@@ -1,33 +1,41 @@
 require 'rails_helper'
 
-RSpec.describe "pets/edit", type: :view do
+RSpec.describe "When I visit the pets show page" do
   before(:each) do
-    @pet = assign(:pet, Pet.create!(
-      image: "MyString",
-      name: "MyString",
-      age: "MyString",
-      sex: "MyString",
+    @shelter_1 = Shelter.create!(
+      name: "Will's Pet Shelter",
+      address: "123 Main St",
+      city: "Boulder",
+      state: "CO",
+      zip: "80309"
+    )
+
+    @pet_1 = Pet.create!(
+      image: "https://placedog.net/280?id=1",
+      name: "Max",
+      age: "14",
+      sex: "Female",
+      description: "A nice doggo",
       adoptable: false,
-      shelter: nil
-    ))
+      shelter: @shelter_1
+    )
   end
 
-  it "renders the edit pet form" do
-    render
+  it "I can edit the pet" do
+    visit "/pets/#{@pet_1.id}"
 
-    assert_select "form[action=?][method=?]", pet_path(@pet), "post" do
+    click_link 'Update Pet'
 
-      assert_select "input[name=?]", "pet[image]"
+    expect(current_path).to eq("/pets/#{@pet_1.id}/edit")
 
-      assert_select "input[name=?]", "pet[name]"
+    fill_in 'Image', with: "https://placedog.net/280?id=1"
+    fill_in 'Name', with: 'Roxie'
+    fill_in 'Age', with: '14'
+    fill_in 'Description', with: "A nice doggo"
+    choose 'Female'
+    click_on 'Update Pet'
 
-      assert_select "input[name=?]", "pet[age]"
-
-      assert_select "input[name=?]", "pet[sex]"
-
-      assert_select "input[name=?]", "pet[adoptable]"
-
-      assert_select "input[name=?]", "pet[shelter_id]"
-    end
+    expect(current_path).to eq("/pets/#{@pet_1.id}")
+    expect(page).to have_content('Roxie')
   end
 end
