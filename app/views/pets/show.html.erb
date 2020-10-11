@@ -1,36 +1,37 @@
+<div class="pet">
+  <%= image_tag @pet.image %>
 
-<%= image_tag @pet.image %>
+  <p>
+    <strong>Name:</strong>
+    <%= link_to @pet.name, "/pets/#{@pet.id}" %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= link_to @pet.name, "/pets/#{@pet.id}" %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @pet.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @pet.description %>
+  </p>
 
 
-<p>
-  <strong>Age:</strong>
-  <%= @pet.age %>
-</p>
+  <p>
+    <strong>Age:</strong>
+    <%= @pet.age %>
+  </p>
 
-<p>
-  <strong>Sex:</strong>
-  <%= @pet.sex %>
-</p>
+  <p>
+    <strong>Sex:</strong>
+    <%= @pet.sex %>
+  </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @pet.status %>
-</p>
+  <p>
+    <strong>Status:</strong>
+    <%= @pet.status %>
+  </p>
 
-<p>
-  <strong>Shelter:</strong>
-  <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %>
-</p>
+  <p>
+    <strong>Shelter:</strong>
+    <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %>
+  </p>
+</div>
 
 <% if @pet.adoptable? %>
   <%= link_to "Change to Pending Adoption", "/pets/#{@pet.id}/pending", method: :patch %> |
@@ -38,5 +39,5 @@
   <%= link_to "Change to Adoptable", "/pets/#{@pet.id}/adoptable", method: :patch %> |
 <% end %>
 
-<%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> |
-<%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %> |
+<%= link_to 'Update Pet', "/pets/#{@pet.id}/edit", class: "Update" %> |
+<%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: "Delete" %> |
