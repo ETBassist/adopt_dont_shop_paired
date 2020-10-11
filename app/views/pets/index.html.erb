@@ -1,5 +1,9 @@
 <h1>Pets</h1>
 
+<%= link_to 'Adoptable Pets', "/pets?adoptable=true" %> |
+<%= link_to 'Pets Pending Adoption', "/pets?adoptable=false" %>
+
+
 <% @pets.each do |pet| %>
   <hr>
   <%= image_tag pet.image %>
