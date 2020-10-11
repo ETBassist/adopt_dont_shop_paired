@@ -38,5 +38,5 @@
   <%= link_to "Change to Adoptable", "/pets/#{@pet.id}/adoptable", method: :patch %> |
 <% end %>
 
-<%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> |
-<%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %> |
+<%= link_to 'Update Pet', "/pets/#{@pet.id}/edit", class: "Update" %> |
+<%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: "Delete" %> |
