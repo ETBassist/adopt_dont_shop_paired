@@ -8,5 +8,4 @@ class Pet < ApplicationRecord
       "Pending Adoption"
     end
   end
-
 end
