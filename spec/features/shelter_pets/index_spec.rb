@@ -37,6 +37,16 @@ describe "When I visit /shelter/:shelter_id/pets" do
       adoptable: true,
       shelter: @shelter_2
     )
+
+    @pet_3 = Pet.create!(
+      image: "https://placedog.net/280?id=3",
+      name: "Mojo",
+      age: "11",
+      sex: "Female",
+      description: "A nice doggo",
+      adoptable: true,
+      shelter: @shelter_1
+    )
   end
 
   it "I see each pet in that shelter and their info" do
@@ -73,6 +83,11 @@ describe "When I visit /shelter/:shelter_id/pets" do
 
   it 'I see a count of pets' do
     visit "/shelters/#{@shelter_1.id}/pets"
-    expect(page).to have_content('Total pets: 1')
+    expect(page).to have_content('Total pets: 2')
+  end
+
+  it 'I see adoptable pets listed before pending' do
+    visit "/shelters/#{@shelter_1.id}/pets"
+    expect(@pet_3.name). to appear_before(@pet_1.name)
   end
 end

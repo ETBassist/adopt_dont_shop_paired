@@ -55,5 +55,10 @@ describe "Pets Index" do
       expect(page).to have_content(@pet_2.sex)
       expect(page).to have_content(@pet_2.shelter.name)
     end
+
+    it 'I see adoptable pets listed before pending' do
+      visit "/pets"
+      expect(@pet_2.name). to appear_before(@pet_1.name)
+    end
   end
 end
