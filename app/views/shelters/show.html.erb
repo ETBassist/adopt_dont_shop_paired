@@ -1,11 +1,16 @@
-<a href="/shelters">Back to Shelters</a>
+<h2>
+  <%= link_to @shelter.name, "/shelters/#{@shelter.id}"%>
+</h2>
 
-<h2><%= @shelter.name %></h2>
-<p><%= @shelter.address %></p>
-<p><%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %></p>
-<br>
-<%= link_to "View Pets", "/shelters/#{@shelter.id}/pets"%>
 
-<%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit"%>
+<p>
+  <strong>Address:</strong>
+  <%= @shelter.address %>,
+  <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %>
+</p>
 
-<%= button_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %>
+<%= link_to "View Pets", "/shelters/#{@shelter.id}/pets"%> |
+
+<%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit"%> |
+
+<%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete %>

@@ -9,6 +9,11 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
+  <header>
+    <%= link_to 'Shelters', "/shelters" %> |
+    <%= link_to 'Pets', "/pets" %>
+  </header>
+
   <body>
     <%= yield %>
   </body>

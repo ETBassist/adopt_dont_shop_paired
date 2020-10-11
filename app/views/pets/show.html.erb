@@ -3,7 +3,7 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @pet.name %>
+  <%= link_to @pet.name, "/pets/#{@pet.id}" %>
 </p>
 
 <p>
@@ -29,9 +29,8 @@
 
 <p>
   <strong>Shelter:</strong>
-  <%= @pet.shelter.name %>
+  <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %>
 </p>
 
 <%= link_to 'Update Pet', "/pets/#{@pet.id}/edit" %> |
 <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete %> |
-<%= link_to 'To all pets', "/pets" %>
