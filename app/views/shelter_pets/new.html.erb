@@ -1,6 +1,6 @@
-<h1>Edit Pet</h1>
+<h1>New Pet</h1>
 
-<%= form_tag "/pets/#{@pet.id}", method: :patch do %>
+<%= form_tag "/shelters/#{@shelter.id}/pets" do %>
   <div class="field">
     <%= label_tag :image %>
     <%= text_field_tag :image %>
@@ -29,6 +29,6 @@
   </div>
 
   <div class="actions">
-    <%= submit_tag 'Update Pet'%>
+    <%= submit_tag 'Create Pet'%>
   </div>
 <% end %>
