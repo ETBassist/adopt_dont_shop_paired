@@ -39,4 +39,14 @@ describe "When I visit pets/:id" do
     expect(current_path).to eq('/pets')
     expect(page).to_not have_content(pet.name)
   end
+
+  it "I can change adoption status" do
+    visit "/pets/#{pet.id}"
+
+    click_on 'Change to Adoptable'
+    expect(page).to have_content('Status: Adoptable')
+
+    click_on 'Change to Pending Adoption'
+    expect(page).to have_content('Status: Pending Adoption')
+  end
 end
