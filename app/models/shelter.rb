@@ -7,7 +7,7 @@ class Shelter < ApplicationRecord
         shelter.pets.count(&:adoptable)
       end.reverse
     elsif param == "alphabetical"
-      Shelter.all.order(:name)
+      Shelter.order(:name)
     else
       Shelter.all
     end
