@@ -1,12 +1,6 @@
 class PetsController < ApplicationController
   def index
-    if params[:adoptable].nil?
-      @pets = Pet.all.sort_by(&:status)
-    elsif params[:adoptable] == "false"
-      @pets = Pet.where(adoptable: false)
-    else
-      @pets = Pet.where(adoptable: true)
-    end
+    @pets = Pet.display_by(params[:adoptable])
   end
 
   def show

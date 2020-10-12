@@ -1,14 +1,7 @@
 class ShelterPetsController < ApplicationController
   def index
     @shelter = Shelter.find(params[:shelter_id])
-
-    if params[:adoptable].nil?
-      @pets = @shelter.pets.sort_by(&:status)
-    elsif params[:adoptable] == "false"
-      @pets = @shelter.pets.where(adoptable: false)
-    else
-      @pets = @shelter.pets.where(adoptable: true)
-    end
+    @pets = @shelter.pets.display_by(params[:adoptable])
   end
 
   def new
