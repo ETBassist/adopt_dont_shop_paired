@@ -7,7 +7,7 @@ class Pet < ApplicationRecord
     elsif param == "false"
       Pet.where(adoptable: false)
     else
-      Pet.all.sort_by(&:status)
+      Pet.order(adoptable: :desc)
     end
   end
 
