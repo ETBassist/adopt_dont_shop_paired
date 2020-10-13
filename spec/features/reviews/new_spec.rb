@@ -18,6 +18,7 @@ describe 'As a visitor' do
       zip: "80309"
     )
   end
+
   describe 'When I visit shelter show page' do
     it 'I can create a new review' do
       visit "/shelters/#{@shelter.id}"
@@ -36,6 +37,19 @@ describe 'As a visitor' do
       expect(current_path).to eq("/shelters/#{@shelter.id}")
       expect(page).to have_content('They are so great!')
       expect(page).to have_content('William Told')
+    end
+
+    it "I incorrectly fill in a new review" do
+      visit "/shelters/#{@shelter.id}"
+
+      click_link 'New Review'
+
+      fill_in :rating, with: 5
+      fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
+      fill_in :user_name, with: @user.name
+      
+      click_on 'Create Review'
+      expect(page).to have_content('Please fill out all required fields')
     end
   end
 end
