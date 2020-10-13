@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 
   factory :pet do
-    name { Faker::University.name + " Shelter" }
+    name { Faker::Superhero.name }
     image { "https://placedog.net/280/id=" + rand(1..160).to_s}
     age { rand(1..16).to_s }
     sex { "Male" }
