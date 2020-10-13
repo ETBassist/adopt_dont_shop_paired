@@ -24,9 +24,18 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    review = Review.find(params[:id])
-    review.update(review_params)
-    redirect_to "/shelters/#{review.shelter.id}"
+    @review = Review.find(params[:id])
+    user = User.find_by(name: params[:user_name])
+    if user.nil?
+      flash.notice = 'Failed to edit review: User must exist'
+      render :edit
+    elsif @review.update(review_params)
+      @review.update(review_params)
+      redirect_to "/shelters/#{@review.shelter.id}"
+    else
+      flash.notice = "Please fill out all required fields"
+      render :edit
+    end
   end
 
   def destroy
