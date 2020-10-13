@@ -9,6 +9,15 @@
   <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %>
 </p>
 
+<% @shelter.reviews.each do |review| %>
+
+<%= review.rating %> | <%= review.user.name %>
+<%= review.title %>
+<%= review.content %>
+<%= image_tag review.image if review.image %>
+<% end %>
+
+
 <%= link_to "View Pets", "/shelters/#{@shelter.id}/pets"%> |
 
 <%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit", class: "Update" %> |
