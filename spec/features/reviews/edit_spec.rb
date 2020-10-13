@@ -36,5 +36,21 @@ describe "As a visitor" do
       expect(page).to have_field(:content, with: @review.content)
       expect(page).to have_field(:name, with: @user.name)
     end
+
+    it "I can fill in the form and submit changes to a review" do
+      visit "/reviews/#{@review.id}/edit"
+
+      title = "I love my #{Faker::Creature::Dog.meme_phrase}"
+      content = "#{Faker::Movies::HarryPotter.quote}"
+
+      fill_in :title, with: title
+      fill_in :content, with: content
+      
+      click_on("Update Review")
+      expect(current_path).to eq("/shelters/#{@shelter.id}")
+
+      expect(page).to have_content(title)
+      expect(page).to have_content(content)
+    end
   end
 end
