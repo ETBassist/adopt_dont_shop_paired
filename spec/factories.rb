@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :shelter do
-    name { Faker::University.name + " Shelter" }
+    name { Faker::Games::Zelda.location + " Shelter" }
     address { Faker::Address.street_address }
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
@@ -22,5 +22,14 @@ FactoryBot.define do
     city { Faker::Address.city }
     state { Faker::Address.state_abbr }
     zip { Faker::Address.zip }
+  end
+
+  factory :review do
+    title { "I love my #{Faker::Creature::Dog.meme_phrase}" }
+    rating { rand(1..5).to_s}
+    content { Faker::JapaneseMedia::StudioGhibli.quote }
+    image { "https://placedog.net/100/id=" + rand(1..160).to_s }
+    shelter
+    user
   end
 end
