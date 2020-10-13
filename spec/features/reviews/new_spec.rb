@@ -51,5 +51,18 @@ describe 'As a visitor' do
       click_on 'Create Review'
       expect(page).to have_content('Please fill out all required fields')
     end
+
+    it "will flash a message if the user doesn't exist" do
+      visit "/shelters/#{@shelter.id}"
+
+      click_link 'New Review'
+
+      fill_in :title, with: 'They are so great!'
+      fill_in :rating, with: 5
+      fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
+      fill_in :user_name, with: "GobbleGobble"
+      click_on 'Create Review'
+      expect(page).to have_content('Failed to create review: User must exist')
+    end
   end
 end
