@@ -15,6 +15,7 @@
 <%= review.title %>
 <%= review.content %>
 <%= image_tag review.image if review.image %>
+<%= link_to 'Edit', "/reviews/#{review.id}/edit" %>
 <% end %>
 <%= link_to "New Review", "/reviews/new?shelter=#{@shelter.id}" %> |
 
