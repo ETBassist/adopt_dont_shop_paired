@@ -5,19 +5,15 @@ class ReviewsController < ApplicationController
   def create
     user = User.find_by(name: params[:user_name])
     shelter = Shelter.find(params[:shelter])
-    review = shelter.reviews.new({
-      user: user,
-      title: params[:title],
-      content: params[:content],
-      rating: params[:rating],
-      image: params[:image]
-    })
+    review = shelter.reviews.new(review_params)
+    review.user = user
     if review.save
       review.save
+      redirect_to "/shelters/#{shelter.id}"
     else
       flash.notice = "Please fill out all required fields"
+      render :new
     end
-    redirect_to "/shelters/#{shelter.id}"
   end
 
   def edit
