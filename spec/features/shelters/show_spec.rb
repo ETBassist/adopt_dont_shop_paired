@@ -47,6 +47,7 @@ describe 'As a visitor' do
       expect(page).to have_content(@review.user.name)
       expect(page).to have_link('New Review')
       expect(page).to have_link('Edit')
+      expect(page).to have_link('Delete Review')
     end
 
     it 'I can delete the shelter' do
