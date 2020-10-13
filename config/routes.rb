@@ -21,4 +21,6 @@ Rails.application.routes.draw do
 
   patch '/pets/:id/adoptable', to: 'pets#change_status'
   patch '/pets/:id/pending', to: 'pets#change_status'
+
+  resources :users, only:  [:show, :new, :create]
 end
