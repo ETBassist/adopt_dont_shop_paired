@@ -45,6 +45,7 @@ describe 'As a visitor' do
       expect(page).to have_content(@review.rating)
       expect(page).to have_content(@review.content)
       expect(page).to have_content(@review.user.name)
+      expect(page).to have_link('New Review')
     end
 
     it 'I can delete the shelter' do
