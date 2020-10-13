@@ -58,5 +58,17 @@ describe 'As a visitor' do
       expect(current_path).to eq('/shelters')
       expect(page).to_not have_content(@shelter.name)
     end
+
+    it 'I can delete a review' do
+      visit "/shelters/#{@shelter.id}"
+
+      click_on 'Delete Review'
+
+      expect(current_path).to eq("/shelters/#{@shelter.id}")
+      expect(page).to_not have_content(@review.title)
+      expect(page).to_not have_content(@review.rating)
+      expect(page).to_not have_content(@review.content)
+      expect(page).to_not have_content(@review.user.name)
+    end
   end
 end
