@@ -7,3 +7,12 @@
   <%= @user.street_address %>,
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
+
+<p>
+  <% @user.reviews.each do |review| %>
+    <%= review.rating %>
+    <%= review.title %>
+    <%= review.content %>
+  <% end %>
+</p>
+
