@@ -52,5 +52,26 @@ describe "As a visitor" do
       expect(page).to have_content(title)
       expect(page).to have_content(content)
     end
+
+    it "I incorrectly edited a review" do
+      visit "/shelters/#{@shelter.id}"
+
+      click_link 'Edit'
+
+      fill_in :title, with: ''
+      
+      click_on 'Update Review'
+      expect(page).to have_content('Please fill out all required fields')
+    end
+
+    it "will flash a message if the edited user doesn't exist" do
+      visit "/shelters/#{@shelter.id}"
+
+      click_link 'Edit'
+
+      fill_in :user_name, with: "GobbleGobble"
+      click_on 'Update Review'
+      expect(page).to have_content('Failed to edit review: User must exist')
+    end
   end
 end
