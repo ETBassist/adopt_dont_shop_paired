@@ -1,0 +1,7 @@
+<%= @application.user.name %>
+<%= @application.user.full_address %>
+<%= @application.description %>
+<% @application.pets.each do |pet| %>
+  <%= link_to pet.name, "/pets/#{pet.id}" %>
+<% end %>
+<%= @application.status %>

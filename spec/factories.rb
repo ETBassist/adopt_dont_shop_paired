@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :pet_application do
-    pet { nil }
-    application { nil }
+    pet
+    application
   end
 
   factory :application do
-    description { "MyString" }
-    status { "MyString" }
-    user { nil }
+    description { Faker::Company.bs }
+    status { ['In Progress', 'Pending', 'Accepted', 'Rejected'].sample }
+    user
   end
 
   factory :shelter do

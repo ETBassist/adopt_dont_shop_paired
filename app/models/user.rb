@@ -36,4 +36,8 @@ class User < ApplicationRecord
       }
     end
   end
+
+  def full_address
+    "#{self.street_address} #{self.city}, #{self.state} #{self.zip}"
+  end
 end

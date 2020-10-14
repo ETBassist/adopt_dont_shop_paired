@@ -25,4 +25,6 @@ Rails.application.routes.draw do
   resources :users, only:  [:show, :new, :create]
   resources :reviews, except: [:show, :index]
   delete 'shelters/reviews/:id', to: 'reviews#destroy'
+
+  get '/applications/:id', to: 'applications#show'
 end
