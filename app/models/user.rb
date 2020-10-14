@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :reviews
+  has_many :applications
 
   def best_review
     best = reviews.order(rating: :desc).limit(1)

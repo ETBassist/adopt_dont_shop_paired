@@ -1,0 +1,29 @@
+require 'rails_helper'
+
+describe 'As a visitor' do
+  describe 'When I visit the pet index page' do
+    before (:each) do
+      @user = create(:user)
+      @shelter = create(:shelter)
+      @pet = create(:pet, shelter: @shelter)
+    end
+
+    it 'I can create an application' do
+      visit "/pets"
+
+      click_on 'Start an Application'
+
+      expect(current_path).to eq('/applications/new')
+
+      fill_in :user_name, with: @user.name
+
+      click_on 'Submit'
+
+      expect(current_path).to eq("/applications/#{@user.applications.last.id}")
+
+      expect(page).to have_content(@user.name)
+      expect(page).to have_content(@user.full_address)
+      expect(page).to have_content("In Progress")
+    end
+  end
+end

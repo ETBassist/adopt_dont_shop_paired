@@ -26,5 +26,7 @@ Rails.application.routes.draw do
   resources :reviews, except: [:show, :index]
   delete 'shelters/reviews/:id', to: 'reviews#destroy'
 
+  get '/applications/new', to: 'applications#new'
+  post '/applications', to: 'applications#create'
   get '/applications/:id', to: 'applications#show'
 end
