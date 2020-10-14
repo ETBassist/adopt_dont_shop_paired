@@ -9,6 +9,10 @@
 </p>
 
 <p>
+  Average Review Score: <%= @user.reviews.average(:rating) %>
+</p>
+
+<p>
   <% @user.reviews.each do |review| %>
     <%= review.rating %>
     <%= review.title %>
