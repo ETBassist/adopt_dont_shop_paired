@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @best_review = @user.best_review
+    @worst_review = @user.worst_review
   end
 
   def new
