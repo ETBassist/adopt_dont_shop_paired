@@ -44,5 +44,12 @@ describe 'As a visitor' do
       expect(page).to have_content(@review.rating)
       expect(page).to have_content(@review.content)
     end
+
+    it "I see an average of all review scored by that User" do
+      review1 = create(:review, rating: 1, user: @user, shelter: @shelter)
+      visit "/users/#{@user.id}"
+
+      expect(page).to have_content('Average Review Score: 3')
+    end
   end
 end
