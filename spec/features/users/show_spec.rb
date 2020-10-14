@@ -51,5 +51,23 @@ describe 'As a visitor' do
 
       expect(page).to have_content('Average Review Score: 3')
     end
+
+    it "I see the review with the highest rating by that User" do
+      review1 = create(:review, rating: 1, user: @user, shelter: @shelter)
+      review2 = create(:review, rating: 2, user: @user, shelter: @shelter)
+      visit "/users/#{@user.id}"
+
+      within('section.best') do
+        expect(page).to have_content(@review.title)
+        expect(page).to have_content(@review.rating)
+        expect(page).to have_content(@review.content)
+      end
+
+      within('section.worst') do
+        expect(page).to have_content(review1.title)
+        expect(page).to have_content(review1.rating)
+        expect(page).to have_content(review1.content)
+      end
+    end
   end
 end
