@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :pet_application do
+    pet { nil }
+    application { nil }
+  end
+
   factory :application do
     description { "MyString" }
     status { "MyString" }
