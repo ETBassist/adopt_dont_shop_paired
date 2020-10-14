@@ -10,13 +10,16 @@
 </p>
 
 <% @shelter.reviews.each do |review| %>
-
-<%= review.rating %> | <%= review.user.name %>
-<%= review.title %>
-<%= review.content %>
-<%= image_tag review.image if review.image %>
-<%= link_to 'Edit', "/reviews/#{review.id}/edit" %>
-<%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
+  <div>
+    <%= review.rating %> | <%= review.user.name %>
+    <p><%= review.title %></p>
+    <p><%= review.content %></p>
+    <p><%= image_tag review.image if review.image %></p>
+    <p>
+      <%= link_to 'Edit', "/reviews/#{review.id}/edit" %>
+      <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
+    </p>
+  </div>
 <% end %>
 <%= link_to "New Review", "/reviews/new?shelter=#{@shelter.id}" %> |
 
