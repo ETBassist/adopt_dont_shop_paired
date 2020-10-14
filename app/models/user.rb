@@ -3,21 +3,37 @@ class User < ApplicationRecord
 
   def best_review
     best = reviews.order(:rating).last
-    {
-      title: best.title,
-      rating: best.rating,
-      content: best.content, 
-      image: best.image
-    }
+    if best
+      {
+        title: best.title,
+        rating: best.rating,
+        content: best.content,
+        image: best.image
+      }
+    else
+      {
+        title: "No title",
+        rating: "No rating",
+        content: "No content"
+      }
+    end
   end
 
   def worst_review
     worst = reviews.order(:rating).first
-    {
-      title: worst.title,
-      rating: worst.rating,
-      content: worst.content,
-      image: worst.image
-    }
+    if worst
+      {
+        title: worst.title,
+        rating: worst.rating,
+        content: worst.content,
+        image: worst.image
+      }
+    else
+      {
+        title: "No title",
+        rating: "No rating",
+        content: "No content"
+      }
+    end
   end
 end
