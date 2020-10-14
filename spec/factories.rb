@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :application do
+    description { "MyString" }
+    status { "MyString" }
+    user { nil }
+  end
+
   factory :shelter do
     name { Faker::Games::Zelda.location + " Shelter" }
     address { Faker::Address.street_address }
