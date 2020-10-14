@@ -7,3 +7,30 @@
   <%= @user.street_address %>,
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
+
+<p>
+  Average Review Score: <%= @user.reviews.average(:rating) %>
+</p>
+
+<section class="best">
+  <%= @best_review[:title] %>
+  <%= @best_review[:rating] %>
+  <%= @best_review[:content] %>
+  <%= image_tag @best_review[:image] if @best_review[:image] %>"
+</section>
+
+<section class="worst">
+  <%= @worst_review[:title] %>
+  <%= @worst_review[:rating] %>
+  <%= @worst_review[:content] %>
+  <%= image_tag @worst_review[:image] if @worst_review[:image] %>
+</section>
+
+<p>
+  <% @user.reviews.each do |review| %>
+    <%= review.rating %>
+    <%= review.title %>
+    <%= review.content %>
+  <% end %>
+</p>
+

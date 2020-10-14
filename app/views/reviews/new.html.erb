@@ -1,0 +1,34 @@
+<h1>New Review</h1>
+<p>An image is optional: all other fields are required</p>
+<%= form_tag '/reviews' do %>
+  <div class="actions">
+    <%= label_tag :rating %>
+    <%= text_field_tag :rating %>
+  </div>
+
+  <div class="actions">
+    <%= label_tag :title %>
+    <%= text_field_tag :title %>
+  </div>
+
+  <div class="actions">
+    <%= label_tag :content %>
+    <%= text_area_tag :content %>
+  </div>
+
+  <div class="actions">
+    <%= label_tag :image %>
+    <%= text_field_tag :image %>
+  </div>
+
+  <div class="actions">
+    <%= label_tag :user_name %>
+    <%= text_field_tag :user_name %>
+  </div>
+
+  <%= hidden_field_tag :shelter, params[:shelter] %>
+
+  <div class="actions">
+    <%= submit_tag 'Create Review' %>
+  </div>
+<% end %>

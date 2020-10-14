@@ -27,7 +27,7 @@ FactoryBot.define do
   factory :review do
     title { "I love my #{Faker::Creature::Dog.meme_phrase}" }
     rating { rand(1..5).to_s}
-    content { Faker::JapaneseMedia::StudioGhibli.quote }
+    content { Faker::Movies::HarryPotter.quote }
     image { "https://placedog.net/100/id=" + rand(1..160).to_s }
     shelter
     user

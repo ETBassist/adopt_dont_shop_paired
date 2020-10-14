@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   patch '/pets/:id/pending', to: 'pets#change_status'
 
   resources :users, only:  [:show, :new, :create]
+  resources :reviews, except: [:show, :index]
+  delete 'shelters/reviews/:id', to: 'reviews#destroy'
 end
