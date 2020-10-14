@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :applications
 
   def best_review
-    best = reviews.order(rating: :desc).limit(1)
+    best = reviews.order(rating: :desc).limit(1).first
     if best
       {
         title: best.title,
@@ -21,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def worst_review
-    worst = reviews.order(:rating).limit(1)
+    worst = reviews.order(:rating).limit(1).last
     if worst
       {
         title: worst.title,

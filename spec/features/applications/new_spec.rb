@@ -25,5 +25,20 @@ describe 'As a visitor' do
       expect(page).to have_content(@user.full_address)
       expect(page).to have_content("In Progress")
     end
+
+    it "I get an error when I submit an application with a bad username" do
+      visit "/pets"
+
+      click_on 'Start an Application'
+
+      expect(current_path).to eq('/applications/new')
+
+      fill_in :user_name, with: 'Bob'
+
+      click_on 'Submit'
+
+      expect(current_path).to eq("/applications/new")
+      expect(page).to have_content("Invalid User Name")
+    end
   end
 end
