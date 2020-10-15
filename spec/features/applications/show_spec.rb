@@ -7,8 +7,12 @@ describe 'As a visitor' do
       @shelter = create(:shelter)
       @pet = create(:pet, shelter: @shelter)
 
-      @app = create(:application, user: @user)
-      @pet_application = create(:pet_application, pet: @pet, application: @app)
+      @app = create(:application, user: @user, status: 'In Progress')
+      @pet_application = create(
+        :pet_application,
+        pet: @pet,
+        application: @app
+      )
     end
 
     it 'I see the application information' do
@@ -28,7 +32,7 @@ describe 'As a visitor' do
 
       fill_in :pet_name, with: pet2.name
 
-      click_on "Submit"
+      first(:button, "Submit").click
 
       expect(current_path).to eq("/applications/#{@app.id}")
 
@@ -44,7 +48,7 @@ describe 'As a visitor' do
 
       fill_in :pet_name, with: pet2.name
 
-      click_on "Submit"
+      first(:button, "Submit").click
 
       expect(current_path).to eq("/applications/#{@app.id}")
 
@@ -60,21 +64,24 @@ describe 'As a visitor' do
       click_on "Start an Application"
 
       fill_in :user_name, with: @user.name
-      click_on "Submit"
+      first(:button, "Submit").click
 
       fill_in :pet_name, with: @pet.name
-      click_on "Submit"
-      
+      first(:button, "Submit").click
+
       first(:button, 'Adopt this Pet').click
 
       expect(page).to have_content("Application Submission")
 
       fill_in :description, with: 'I have a great house and love iguanas.'
-      click_button "Submit"
+      within(".app-submit") do
+        click_button 'Submit'
+      end
 
       app = @user.applications.last
       expect(current_path).to eq("/applications/#{app.id}")
       expect(page).to have_content("Status: Pending")
+      expect(page).to have_content("Description: I have a great house and love iguanas.")
       expect(page).to have_content(app.pets.first.name)
       expect(page).to_not have_content('Add a Pet to this Application')
     end
