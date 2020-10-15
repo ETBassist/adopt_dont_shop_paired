@@ -85,5 +85,13 @@ describe 'As a visitor' do
       expect(page).to have_content(app.pets.first.name)
       expect(page).to_not have_content('Add a Pet to this Application')
     end
+
+    it "I can't see the ability to submit the app unless it has pets" do
+      app = create(:application)
+      
+      visit "/applications/#{app.id}"
+
+      expect(page).to_not have_content("Application Submission")
+    end
   end
 end
