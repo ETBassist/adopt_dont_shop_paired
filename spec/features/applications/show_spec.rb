@@ -114,7 +114,7 @@ describe 'As a visitor' do
 
       visit "/applications/#{@app.id}"
 
-      fill_in :pet_name, with: bun.name
+      fill_in :pet_name, with: 'bUn'
       first(:button, "Submit").click
 
       expect(page).to have_content(bun.name)
