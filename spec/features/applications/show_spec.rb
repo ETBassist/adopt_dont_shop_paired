@@ -54,5 +54,29 @@ describe 'As a visitor' do
 
       expect(page).to have_link(pet2.name)
     end
+
+    it 'I can submit an application after adding required info' do
+      visit "/pets"
+      click_on "Start an Application"
+
+      fill_in :user_name, with: @user.name
+      click_on "Submit"
+
+      fill_in :pet_name, with: @pet.name
+      click_on "Submit"
+      
+      first(:button, 'Adopt this Pet').click
+
+      expect(page).to have_content("Application Submission")
+
+      fill_in :description, with: 'I have a great house and love iguanas.'
+      click_button "Submit"
+
+      app = @user.applications.last
+      expect(current_path).to eq("/applications/#{app.id}")
+      expect(page).to have_content("Status: Pending")
+      expect(page).to have_content(app.pets.first.name)
+      expect(page).to_not have_content('Add a Pet to this Application')
+    end
   end
 end
