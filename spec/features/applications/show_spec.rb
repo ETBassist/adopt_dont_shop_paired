@@ -36,5 +36,23 @@ describe 'As a visitor' do
         expect(page).to have_content(pet2.name)
       end
     end
+
+    it 'I can add a pet to the application' do
+      pet2 = create(:pet)
+
+      visit "/applications/#{@app.id}"
+
+      fill_in :pet_name, with: pet2.name
+
+      click_on "Submit"
+
+      expect(current_path).to eq("/applications/#{@app.id}")
+
+      first(:button, 'Adopt this Pet').click
+
+      expect(current_path).to eq("/applications/#{@app.id}")
+
+      expect(page).to have_link(pet2.name)
+    end
   end
 end

@@ -22,10 +22,12 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  # def search
-  #   @pets = Pet.where(name: params[:pet_name])
-  #   redirect_to "/applications/#{params[:id]}"
-  # end
+  def update
+    application = Application.find(params[:id])
+    pet = Pet.find(params[:pet])
+    application.pets << pet
+    redirect_to "/applications/#{application.id}"
+  end
 
   private
   def app_params

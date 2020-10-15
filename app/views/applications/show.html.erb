@@ -18,6 +18,7 @@
   <p class="search-results">
     <% @pets.each do |pet| %>
       <%= pet.name %>
+      <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
     <% end %>
   </p>
 </section>
