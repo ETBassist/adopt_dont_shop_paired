@@ -1,0 +1,14 @@
+<h1>New Application</h1>
+
+<%= form_tag '/applications' do %>
+  <div class="actions">
+    <%= label_tag :user_name %>
+    <%= text_field_tag :user_name %>
+  </div>
+
+  <%= hidden_field_tag :status, "In Progress" %>
+
+  <div class="actions">
+    <%= submit_tag 'Submit' %>
+  </div>
+<% end %>

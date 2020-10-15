@@ -1,4 +1,15 @@
 FactoryBot.define do
+  factory :pet_application do
+    pet
+    application
+  end
+
+  factory :application do
+    description { Faker::Company.bs }
+    status { ['In Progress', 'Pending', 'Accepted', 'Rejected'].sample }
+    user
+  end
+
   factory :shelter do
     name { Faker::Games::Zelda.location + " Shelter" }
     address { Faker::Address.street_address }
