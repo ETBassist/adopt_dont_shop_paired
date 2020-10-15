@@ -88,10 +88,24 @@ describe 'As a visitor' do
 
     it "I can't see the ability to submit the app unless it has pets" do
       app = create(:application)
-      
+
       visit "/applications/#{app.id}"
 
       expect(page).to_not have_content("Application Submission")
+    end
+
+    it "I cannot submit an application without a description" do
+      app = create(:application, description: "", status: "In Progress")
+      pet_app = create(:pet_application, application: app)
+
+      visit "/applications/#{app.id}"
+
+      within(".app-submit") do
+        click_button 'Submit'
+      end
+
+      expect(page).to have_content("Required field: Description")
+      expect(page).to have_content("Status: In Progress")
     end
   end
 end

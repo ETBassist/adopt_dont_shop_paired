@@ -27,6 +27,8 @@ class ApplicationsController < ApplicationController
     if params[:pet]
       pet = Pet.find(params[:pet])
       application.pets << pet
+    elsif params[:description].empty?
+      flash.notice = "Required field: Description"
     elsif params[:status]
       application.update(app_params)
     end
