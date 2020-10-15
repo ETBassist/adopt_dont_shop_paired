@@ -1,7 +1,23 @@
-<%= @application.user.name %>
-<%= @application.user.full_address %>
-<%= @application.description %>
+<h2>Application</h2>
+<p><%= @application.user.name %></p>
+<p><%= @application.user.full_address %></p>
+<p><%= @application.description %></p>
 <% @application.pets.each do |pet| %>
-  <%= link_to pet.name, "/pets/#{pet.id}" %>
+  <p><%= link_to pet.name, "/pets/#{pet.id}" %></p>
 <% end %>
-<%= @application.status %>
+<p><%= @application.status %></p>
+
+<section>
+  <p>Add a Pet to this Application</p>
+  <%= form_tag "/applications/#{@application.id}", method: :get do %>
+    <%= label_tag :pet_name %>
+    <%= search_field_tag :pet_name, 'Find Pet' %>
+    <%= hidden_field_tag :id, @application.id %>
+    <%= submit_tag "Submit" %>
+  <% end %>
+  <p class="search-results">
+    <% @pets.each do |pet| %>
+      <%= pet.name %>
+    <% end %>
+  </p>
+</section>
