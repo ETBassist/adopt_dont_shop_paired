@@ -7,18 +7,34 @@
 <% end %>
 <p><%= @application.status %></p>
 
+<% if @application.status == 'In Progress' %>
+  <section>
+    <p>Add a Pet to this Application</p>
+    <%= form_tag "/applications/#{@application.id}", method: :get do %>
+      <%= label_tag :pet_name %>
+      <%= search_field_tag :pet_name, 'Find Pet' %>
+      <%= hidden_field_tag :id, @application.id %>
+      <%= submit_tag "Submit" %>
+    <% end %>
+    <p class="search-results">
+      <% @pets.each do |pet| %>
+        <%= pet.name %>
+        <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+      <% end %>
+    </p>
+  </section>
+<% end %>
+
+<% if @application.has_pets? %>
 <section>
-  <p>Add a Pet to this Application</p>
-  <%= form_tag "/applications/#{@application.id}", method: :get do %>
-    <%= label_tag :pet_name %>
-    <%= search_field_tag :pet_name, 'Find Pet' %>
+  <p>Application Submission</p>
+  <%= form_tag "/applications/#{@application.id}", method: :patch do %>
+    <%= label_tag :description %>
+    <%= text_area_tag :description %>
     <%= hidden_field_tag :id, @application.id %>
+    <%= hidden_field_tag :status, 'Pending' %>
     <%= submit_tag "Submit" %>
   <% end %>
-  <p class="search-results">
-    <% @pets.each do |pet| %>
-      <%= pet.name %>
-      <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
-    <% end %>
-  </p>
+
 </section>
+<% end %>
