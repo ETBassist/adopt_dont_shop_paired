@@ -107,5 +107,18 @@ describe 'As a visitor' do
       expect(page).to have_content("Required field: Description")
       expect(page).to have_content("Status: In Progress")
     end
+
+    it "I can search for pets that kinda match the name" do
+      bun = create(:pet, name: "Bun")
+      bunbun = create(:pet, name: "BunBun")
+
+      visit "/applications/#{@app.id}"
+
+      fill_in :pet_name, with: bun.name
+      first(:button, "Submit").click
+
+      expect(page).to have_content(bun.name)
+      expect(page).to have_content(bunbun.name)
+    end
   end
 end
