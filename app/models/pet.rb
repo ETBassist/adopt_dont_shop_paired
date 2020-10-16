@@ -20,4 +20,8 @@ class Pet < ApplicationRecord
       "Pending Adoption"
     end
   end
+
+  def approve_pet
+    adoptable == false
+  end
 end

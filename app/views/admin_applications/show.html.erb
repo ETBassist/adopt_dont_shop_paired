@@ -1,0 +1,11 @@
+<% @application.pets.each do |pet| %>
+  <div id="pet-<%= pet.id %>">
+    <%= pet.name %>
+    <%= image_tag pet.image if pet.image %>
+    <% if pet.adoptable? %>
+      <%= button_to 'Approve', "/admin/applications/#{@application.id}?pet=#{pet.id}", method: :patch %>
+    <% else %>
+      <p>Approved</p>
+    <% end %>
+  </div>
+<% end %>
