@@ -38,5 +38,19 @@ describe "As an Visitor" do
         expect(page).to_not have_content("Rejected")
       end
     end
+
+    it "when all pets are approved, application is approved" do
+      visit "/admin/applications/#{@app.id}"
+
+      within("#pet-#{@app.pets.first.id}") do
+        click_button('Approve')
+      end
+
+      within("#pet-#{@app.pets.last.id}") do
+        click_button('Approve')
+      end
+
+      expect(page).to have_content("Status: Approved")
+    end
   end
 end
