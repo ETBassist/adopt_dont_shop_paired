@@ -66,5 +66,19 @@ describe "As an Visitor" do
 
       expect(page).to have_content("Status: Rejected")
     end
+
+    it "when all pets are reviewed, if one is rejected, app is rejected" do
+      pet = create(:pet, adoptable: false)
+      app1 = create(:application, status: 'Approved')
+      app2 = create(:application, status: 'Pending')
+      pet_app1 = create(:pet_application, pet: pet, application: app1)
+      pet_app2 = create(:pet_application, pet: pet, application: app2)
+
+      visit "/admin/applications/#{app2.id}"
+
+      expect(page).to_not have_button("Approve")
+      expect(page).to_not have_button("Reject")
+      expect(page).to have_content("Pet Unavailable")
+    end
   end
 end
