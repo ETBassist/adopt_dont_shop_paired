@@ -24,4 +24,8 @@ class Pet < ApplicationRecord
   def approve_pet
     adoptable == false
   end
+
+  def pet_application(application_id)
+    PetApplication.find_by(pet_id: id, application_id: application_id)
+  end
 end

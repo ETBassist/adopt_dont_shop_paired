@@ -2,10 +2,13 @@
   <div id="pet-<%= pet.id %>">
     <%= pet.name %>
     <%= image_tag pet.image if pet.image %>
-    <% if pet.adoptable? %>
-      <%= button_to 'Approve', "/admin/applications/#{@application.id}?pet=#{pet.id}", method: :patch %>
-    <% else %>
+    <% if pet.pet_application(@application.id).status.nil? %>
+      <%= button_to 'Approve', "/admin/applications/#{@application.id}?pet=#{pet.id}&status=approved", method: :patch %>
+      <%= button_to 'Reject',  "/admin/applications/#{@application.id}?pet=#{pet.id}&status=rejected", method: :patch %>
+    <% elsif pet.pet_application(@application.id).status == "approved"  %>
       <p>Approved</p>
+    <% else %>
+      <p>Rejected</p>
     <% end %>
   </div>
 <% end %>
