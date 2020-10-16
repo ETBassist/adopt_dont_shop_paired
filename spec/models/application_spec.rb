@@ -8,4 +8,14 @@ RSpec.describe Application, type: :model do
 
   end
 
+  describe "instance methods" do
+    it "has pets" do
+      application = create(:application)
+      expect(application.has_pets?).to eq(false)
+
+      pet_application = create(:pet_application, application: application)
+      expect(application.has_pets?).to eq(true)
+    end
+  end
+
 end
