@@ -6,7 +6,7 @@ FactoryBot.define do
 
   factory :application do
     description { Faker::Company.bs }
-    status { ['In Progress', 'Pending', 'Accepted', 'Rejected'].sample }
+    status { 'In Progress' }
     user
   end
 
@@ -23,7 +23,7 @@ FactoryBot.define do
     image { "https://placedog.net/280/id=" + rand(1..160).to_s}
     age { rand(1..16).to_s }
     sex { ["Male", "Female"].sample }
-    adoptable { [true, false].sample }
+    adoptable { true }
     shelter
   end
 

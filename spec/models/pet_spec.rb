@@ -16,5 +16,14 @@ describe Pet, type: :model do
       expect(pet_1.status).to eq('Adoptable')
       expect(pet_2.status).to eq('Pending Adoption')
     end
+
+    it "pet_application" do
+      pet = create(:pet)
+      application = create(:application)
+      pet_application1 = create(:pet_application, application: application, pet: pet)
+      pet_application2 = create(:pet_application, pet: pet) 
+      expect(pet.pet_application(application.id)).to eq(pet_application1)
+      expect(pet.pet_application(application.id)).to_not eq(pet_application2)
+    end
   end
 end
