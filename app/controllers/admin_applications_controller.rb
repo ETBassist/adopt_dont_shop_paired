@@ -10,6 +10,9 @@ class AdminApplicationsController < ApplicationController
     if application.pet_applications.all? { |pet_app| pet_app.status == "approved" }
       application.status = "Approved"
       application.save
+    elsif application.pet_applications.all?(&:status)
+      application.status = "Rejected"
+      application.save
     end
     redirect_to "/admin/applications/#{params[:id]}"
   end

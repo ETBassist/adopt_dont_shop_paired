@@ -22,7 +22,7 @@ describe "As an Visitor" do
         expect(page).to_not have_content("Approved")
       end
     end
-    
+
     it "I can approve pets on an application" do
       visit "/admin/applications/#{@app.id}"
 
@@ -51,6 +51,20 @@ describe "As an Visitor" do
       end
 
       expect(page).to have_content("Status: Approved")
+    end
+
+    it "when all pets are reviewed, if one is rejected, app is rejected" do
+      visit "/admin/applications/#{@app.id}"
+
+      within("#pet-#{@app.pets.first.id}") do
+        click_button('Reject')
+      end
+
+      within("#pet-#{@app.pets.last.id}") do
+        click_button('Approve')
+      end
+
+      expect(page).to have_content("Status: Rejected")
     end
   end
 end
