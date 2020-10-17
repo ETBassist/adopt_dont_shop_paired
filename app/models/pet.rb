@@ -24,4 +24,11 @@ class Pet < ApplicationRecord
   def pet_application(application_id)
     PetApplication.find_by(pet_id: id, application_id: application_id)
   end
+
+  def has_approvals?
+    # TODO: Refactor into ActiveRecord query
+    applications.any? do |app|
+      app.status == 'Approved'
+    end
+  end
 end
