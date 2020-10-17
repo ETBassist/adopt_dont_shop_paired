@@ -49,4 +49,33 @@ describe "When I visit pets/:id" do
     click_on 'Change to Pending Adoption'
     expect(page).to have_content('Status: Pending Adoption')
   end
+
+  it 'I click a link to view all applications for this pet' do
+    pet_app1 = create(:pet_application, pet: pet)
+    pet_app2 = create(:pet_application, pet: pet)
+
+    visit "/pets/#{pet.id}"
+
+    expect(page).to_not have_link(pet_app1.application.user.name)
+    expect(page).to_not have_link(pet_app2.application.user.name)
+
+    click_link 'View all Applications'
+
+    expect(page).to have_link(pet_app1.application.user.name)
+    expect(page).to have_link(pet_app2.application.user.name)
+
+    click_link "#{pet_app1.application.user.name}"
+
+    expect(current_path).to eq("/applications/#{pet_app1.application.id}")
+  end
+
+  it 'I click a link to view all applications for this pet, and I see a message when there are no apps' do
+    visit "/pets/#{pet.id}"
+
+    expect(page).to_not have_content("#{pet.name} has no applications")
+
+    click_link 'View all Applications'
+
+    expect(page).to have_content("#{pet.name} has no applications")
+  end
 end

@@ -5,6 +5,7 @@ class PetsController < ApplicationController
 
   def show
     @pet = Pet.find(params[:id])
+    @view = params[:show_apps]
   end
 
   def edit
