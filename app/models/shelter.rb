@@ -30,4 +30,10 @@ class Shelter < ApplicationRecord
       pet.applications.count
     end
   end
+
+  def has_approvals?
+    pets.any? do |pet|
+      pet.has_approvals?
+    end
+  end
 end

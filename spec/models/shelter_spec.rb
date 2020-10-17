@@ -42,5 +42,18 @@ describe Shelter, type: :model do
 
       expect(shelter.application_count).to eq(5)
     end
+
+    it '.has_approvals?' do
+      shelter = create(:shelter)
+
+      expect(shelter.has_approvals?).to eq(false)
+
+      shelter = create(:shelter)
+      pet = create(:pet, shelter: shelter)
+      application = create(:application, status: 'Approved')
+      pet_app = create(:pet_application, pet: pet, application: application)
+
+      expect(shelter.has_approvals?).to eq(true)
+    end
   end
 end
