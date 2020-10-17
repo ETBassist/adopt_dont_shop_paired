@@ -78,5 +78,17 @@ describe 'As a visitor' do
       expect(page).to have_content("Average Rating: #{@shelter.average_rating.round(2)}")
       expect(page).to have_content("Total Applications: #{@shelter.application_count}")
     end
+
+    it 'I cannot delete a shelter if there are any approved apps for pets' do
+      shelter = create(:shelter)
+      pet = create(:pet, shelter: shelter)
+      application = create(:application, status: 'Approved')
+      pet_app = create(:pet_application, pet: pet, application: application)
+
+      visit "/shelters/#{shelter.id}"
+
+      expect(page).to_not have_link('Delete Shelter')
+      expect(page).to have_content('Delete Shelter')
+    end
   end
 end

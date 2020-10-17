@@ -10,7 +10,7 @@
 </p>
 
 <p>Total Pets: <%= @shelter.pet_count %> </p>
-<p>Average Rating: <%= @shelter.average_rating.round(2) %> </p>
+<p>Average Rating: <%= @shelter.average_rating.round(2) if @shelter.average_rating %> </p>
 <p>Total Applications: <%= @shelter.application_count %> </p>
 
 <% @shelter.reviews.each do |review| %>
@@ -31,4 +31,8 @@
 
 <%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit", class: "Update" %> |
 
-<%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete, class: "Delete" %>
+<% if @shelter.has_approvals? %>
+  <p>Delete Shelter</p>
+<% else %>
+  <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete, class: "Delete" %>
+<% end %>
