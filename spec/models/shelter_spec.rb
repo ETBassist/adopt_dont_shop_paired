@@ -18,6 +18,7 @@ describe Shelter, type: :model do
 
       expect(Shelter.sorted_by("alphabetical")).to eq([apa, dfl, sf])
       expect(Shelter.sorted_by("adoptable")).to eq([dfl, sf, apa])
+      expect(Shelter.sorted_by(nil)).to eq([sf, apa, dfl])
     end
   end
 
