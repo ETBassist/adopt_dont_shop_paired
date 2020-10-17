@@ -33,15 +33,7 @@
   </p>
 </div>
 
-<%= link_to 'View all Applications', "/pets/#{@pet.id}?show_apps=true" %>
-
-<% if @view == "true" %>
-  <div>
-    <% @pet.applications.each do |app| %>
-      <p><%= link_to app.user.name, "/applications/#{app.id}" %></p>
-    <% end %>
-  </div>
-<% end %>
+<%= link_to 'View all Applications', "/pet_applications/#{@pet.id}" %>
 
 <% if @pet.adoptable? %>
   <%= link_to "Change to Pending Adoption", "/pets/#{@pet.id}/pending", method: :patch %> |

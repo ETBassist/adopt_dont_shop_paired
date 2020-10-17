@@ -61,6 +61,8 @@ describe "When I visit pets/:id" do
 
     click_link 'View all Applications'
 
+    expect(current_path).to eq("/pet_applications/#{pet.id}")
+
     expect(page).to have_link(pet_app1.application.user.name)
     expect(page).to have_link(pet_app2.application.user.name)
 
