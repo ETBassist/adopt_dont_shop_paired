@@ -79,5 +79,16 @@ describe "Pets Index" do
       expect(page).to_not have_content(@pet_2.name)
       expect(page).to have_content(@pet_1.name)
     end
+
+    it 'I do not see pets from a deleted shelter' do
+      visit "/shelters/#{@shelter_1.id}"
+
+      click_on "Delete Shelter"
+
+      visit '/pets'
+
+      expect(page).to_not have_content(@shelter_1.name)
+      expect(page).to_not have_content(@pet_1.name)
+    end
   end
 end
