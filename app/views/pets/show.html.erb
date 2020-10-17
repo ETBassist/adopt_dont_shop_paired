@@ -37,8 +37,12 @@
 
 <% if @view == "true" %>
   <div>
-    <% @pet.applications.each do |app| %>
-      <p><%= link_to app.user.name, "/applications/#{app.id}" %></p>
+    <% if @pet.applications.any? %>
+      <% @pet.applications.each do |app| %>
+        <p><%= link_to app.user.name, "/applications/#{app.id}" %></p>
+      <% end %>
+    <% else %>
+      <p><%= @pet.name %> has no applications</p>
     <% end %>
   </div>
 <% end %>

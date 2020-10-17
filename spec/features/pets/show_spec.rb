@@ -68,4 +68,14 @@ describe "When I visit pets/:id" do
 
     expect(current_path).to eq("/applications/#{pet_app1.application.id}")
   end
+
+  it 'I click a link to view all applications for this pet, and I see a message when there are no apps' do
+    visit "/pets/#{pet.id}"
+
+    expect(page).to_not have_content("#{pet.name} has no applications")
+
+    click_link 'View all Applications'
+
+    expect(page).to have_content("#{pet.name} has no applications")
+  end
 end
