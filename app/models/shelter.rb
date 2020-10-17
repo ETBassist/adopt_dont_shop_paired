@@ -23,4 +23,11 @@ class Shelter < ApplicationRecord
   def average_rating
     reviews.average(:rating)
   end
+
+  def application_count
+    # TODO: Refactor with ActiveRecord
+    pets.sum do |pet|
+      pet.applications.count
+    end
+  end
 end
