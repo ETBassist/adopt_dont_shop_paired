@@ -54,4 +54,8 @@
 <% end %>
 
 <%= link_to 'Update Pet', "/pets/#{@pet.id}/edit", class: "Update" %> |
-<%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: "Delete" %> |
+<% if @pet.has_approvals? %>
+  <p>Delete Pet</p>
+<% else %>
+  <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: "Delete" %>
+<% end %>

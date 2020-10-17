@@ -78,4 +78,15 @@ describe "When I visit pets/:id" do
 
     expect(page).to have_content("#{pet.name} has no applications")
   end
+
+  it "I cannot delete a pet with an approved application" do
+    pet = create(:pet)
+    application = create(:application, status: "Approved")
+    pet_app = create(:pet_application, pet: pet, application: application)
+
+    visit "/pets/#{pet.id}"
+
+    expect(page).to_not have_link('Delete Pet')
+    expect(page).to have_content('Delete Pet')
+  end
 end
