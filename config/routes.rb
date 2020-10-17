@@ -33,6 +33,4 @@ Rails.application.routes.draw do
 
   get '/admin/applications/:id', to: 'admin_applications#show'
   patch '/admin/applications/:id', to: 'admin_applications#update'
-
-  get '/pet_applications/:pet_id', to: 'pet_applications#index'
 end
