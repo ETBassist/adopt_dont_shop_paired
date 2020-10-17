@@ -9,6 +9,10 @@
   <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %>
 </p>
 
+<p>Total Pets: <%= @shelter.pet_count %> </p>
+<p>Average Rating: <%= @shelter.average_rating.round(2) %> </p>
+<p>Total Applications: <%= @shelter.application_count %> </p>
+
 <% @shelter.reviews.each do |review| %>
   <div>
     <%= review.rating %> | <%= review.user.name %>
