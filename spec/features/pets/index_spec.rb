@@ -90,5 +90,18 @@ describe "Pets Index" do
       expect(page).to_not have_content(@shelter_1.name)
       expect(page).to_not have_content(@pet_1.name)
     end
+
+    it "I cannot delete a pet with an approved application" do
+      pet = create(:pet)
+      application = create(:application, status: "Approved")
+      pet_app = create(:pet_application, pet: pet, application: application)
+
+      visit '/pets'
+
+      within("#pet-#{pet.id}") do
+        expect(page).to_not have_link('Delete Pet')
+        expect(page).to have_content('Delete Pet')
+      end
+    end
   end
 end

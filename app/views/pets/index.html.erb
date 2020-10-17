@@ -13,7 +13,7 @@
 
   <% @pets.each do |pet| %>
     <hr>
-    <div class="pet">
+    <div class="pet" id="pet-<%= pet.id %>">
       <%= image_tag pet.image %>
       <p>
         <strong>Name:</strong>
@@ -39,8 +39,12 @@
         <strong>Shelter:</strong>
         <%= link_to pet.shelter.name, "/shelters/#{pet.shelter.id}" %>
       </p>
-    </div>
 
-    <%= link_to 'Update Pet', "/pets/#{pet.id}/edit", class: "Update" %> |
-    <%= link_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "Delete" %>
+      <%= link_to 'Update Pet', "/pets/#{pet.id}/edit", class: "Update" %> |
+      <% if pet.has_approvals? %>
+        <p>Delete Pet</p>
+      <% else %>
+        <%= link_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "Delete" %>
+      <% end %>
+    </div>
   <% end %>
