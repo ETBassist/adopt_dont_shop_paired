@@ -9,7 +9,7 @@ describe 'As a visitor' do
         city: "Boulder",
         state: "CO",
         zip: "80309"
-      ) 
+      )
 
       @shelter = Shelter.create!(
         name: "Will's Pet Shelter",
@@ -68,6 +68,23 @@ describe 'As a visitor' do
         expect(page).to have_content(review1.rating)
         expect(page).to have_content(review1.content)
       end
+    end
+
+    it "I cannot see reviews from deleted shelters" do
+      review1 = create(:review, rating: 1, user: @user, shelter: @shelter)
+      shelter2 = create(:shelter)
+      review2 = create(:review, rating: 2, user: @user, shelter: shelter2)
+
+      visit "/shelters/#{shelter2.id}"
+
+      click_on 'Delete Shelter'
+
+      visit "/users/#{@user.id}"
+
+      expect(page).to have_content(review1.title)
+      expect(page).to have_content(review1.content)
+      expect(page).to_not have_content(review2.title)
+      expect(page).to_not have_content(review2.content)
     end
   end
 end
