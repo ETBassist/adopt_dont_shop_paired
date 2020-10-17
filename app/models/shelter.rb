@@ -15,4 +15,12 @@ class Shelter < ApplicationRecord
       Shelter.all
     end
   end
+
+  def pet_count
+    pets.count
+  end
+
+  def average_rating
+    reviews.average(:rating)
+  end
 end
