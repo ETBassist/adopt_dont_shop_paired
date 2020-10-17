@@ -85,5 +85,19 @@ describe 'As a visitor' do
 
       expect(@shelter_1.name).to_not appear_before(@shelter_2.name)
     end
+
+    it 'I cannot delete a shelter if the pet has an approved app' do
+      shelter = create(:shelter)
+      pet = create(:pet, shelter: shelter)
+      application = create(:application, status: 'Approved')
+      pet_app = create(:pet_application, pet: pet, application: application)
+
+      visit "/shelters"
+
+      within("#shelter-#{shelter.id}") do
+        expect(page).to_not have_link('Delete Shelter')
+        expect(page).to have_content('Delete Shelter')
+      end
+    end
   end
 end

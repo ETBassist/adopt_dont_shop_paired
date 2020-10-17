@@ -6,10 +6,16 @@
 
 <% @shelters.each do |shelter| %>
   <hr>
-  <h2>
-    <%= link_to shelter.name, "/shelters/#{shelter.id}"%>
-  </h2>
-  <%= link_to "Update Shelter", "/shelters/#{shelter.id}/edit", class: "Update" %> |
-  <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "Delete" %>
+  <div id="shelter-<%= shelter.id %>">
+    <h2>
+      <%= link_to shelter.name, "/shelters/#{shelter.id}"%>
+    </h2>
+    <%= link_to "Update Shelter", "/shelters/#{shelter.id}/edit", class: "Update" %> |
 
+    <% if shelter.has_approvals? %>
+      <p>Delete Shelter</p>
+    <% else %>
+      <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "Delete" %>
+    <% end %>
+  </div>
 <% end %>
