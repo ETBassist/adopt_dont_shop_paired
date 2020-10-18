@@ -2,6 +2,13 @@ class Shelter < ApplicationRecord
   has_many :pets, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
+  def self.best_shelters
+    sorted_shelters = self.all.sort_by do |shelter|
+      shelter.average_rating
+    end
+    sorted_shelters.reverse.first(3)
+  end
+
   def pet_count
     pets.count
   end
