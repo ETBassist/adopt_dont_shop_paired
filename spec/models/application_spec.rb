@@ -9,7 +9,7 @@ RSpec.describe Application, type: :model do
   end
 
   describe "instance methods" do
-    it "has pets" do
+    it ".has_pets" do
       application = create(:application)
       expect(application.has_pets?).to eq(false)
 
