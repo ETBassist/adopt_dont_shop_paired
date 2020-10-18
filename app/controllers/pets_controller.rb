@@ -1,6 +1,7 @@
 class PetsController < ApplicationController
   def index
     @pets = Pet.display_by(params[:adoptable])
+    @adopted_pets = Pet.adopted_pets
   end
 
   def show
