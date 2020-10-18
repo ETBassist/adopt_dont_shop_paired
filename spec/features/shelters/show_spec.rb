@@ -90,5 +90,33 @@ describe 'As a visitor' do
       expect(page).to_not have_link('Delete Shelter')
       expect(page).to have_content('Delete Shelter')
     end
+
+    it 'I can filter reviews by highest or lowest rating' do
+      review1 = create(:review, shelter: @shelter, rating: 1, title: 'WTF')
+      review2 = create(:review, shelter: @shelter, rating: 1, title: 'SRSLY ppl?')
+      review3 = create(:review, shelter: @shelter, rating: 5, title: 'Wowza')
+      review4 = create(:review, shelter: @shelter, rating: 2, title: 'Meh. Sure.')
+      review5 = create(:review, shelter: @shelter, rating: 1, title: 'Run. Fast.')
+      review6 = create(:review, shelter: @shelter, rating: 5, title: 'Love it.')
+
+      visit "/shelters/#{@shelter.id}"
+
+      expect(review1.title).to appear_before(review2.title)
+      expect(review4.title).to appear_before(review5.title)
+      expect(review5.title).to appear_before(review6.title)
+
+      click_on 'Highest Rating'
+
+      expect(review6.title).to appear_before(review3.title)
+      expect(review3.title).to appear_before(review4.title)
+      expect(review5.title).to appear_before(review1.title)
+
+      click_on 'Lowest Rating'
+
+      expect(review1.title).to appear_before(review2.title)
+      expect(review2.title).to appear_before(review5.title)
+      expect(review3.title).to appear_before(review6.title)
+
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_004414) do
+ActiveRecord::Schema.define(version: 2020_10_18_181713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_10_16_004414) do
     t.string "title"
     t.integer "rating"
     t.string "content"
-    t.string "image"
+    t.string "image", default: "https://cdn.iconscout.com/icon/premium/png-256-thumb/pet-117-805569.png"
     t.bigint "user_id"
     t.bigint "shelter_id"
     t.datetime "created_at", null: false

@@ -7,11 +7,13 @@ class ReviewsController < ApplicationController
     shelter = Shelter.find(params[:shelter])
     review = shelter.reviews.new(review_params)
     review.user = user
+    if params[:image] == ""
+      review.default_image
+    end
     if user.nil?
       flash.notice = 'Failed to create review: User must exist'
       render :new
     elsif review.save
-      review.save
       redirect_to "/shelters/#{shelter.id}"
     else
       flash.notice = "Please fill out all required fields"

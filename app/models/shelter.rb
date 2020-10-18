@@ -2,18 +2,11 @@ class Shelter < ApplicationRecord
   has_many :pets, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
-  def self.sorted_by(param)
-    if param == "adoptable"
-      # TODO: Refactor with ActiveRecord
-      # Shelter.joins(:pets).group(:id).order(pets.count(:adoptable))
-      Shelter.all.sort_by do |shelter|
-        shelter.pets.count(:adoptable)
-      end.reverse
-    elsif param == "alphabetical"
-      Shelter.order(:name)
-    else
-      Shelter.all
+  def self.best_shelters
+    sorted_shelters = self.all.sort_by do |shelter|
+      shelter.average_rating
     end
+    sorted_shelters.reverse.first(3)
   end
 
   def pet_count

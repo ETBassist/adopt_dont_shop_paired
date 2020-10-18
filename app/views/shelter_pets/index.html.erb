@@ -32,3 +32,28 @@
       </p>
     </div>
   <% end %>
+
+<section class="adopted-pets">
+  <h3>Adopted Pets</h3>
+  <% @adopted_pets.each do |pet| %>
+    <div class="pet">
+      <%= image_tag pet.image %>
+
+      <p>
+        <strong>Name:</strong>
+        <%= link_to pet.name, "/pets/#{pet.id}" %>
+      </p>
+
+      <p>
+        <strong>Age:</strong>
+        <%= pet.age %>
+      </p>
+
+      <p>
+        <strong>Sex:</strong>
+        <%= pet.sex %>
+      </p>
+    </div>
+  <% end  %>
+
+</section>

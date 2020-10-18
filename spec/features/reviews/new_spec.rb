@@ -47,7 +47,7 @@ describe 'As a visitor' do
       fill_in :rating, with: 5
       fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
       fill_in :user_name, with: @user.name
-      
+
       click_on 'Create Review'
       expect(page).to have_content('Please fill out all required fields')
     end
@@ -63,6 +63,21 @@ describe 'As a visitor' do
       fill_in :user_name, with: "GobbleGobble"
       click_on 'Create Review'
       expect(page).to have_content('Failed to create review: User must exist')
+    end
+
+    it "The image will set to a default image if no image is given" do
+      visit "/shelters/#{@shelter.id}"
+
+      click_link 'New Review'
+
+      fill_in :title, with: 'They are so great!'
+      fill_in :rating, with: 5
+      fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
+      fill_in :user_name, with: @user.name
+      click_on 'Create Review'
+
+      img = "https://cdn.iconscout.com/icon/premium/png-256-thumb/pet-117-805569.png"
+      expect(page).to have_xpath("//img[contains(@src, '#{img}')]")
     end
   end
 end

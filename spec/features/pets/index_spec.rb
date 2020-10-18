@@ -103,5 +103,22 @@ describe "Pets Index" do
         expect(page).to have_content('Delete Pet')
       end
     end
+
+    it 'I see section of pets with approved applications' do
+      adopted_pet1 = create(:pet, shelter: @shelter_2, adoptable: false)
+      adopted_pet2 = create(:pet, shelter: @shelter_2, adoptable: false)
+      app_approved = create(:application, status: 'Approved')
+      app_unapproved = create(:application, status: 'Pending')
+      pet_app_approved = create(:pet_application, pet: adopted_pet1, application: app_approved)
+      pet_app = create(:pet_application, pet: adopted_pet2, application: app_unapproved)
+
+      visit "/pets"
+
+      expect(page).to have_content('Adopted Pets')
+      within('.adopted-pets') do
+        expect(page).to have_content(adopted_pet1.name)
+        expect(page).to_not have_content(adopted_pet2.name)
+      end
+    end
   end
 end

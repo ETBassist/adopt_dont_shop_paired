@@ -13,7 +13,10 @@
 <p>Average Rating: <%= @shelter.average_rating.round(2) if @shelter.average_rating %> </p>
 <p>Total Applications: <%= @shelter.application_count %> </p>
 
-<% @shelter.reviews.each do |review| %>
+Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
+<%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%> |
+
+<% @reviews.each do |review| %>
   <div>
     <%= review.rating %> | <%= review.user.name %>
     <p><%= review.title %></p>
