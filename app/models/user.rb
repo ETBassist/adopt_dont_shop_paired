@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :reviews
-  has_many :applications
+  has_many :applications, dependent: :destroy
 
   def best_review
     best = reviews.order(rating: :desc).limit(1).first
