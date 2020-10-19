@@ -99,7 +99,7 @@ describe 'As a visitor' do
       click_on 'Create Review'
 
       expect(page).to have_content('You already have a review, want to update it?')
-      expect(current_path).to eq("/reviews/#{review.id}")
+      expect(current_path).to eq("/reviews/#{review.id}/edit")
     end
   end
 end
