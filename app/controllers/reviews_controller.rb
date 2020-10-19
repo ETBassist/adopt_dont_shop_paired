@@ -13,6 +13,10 @@ class ReviewsController < ApplicationController
     if user.nil?
       flash.notice = 'Failed to create review: User must exist'
       render :new
+    elsif Review.check_exists(user, shelter)
+      review = Review.check_exists(user, shelter)
+      flash.notice = 'You already have a review, want to update it?'
+      redirect_to "/reviews/#{review.id}"
     elsif review.save
       redirect_to "/shelters/#{shelter.id}"
     else
