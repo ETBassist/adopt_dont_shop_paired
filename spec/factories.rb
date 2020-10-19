@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :pet_application do
     pet
     application
+    status {}
   end
 
   factory :application do
