@@ -7,8 +7,86 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Pet.destroy_all
 Shelter.destroy_all
+User.destroy_all
+Application.destroy_all
+Review.destroy_all
+PetApplication.destroy_all
 
-4.times do
-  shelter = FactoryBot.create(:shelter)
-  FactoryBot.create_list(:pet, 5, shelter: shelter)
-end
+# shelter, no reviews, no pets
+FactoryBot.create(:shelter)
+
+# shelter, no reviews, with adoptable pets
+shelter = FactoryBot.create(:shelter)
+FactoryBot.create_list(:pet, 4, shelter: shelter)
+
+# shelter, reviews, no pets
+shelter = FactoryBot.create(:shelter)
+FactoryBot.create_list(:review, 4, shelter: shelter)
+
+# shelter, reviews, with adoptable pets
+shelter = FactoryBot.create(:shelter)
+FactoryBot.create_list(:review, 4, shelter: shelter)
+FactoryBot.create_list(:pet, 4, shelter: shelter)
+
+# user, no apps, no reviews
+FactoryBot.create(:user)
+
+# user, no apps, yes reviews
+user = FactoryBot.create(:user)
+FactoryBot.create_list(:review, 4, user: user)
+
+
+# user, yes apps, yes reviews
+user = FactoryBot.create(:user)
+FactoryBot.create_list(:review, 4, user: user)
+  # app in progress
+  FactoryBot.create(:application, user: user)
+
+  # app pending
+  app = FactoryBot.create(:application, user: user, status: 'Pending')
+  FactoryBot.create_list(:pet_application, 2, application: app)
+
+  # app approved, all pet apps approved
+  app = FactoryBot.create(:application, user: user, status: 'Approved')
+  pets = FactoryBot.create_list(:pet, 2, adoptable: false)
+  FactoryBot.create(:pet_application, application: app, pet: pets.first, status: 'approved')
+  FactoryBot.create(:pet_application, application: app, pet: pets.second, status: 'approved')
+
+  # app rejected, some pet apps rejected
+  app = FactoryBot.create(:application, user: user, status: 'Rejected')
+  pets = FactoryBot.create_list(:pet, 2)
+  FactoryBot.create(:pet_application, application: app, pet: pets.first, status: 'approved')
+  FactoryBot.create(:pet_application, application: app, pet: pets.second, status: 'rejected')
+
+  # app rejected, all pet apps rejected
+  app = FactoryBot.create(:application, user: user, status: 'Rejected')
+  pets = FactoryBot.create_list(:pet, 2)
+  FactoryBot.create(:pet_application, application: app, pet: pets.first, status: 'rejected')
+  FactoryBot.create(:pet_application, application: app, pet: pets.second, status: 'rejected')
+
+  # user, yes apps, no reviews
+  user = FactoryBot.create(:user)
+    # app in progress
+    FactoryBot.create(:application, user: user)
+
+    # app pending
+    app = FactoryBot.create(:application, user: user, status: 'Pending')
+    FactoryBot.create_list(:pet_application, 2, application: app)
+
+    # app approved, all pet apps approved
+    app = FactoryBot.create(:application, user: user, status: 'Approved')
+    pets = FactoryBot.create_list(:pet, 2, adoptable: false)
+    FactoryBot.create(:pet_application, application: app, pet: pets.first, status: 'approved')
+    FactoryBot.create(:pet_application, application: app, pet: pets.second, status: 'approved')
+
+    # app rejected, some pet apps rejected
+    app = FactoryBot.create(:application, user: user, status: 'Rejected')
+    pets = FactoryBot.create_list(:pet, 2)
+    FactoryBot.create(:pet_application, application: app, pet: pets.first, status: 'approved')
+    FactoryBot.create(:pet_application, application: app, pet: pets.second, status: 'rejected')
+
+    # app rejected, all pet apps rejected
+    app = FactoryBot.create(:application, user: user, status: 'Rejected')
+    pets = FactoryBot.create_list(:pet, 2)
+    FactoryBot.create(:pet_application, application: app, pet: pets.first, status: 'rejected')
+    FactoryBot.create(:pet_application, application: app, pet: pets.second, status: 'rejected')
