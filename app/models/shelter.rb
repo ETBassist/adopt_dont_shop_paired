@@ -4,7 +4,11 @@ class Shelter < ApplicationRecord
 
   def self.best_shelters
     sorted_shelters = self.all.sort_by do |shelter|
-      shelter.average_rating
+      if shelter.average_rating
+        shelter.average_rating
+      else
+        0
+      end
     end
     sorted_shelters.reverse.first(3)
   end
