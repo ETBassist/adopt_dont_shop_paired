@@ -5,23 +5,25 @@ class ReviewsController < ApplicationController
   def create
     user = User.find_by(name: params[:user_name])
     shelter = Shelter.find(params[:shelter])
-    review = shelter.reviews.new(review_params)
-    review.user = user
-    if params[:image] == ""
-      review.default_image
-    end
-    if user.nil?
-      flash.notice = 'Failed to create review: User must exist'
-      render :new
-    elsif Review.check_exists(user, shelter)
+    if Review.check_exists(user, shelter)
       review = Review.check_exists(user, shelter)
       flash.notice = 'You already have a review, want to update it?'
-      redirect_to "/reviews/#{review.id}"
-    elsif review.save
-      redirect_to "/shelters/#{shelter.id}"
+      redirect_to "/reviews/#{review.id}/edit"
     else
-      flash.notice = "Please fill out all required fields"
-      render :new
+      review = shelter.reviews.new(review_params)
+      review.user = user
+      if params[:image] == ""
+        review.default_image
+      end
+      if user.nil?
+        flash.notice = 'Failed to create review: User must exist'
+        render :new
+      elsif review.save
+        redirect_to "/shelters/#{shelter.id}"
+      else
+        flash.notice = "Please fill out all required fields"
+        render :new
+      end
     end
   end
 
