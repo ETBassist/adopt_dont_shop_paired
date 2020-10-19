@@ -8,7 +8,35 @@ describe Shelter, type: :model do
 
   describe 'class methods' do
     it '.sorted_by' do
+      sf = create(:shelter, name: "San Francisco Pet Shelter")
+      apa = create(:shelter, name: "Austin Pets Alive!")
+      dfl = create(:shelter, name: "Dumb Friend's League")
+      create_list(:pet, 10, shelter: dfl)
+      create_list(:pet, 3, shelter: apa)
+      create_list(:pet, 7, shelter: sf)
 
+
+      expect(Shelter.sorted_by("alphabetical")).to eq([apa, dfl, sf])
+      expect(Shelter.sorted_by("adoptable")).to eq([dfl, sf, apa])
+      expect(Shelter.sorted_by(nil)).to eq([sf, apa, dfl])
+    end
+
+    it '.best_shelters' do
+      sf = create(:shelter, name: "San Francisco Pet Shelter")
+      apa = create(:shelter, name: "Austin Pets Alive!")
+      dfl = create(:shelter, name: "Dumb Friend's League")
+      rando = create(:shelter, name: "Random Shelter")
+      create(:review, shelter: sf, rating: 3)
+      create(:review, shelter: sf, rating: 2)
+      create(:review, shelter: apa, rating: 3)
+      create(:review, shelter: apa, rating: 4)
+      create(:review, shelter: dfl, rating: 5)
+      create(:review, shelter: dfl, rating: 3)
+      create(:review, shelter: rando, rating: 3)
+      create(:review, shelter: rando, rating: 1)
+
+      expect(Shelter.best_shelters).to eq([dfl, apa, sf])
+      expect(Shelter.best_shelters).to_not include(rando)
     end
   end
 

@@ -69,21 +69,29 @@ describe 'As a visitor' do
     it 'I can sort by number of adoptable pets' do
       visit '/shelters'
 
-      expect(@shelter_1.name).to appear_before(@shelter_2.name)
+      within('.all-shelters') do
+        expect(@shelter_1.name).to appear_before(@shelter_2.name)
+      end
 
       click_on 'Sort By: Number of Adoptable Pets'
 
-      expect(@shelter_1.name).to_not appear_before(@shelter_2.name)
+      within('.all-shelters') do
+        expect(@shelter_1.name).to_not appear_before(@shelter_2.name)
+      end
     end
 
     it 'I can sort by alphabetical order' do
       visit '/shelters'
 
-      expect(@shelter_1.name).to appear_before(@shelter_2.name)
+      within('.all-shelters') do
+        expect(@shelter_1.name).to appear_before(@shelter_2.name)
+      end
 
       click_on 'Sort By: Alphabetical'
 
-      expect(@shelter_1.name).to_not appear_before(@shelter_2.name)
+      within('.all-shelters') do
+        expect(@shelter_1.name).to_not appear_before(@shelter_2.name)
+      end
     end
 
     it 'I cannot delete a shelter if the pet has an approved app' do
@@ -97,6 +105,27 @@ describe 'As a visitor' do
       within("#shelter-#{shelter.id}") do
         expect(page).to_not have_link('Delete Shelter')
         expect(page).to have_content('Delete Shelter')
+      end
+    end
+
+    it 'I see the top three highest rated shelters highlighted' do
+      shelter_3 = create(:shelter)
+      shelter_4 = create(:shelter)
+      create(:review, shelter: @shelter_1, rating: 3)
+      create(:review, shelter: @shelter_1, rating: 2)
+      create(:review, shelter: @shelter_2, rating: 3)
+      create(:review, shelter: @shelter_2, rating: 4)
+      create(:review, shelter: shelter_3, rating: 5)
+      create(:review, shelter: shelter_3, rating: 3)
+      create(:review, shelter: shelter_4, rating: 3)
+      create(:review, shelter: shelter_4, rating: 1)
+
+      visit "/shelters"
+
+      within(".best-shelters") do
+        expect(shelter_3.name).to appear_before(@shelter_2.name)
+        expect(@shelter_2.name).to appear_before(@shelter_1.name)
+        expect(page).to_not have_content(shelter_4.name)
       end
     end
   end

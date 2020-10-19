@@ -7,6 +7,32 @@ describe Pet, type: :model do
     it { should have_many(:applications).through(:pet_applications) }
   end
 
+  describe 'class methods' do
+    it '.display_by' do
+      pet1 = create(:pet, adoptable: true)
+      pet2 = create(:pet, adoptable: false)
+      pet3 = create(:pet, adoptable: true)
+      pet4 = create(:pet, adoptable: false)
+
+      expect(Pet.display_by("true")).to eq([pet1, pet3])
+      expect(Pet.display_by("false")).to eq([pet2, pet4])
+      expect(Pet.display_by(nil)).to eq([pet1, pet3, pet2, pet4])
+    end
+
+    it '.adopted_pets' do
+      adopted_pet1 = create(:pet, adoptable: false)
+      adopted_pet2 = create(:pet, adoptable: false)
+      app_approved = create(:application, status: 'Approved')
+      app_unapproved = create(:application, status: 'Pending')
+      pet_app_approved = create(:pet_application, pet: adopted_pet1, application: app_approved)
+      pet_app = create(:pet_application, pet: adopted_pet2, application: app_unapproved)
+
+      expect(Pet.adopted_pets).to eq([adopted_pet1])
+      expect(Pet.adopted_pets).to_not eq([adopted_pet1, adopted_pet2])
+    end
+  end
+
+
   describe 'instance methods' do
     it '.status' do
       shelter = Shelter.create!()
@@ -30,7 +56,7 @@ describe Pet, type: :model do
       pet = create(:pet)
 
       expect(pet.has_approvals?).to eq(false)
-      
+
       user = create(:user)
       pet.applications.create!(user_id: user.id, status: "Approved")
 
