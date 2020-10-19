@@ -18,10 +18,7 @@ class Shelter < ApplicationRecord
   end
 
   def application_count
-    # TODO: Refactor with ActiveRecord
-    pets.sum do |pet|
-      pet.applications.count
-    end
+    pets.joins(:applications).count
   end
 
   def has_approvals?

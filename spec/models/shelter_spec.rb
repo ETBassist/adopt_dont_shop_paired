@@ -68,7 +68,13 @@ describe Shelter, type: :model do
       create(:pet_application, pet: pet2)
       create(:pet_application, pet: pet2)
 
+      shelter2 = create(:shelter)
+      pet3 = create(:pet, shelter: shelter2)
+      create(:pet_application, pet: pet3)
+      create(:pet_application, pet: pet3)
+
       expect(shelter.application_count).to eq(5)
+      expect(shelter2.application_count).to eq(2)
     end
 
     it '.has_approvals?' do
@@ -79,7 +85,7 @@ describe Shelter, type: :model do
       shelter = create(:shelter)
       pet = create(:pet, shelter: shelter)
       application = create(:application, status: 'Approved')
-      pet_app = create(:pet_application, pet: pet, application: application)
+      create(:pet_application, pet: pet, application: application)
 
       expect(shelter.has_approvals?).to eq(true)
     end

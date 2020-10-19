@@ -10,63 +10,26 @@ RSpec.describe User, type: :model do
     it "best_review" do
       user = create(:user)
 
-      no_hash = {
-        title: "No title",
-        rating: "No rating",
-        content: "No content"
-      }
+      expect(user.best_review).to eq(nil)
 
-      expect(user.best_review).to eq(no_hash)
+      user_2 = create(:user)
+      review_1 = create(:review, user: user_2, rating: 5)
+      review_2 = create(:review, user: user_2, rating: 2)
 
-      review1 = create(:review, user: user, rating: 5)
-      review2 = create(:review, user: user, rating: 2)
-
-      review1_hash = {
-        title: review1.title,
-        rating: review1.rating,
-        content: review1.content,
-        image: review1.image
-      }
-
-      review2_hash = {
-        title: review2.title,
-        rating: review2.rating,
-        content: review2.content,
-        image: review2.image
-      }
-
-      expect(user.best_review).to eq(review1_hash)
+      expect(user_2.best_review).to eq(review_1)
+      expect(user_2.best_review).to_not eq(review_2)
     end
 
     it "worst_review" do
       user = create(:user)
 
-      no_hash = {
-        title: "No title",
-        rating: "No rating",
-        content: "No content"
-      }
-
-      expect(user.worst_review).to eq(no_hash)
+      expect(user.worst_review).to eq(nil)
 
       review1 = create(:review, user: user, rating: 5)
       review2 = create(:review, user: user, rating: 2)
 
-      review1_hash = {
-        title: review1.title,
-        rating: review1.rating,
-        content: review1.content,
-        image: review1.image
-      }
-
-      review2_hash = {
-        title: review2.title,
-        rating: review2.rating,
-        content: review2.content,
-        image: review2.image
-      }
-
-      expect(user.worst_review).to eq(review2_hash)
+      expect(user.worst_review).to eq(review2)
+      expect(user.worst_review).to_not eq(review1)
     end
 
     it "full_address" do
