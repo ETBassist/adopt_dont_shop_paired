@@ -26,6 +26,8 @@ describe Shelter, type: :model do
       apa = create(:shelter, name: "Austin Pets Alive!")
       dfl = create(:shelter, name: "Dumb Friend's League")
       rando = create(:shelter, name: "Random Shelter")
+      no_reviews = create(:shelter, name: "No Reviews")
+
       create(:review, shelter: sf, rating: 3)
       create(:review, shelter: sf, rating: 2)
       create(:review, shelter: apa, rating: 3)
