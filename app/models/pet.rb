@@ -17,6 +17,10 @@ class Pet < ApplicationRecord
     Pet.joins(:applications).where("applications.status = 'Approved' AND pets.adoptable = 'false' ")
   end
 
+  def self.count_of_pets
+    Pet.count
+  end
+
   def status
     if adoptable?
       "Adoptable"

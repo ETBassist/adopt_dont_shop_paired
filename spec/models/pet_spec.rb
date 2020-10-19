@@ -24,11 +24,17 @@ describe Pet, type: :model do
       adopted_pet2 = create(:pet, adoptable: false)
       app_approved = create(:application, status: 'Approved')
       app_unapproved = create(:application, status: 'Pending')
-      pet_app_approved = create(:pet_application, pet: adopted_pet1, application: app_approved)
-      pet_app = create(:pet_application, pet: adopted_pet2, application: app_unapproved)
+      create(:pet_application, pet: adopted_pet1, application: app_approved)
+      create(:pet_application, pet: adopted_pet2, application: app_unapproved)
 
       expect(Pet.adopted_pets).to eq([adopted_pet1])
       expect(Pet.adopted_pets).to_not eq([adopted_pet1, adopted_pet2])
+    end
+
+    it '::count_of_pets' do
+      create_list(:pet, 5)
+
+      expect(Pet.count_of_pets).to eq(5)
     end
   end
 
