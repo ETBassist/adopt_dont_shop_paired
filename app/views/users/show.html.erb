@@ -4,7 +4,7 @@
 </h2>
 
 <p><strong>Address:</strong><br />
-  <%= @user.street_address %>,<br />
+  <%= @user.street_address %><br />
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
 
@@ -18,30 +18,50 @@
 
 <% if @best_review %>
   <section class="best">
-    <%= @best_review.title %>
-    <%= @best_review.rating %>
-    <%= @best_review.content %>
-    <%= image_tag @best_review.image if @best_review.image %>"
+    <h3>Best Review</h3>
+    <div class="best-review">
+      <%= image_tag @best_review.image %>
+      <div class="review-info">
+        <p>Rating: <%= @best_review.rating %></p>
+        <p><strong><%= @best_review.title %></strong></p>
+        <p><%= @best_review.content %></p>
+      </div>
+    </div>
   </section>
 
   <section class="worst">
-    <%= @worst_review.title %>
-    <%= @worst_review.rating %>
-    <%= @worst_review.content %>
-    <%= image_tag @worst_review.image if @worst_review.image %>
+    <h3>Worst Review</h3>
+    <div class="worst-review">
+      <%= image_tag @worst_review.image %>
+      <div class="review-info">
+        <p>Rating: <%= @worst_review.rating %></p>
+        <p><strong><%= @worst_review.title %></strong></p>
+        <p><%= @worst_review.content %></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="all">
+    <h3>All Reviews</h3>
+    <% @user.reviews.each do |review| %>
+      <div class="review">
+        <%= image_tag review.image %>
+        <div class="review-info">
+          <p>Rating: <%= review.rating %></p>
+          <p><strong><%= review.title %></strong></p>
+          <p><%= review.content %></p>
+        </div>
+      </div>
+    <% end %>
   </section>
 <% else %>
   <p>No Reviews to Show</p>
+  <h3>Ready to get started? Here are some options:</h3>
+  <p><%= link_to "View Pets", "/pets" %></p>
+  <p><%= link_to "Find a Shelter", "/shelters" %></p>
+  <p><%= link_to "Start an Application", "/applications/new" %></p>
 <% end %>
 
 <p>
-  <% @user.reviews.each do |review| %>
-    <%= review.rating %>
-    <%= review.title %>
-    <%= review.content %>
-  <% end %>
+
 </p>
-<h3>Ready to get started? Here are some options:</h3>
-<p><%= link_to "View Pets", "/pets" %></p>
-<p><%= link_to "Find a Shelter", "/shelters" %></p>
-<p><%= link_to "Start an Application", "/applications/new" %></p>
