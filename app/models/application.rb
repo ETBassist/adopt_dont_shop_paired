@@ -12,7 +12,7 @@ class Application < ApplicationRecord
   end
 
   def add_pet(pet_id)
-    Pet.find(pet_id)
+    pet = Pet.find(pet_id)
     pets << pet
   end
 end
