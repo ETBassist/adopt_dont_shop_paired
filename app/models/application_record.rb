@@ -3,11 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.sorted_by(param)
     if param == "adoptable"
-      # TODO: Refactor with ActiveRecord
-      # Shelter.joins(:pets).group(:id).order(pets.count(:adoptable))
-      self.all.sort_by do |shelter|
-        shelter.pets.count(:adoptable)
-      end.reverse
+      joins(:pets).where('pets.adoptable = true').group(:id).order('count(pets.adoptable) desc')
     elsif param == "alphabetical"
       order(:name)
     elsif param == "highest"
@@ -15,7 +11,7 @@ class ApplicationRecord < ActiveRecord::Base
     elsif param == "lowest"
       order(:rating, :created_at)
     else
-      self.all
+      all
     end
   end
 end
