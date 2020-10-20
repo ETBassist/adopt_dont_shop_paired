@@ -2,13 +2,7 @@
 <p>Status: <%= @application.status %></p>
 
 <h2>Application</h2>
-<p>Name: <%= @application.user.name %></p>
-<p>Address: <%= @application.user.full_address %></p>
-<p>Description: <%= @application.description %></p>
-<p>Pets:</p>
-<% @application.pets.each do |pet| %>
-  <p><%= link_to pet.name, "/pets/#{pet.id}" %></p>
-<% end %>
+<%= render partial: "shared/user_details", locals: {application: @application} %>
 
 <% @application.pets.each do |pet| %>
   <div id="pet-<%= pet.id %>">

@@ -10,4 +10,8 @@ class Application < ApplicationRecord
   def has_pet?(pet)
     pets.exists?(pet.id)
   end
+
+  def add_pet(pet_id)
+    pets << Pet.find(pet_id)
+  end
 end

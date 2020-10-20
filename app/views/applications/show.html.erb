@@ -3,15 +3,7 @@
 <h2>Application</h2>
 <p>Pets will be added to this area once you add them to the application.</p>
 <section class="application-information">
-  <p>Name: <%= @application.user.name %></p>
-  <p>Address: <%= @application.user.full_address %></p>
-  <p>Description: <%= @application.description %></p>
-  <p>Pets:</p>
-  <ul>
-  <% @application.pets.each do |pet| %>
-    <li><%= link_to pet.name, "/pets/#{pet.id}" %></li>
-  <% end %>
-  </ul>
+  <%= render partial: "shared/user_details", locals: {application: @application} %>
   <p>Application Status: <%= @application.status %></p>
 </section>
 

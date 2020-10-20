@@ -21,6 +21,10 @@ class Pet < ApplicationRecord
     count
   end
 
+  def self.with_names_like(name)
+    where('lower(name) like ?', "%#{name.downcase}%")
+  end
+
   def status
     if adoptable?
       "Adoptable"

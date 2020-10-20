@@ -1,0 +1,9 @@
+<p>Name: <%= application.user.name %></p>
+<p>Address: <%= application.user.full_address %></p>
+<p>Description: <%= application.description %></p>
+<p>Pets:</p>
+<ul>
+<% application.pets.each do |pet| %>
+  <li><%= link_to pet.name, "/pets/#{pet.id}" %></li>
+<% end %>
+</ul>
