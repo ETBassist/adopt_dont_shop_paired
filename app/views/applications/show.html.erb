@@ -10,7 +10,8 @@
 
 <% if @application.status == 'In Progress' %>
   <section>
-    <p>Add a Pet to this Application</p>
+    <h3>Add a Pet to this Application</h3>
+
     <%= form_tag "/applications/#{@application.id}", method: :get do %>
       <%= label_tag :pet_name %>
       <%= search_field_tag :pet_name, 'Find Pet' %>
@@ -19,8 +20,14 @@
     <% end %>
     <p class="search-results">
       <% @pets.each do |pet| %>
-        <%= pet.name %>
-        <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+        <div class="pet" id="pet-<%= pet.id %>">
+          <%= image_tag pet.image %>
+          <p>
+            <strong>Name:</strong>
+            <%= link_to pet.name, "/pets/#{pet.id}" %>
+          </p>
+          <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+        </div>
       <% end %>
     </p>
   </section>
@@ -28,7 +35,7 @@
 
 <% if @application.has_pets? %>
 <section class="app-submit">
-  <p>Application Submission</p>
+  <h3>Application Submission</h3>
   <%= form_tag "/applications/#{@application.id}", method: :patch do %>
     <%= label_tag :description %>
     <%= text_area_tag :description %>
