@@ -59,6 +59,33 @@ describe 'As a visitor' do
       expect(page).to have_link(pet2.name)
     end
 
+    it 'I can not add a pet to the application twice' do
+      pet2 = create(:pet)
+
+      visit "/applications/#{@app.id}"
+
+      fill_in :pet_name, with: pet2.name
+
+      first(:button, "Submit").click
+
+      expect(current_path).to eq("/applications/#{@app.id}")
+
+      first(:button, 'Adopt this Pet').click
+
+      expect(current_path).to eq("/applications/#{@app.id}")
+
+      expect(page).to have_link(pet2.name)
+
+      fill_in :pet_name, with: pet2.name
+
+      first(:button, "Submit").click
+
+      within("#pet-#{pet2.id}") do
+        expect(page).to have_content('Already Added')
+        expect(page).to_not have_button('Adopt this Pet')
+      end
+    end
+
     it 'I can submit an application after adding required info' do
       visit "/pets"
       click_on "Start an Application"
