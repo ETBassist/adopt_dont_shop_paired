@@ -79,5 +79,27 @@ describe 'As a visitor' do
       img = "https://cdn.iconscout.com/icon/premium/png-256-thumb/pet-117-805569.png"
       expect(page).to have_xpath("//img[contains(@src, '#{img}')]")
     end
+
+    it "it will take me to edit a review if I have already reviewed this shelter" do
+      review = Review.create(
+        title: 'They are so great!',
+        rating: 5,
+        content: 'I adopted by bun bun through this shelter and they were so great.',
+        shelter_id: @shelter.id,
+        user_id: @user.id
+      )
+      visit "/shelters/#{@shelter.id}"
+
+      click_link 'New Review'
+
+      fill_in :title, with: 'They were so great!'
+      fill_in :rating, with: 3
+      fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great. Until recently, they have really gona downhill.'
+      fill_in :user_name, with: @user.name
+      click_on 'Create Review'
+
+      expect(page).to have_content('You already have a review, want to update it?')
+      expect(current_path).to eq("/reviews/#{review.id}/edit")
+    end
   end
 end
