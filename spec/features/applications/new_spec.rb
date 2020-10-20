@@ -14,6 +14,7 @@ describe 'As a visitor' do
       click_on 'Start an Application'
 
       expect(current_path).to eq('/applications/new')
+      expect(page).to have_content('Create New User')
 
       fill_in :user_name, with: @user.name
 
