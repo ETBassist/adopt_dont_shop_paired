@@ -28,7 +28,7 @@
   <% end %>
 </div>
 
-<% if @reviews.any? %>
+<% if !@reviews.nil? %>
   <div class="review-sort">
     Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
     <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>

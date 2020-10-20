@@ -5,7 +5,7 @@ describe 'As a visitor' do
     before (:each) do
       @user = create(:user)
       @shelter = create(:shelter)
-      @pet = create(:pet, shelter: @shelter)
+      @pet = create(:pet, name: 'Pugalicious', shelter: @shelter)
 
       @app = create(:application, user: @user, status: 'In Progress')
       @pet_application = create(
@@ -123,7 +123,7 @@ describe 'As a visitor' do
 
     it "I cannot submit an application without a description" do
       app = create(:application, description: "", status: "In Progress")
-      pet_app = create(:pet_application, application: app)
+      create(:pet_application, application: app)
 
       visit "/applications/#{app.id}"
 
@@ -146,6 +146,20 @@ describe 'As a visitor' do
 
       expect(page).to have_content(bun.name)
       expect(page).to have_content(bunbun.name)
+    end
+
+    it "I get a notice when there are no matching results" do
+      bun = create(:pet, name: "Bun")
+      bunbun = create(:pet, name: "BunBun")
+
+      visit "/applications/#{@app.id}"
+
+      fill_in :pet_name, with: 'JimJoeBob'
+      first(:button, "Submit").click
+
+      expect(page).to_not have_content(bun.name)
+      expect(page).to_not have_content(bunbun.name)
+      expect(page).to have_content("Could not find a pet by that name")
     end
   end
 end
