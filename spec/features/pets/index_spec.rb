@@ -105,8 +105,8 @@ describe "Pets Index" do
     end
 
     it 'I see section of pets with approved applications' do
-      adopted_pet1 = create(:pet, shelter: @shelter_2, adoptable: false)
-      adopted_pet2 = create(:pet, shelter: @shelter_2, adoptable: false)
+      adopted_pet1 = create(:pet, name: 'Greta', shelter: @shelter_2, adoptable: false)
+      adopted_pet2 = create(:pet, name: 'Hans', shelter: @shelter_2, adoptable: false)
       app_approved = create(:application, status: 'Approved')
       app_unapproved = create(:application, status: 'Pending')
       pet_app_approved = create(:pet_application, pet: adopted_pet1, application: app_approved)

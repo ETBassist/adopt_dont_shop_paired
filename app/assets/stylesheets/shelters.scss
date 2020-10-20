@@ -1,3 +1,62 @@
 // Place all the styles related to the Shelters controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.best-shelters {
+  background-color: #efd8d2;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow:
+     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+     0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
+.all-shelters {
+  background-color: #efe6d2;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow:
+     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+     0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
+.shelter-info {
+  background-color: #efd8d2;
+  padding: .5rem;
+  border-radius: 10px;
+  box-shadow:
+     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+     0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
+.shelter-links {
+  padding: 1rem;
+}
+.review-sort {
+  font-size: 1em;
+}
+.review {
+  background-color: #efe6d2;
+  padding: .5rem;
+  border-radius: 10px;
+  box-shadow:
+     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+     0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
+.review-title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.review-content {
+  font-style: italic;
+  font-size: 1em;
+}
+.application-information {
+  background-color: #efe6d2;
+  padding: .5rem;
+  border-radius: 10px;
+  box-shadow:
+     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+     0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
