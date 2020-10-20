@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :applications, dependent: :destroy
 
+  validates_presence_of :name
+
   def best_review
     reviews.order(rating: :desc).limit(1).first
   end
