@@ -50,7 +50,7 @@ describe 'As a visitor' do
 
       click_button 'Submit'
 
-      expect(current_path).to eq("/applications/new")
+      expect(current_path).to eq("/applications/#{@user.applications.last.id}")
       expect(page).to have_content(@user.name)
       expect(page).to have_content(@user.full_address)
       expect(page).to have_content("In Progress")
