@@ -1,9 +1,5 @@
 <% content_for :title, "All Shelters" %>
-
-
-<%= link_to 'New Shelter', "/shelters/new", class: "Create" %>
-
-
+<p>Do you adopt out pets? Add a <%= link_to 'New Shelter', "/shelters/new", class: "Create" %></p>
 <section class="best-shelters">
   <h2>Best Shelters</h2>
   <% @best_shelters.each do |shelter| %>
