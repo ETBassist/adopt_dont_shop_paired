@@ -14,9 +14,7 @@
 
   <% @pets.each do |pet| %>
     <hr>
-    <div class="pet">
       <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
-    </div>
   <% end %>
 
 <section class="adopted-pets">
