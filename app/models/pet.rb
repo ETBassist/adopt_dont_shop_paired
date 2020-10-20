@@ -34,9 +34,6 @@ class Pet < ApplicationRecord
   end
 
   def has_approvals?
-    # TODO: Refactor into ActiveRecord query
-    applications.any? do |app|
-      app.status == 'Approved'
-    end
+    applications.exists?(status: 'Approved')
   end
 end
