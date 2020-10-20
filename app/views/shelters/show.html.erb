@@ -1,9 +1,10 @@
 <% content_for :title, "#{@shelter.name} Information" %>
-<h2>
-  <%= link_to @shelter.name, "/shelters/#{@shelter.id}"%>
-</h2>
+
 
 <div class="shelter-info">
+  <h2>
+    <%= @shelter.name %>
+  </h2>
   <p>
     <strong>Address:</strong>
     <%= @shelter.address %>,
@@ -28,22 +29,26 @@
   <% end %>
 </div>
 
-<% if @reviews.any? %>
-  <div class="review-sort">
-    Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
-    <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
-  </div>
-
-  <% @reviews.each do |review| %>
-    <div class="review">
-      <%= review.rating %> | <%= review.user.name %>
-      <p><%= review.title %></p>
-      <p><%= review.content %></p>
-      <p><%= image_tag review.image if review.image %></p>
-      <p>
-        <%= link_to 'Edit', "/reviews/#{review.id}/edit" %>
-        <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
-      </p>
+<section>
+  <h2>Reviews for <%= @shelter.name %></h2>
+  <% if @reviews.any? %>
+    <div class="review-sort">
+      Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
+      <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
     </div>
+
+    <% @reviews.each do |review| %>
+      <div class="review">
+        <p class="review-title"><%= review.title %></p>
+        <p class="review-content"><%= review.content %></p>
+        <p><%= image_tag review.image if review.image %></p>
+        <p>Rating: <%= review.rating %> by <%= review.user.name %></p>
+
+        <p>
+          <%= link_to 'Edit', "/reviews/#{review.id}/edit" %> |
+          <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
+        </p>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</section>
