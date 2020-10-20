@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :pet_application do
     pet
     application
+    status {}
   end
 
   factory :application do
@@ -20,7 +21,7 @@ FactoryBot.define do
 
   factory :pet do
     name { Faker::Games::Pokemon.name }
-    image { "https://placedog.net/280/id=" + rand(1..160).to_s}
+    image { "https://placedog.net/280/210/id=" + rand(1..160).to_s}
     age { rand(1..16).to_s }
     sex { ["Male", "Female"].sample }
     adoptable { true }
@@ -39,7 +40,7 @@ FactoryBot.define do
     title { "I love my #{Faker::Creature::Dog.meme_phrase}" }
     rating { rand(1..5).to_s}
     content { Faker::Movies::HarryPotter.quote }
-    image { "https://placedog.net/100/id=" + rand(1..160).to_s }
+    image { "https://placedog.net/100/67/id=" + rand(1..160).to_s }
     shelter
     user
   end
