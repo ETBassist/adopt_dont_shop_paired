@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    user = User.find_by(name: params[:user_name])
+    user = User.find_by('lower(name) = ?', params[:user_name].downcase)
     if user
       app = user.applications.create(app_params)
       redirect_to "/applications/#{app.id}"
