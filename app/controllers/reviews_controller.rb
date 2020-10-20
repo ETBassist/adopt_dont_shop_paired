@@ -1,31 +1,24 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :find_review, only: [:edit, :update, :destroy]
+  before_action :find_user, only: [:create, :update]
+  before_action :find_shelter, only: [:create]
 
   def new
   end
 
   def create
-    user = User.find_by(name: params[:user_name])
-    shelter = Shelter.find(params[:shelter])
-    if Review.check_exists(user, shelter)
-      review = Review.check_exists(user, shelter)
-      flash.notice = 'You already have a review, want to update it?'
-      redirect_to "/reviews/#{review.id}/edit"
+    return redirect_to_existing_review if Review.check_exists(@user, @shelter)
+    @review = @shelter.reviews.new(review_params)
+    @review.user = @user
+    check_default_image
+    if @user.nil?
+      flash.notice = 'Failed to create review: User must exist'
+      render :new
+    elsif @review.save
+      redirect_to "/shelters/#{@shelter.id}"
     else
-      review = shelter.reviews.new(review_params)
-      review.user = user
-      if params[:image] == ""
-        review.default_image
-      end
-      if user.nil?
-        flash.notice = 'Failed to create review: User must exist'
-        render :new
-      elsif review.save
-        redirect_to "/shelters/#{shelter.id}"
-      else
-        flash.notice = "Please fill out all required fields"
-        render :new
-      end
+      flash.notice = "Please fill out all required fields"
+      render :new
     end
   end
 
@@ -33,12 +26,10 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    user = User.find_by(name: params[:user_name])
-    if user.nil?
+    if @user.nil?
       flash.notice = 'Failed to edit review: User must exist'
       render :edit
     elsif @review.update(review_params)
-      @review.update(review_params)
       redirect_to "/shelters/#{@review.shelter.id}"
     else
       flash.notice = "Please fill out all required fields"
@@ -53,11 +44,31 @@ class ReviewsController < ApplicationController
 
   private
 
-  def set_review
+  def find_review
     @review = Review.find(params[:id])
+  end
+
+  def find_user
+    @user = User.find_by(name: params[:user_name])
+  end
+
+  def find_shelter
+    @shelter = Shelter.find(params[:shelter])
   end
 
   def review_params
     params.permit(:title, :content, :rating, :image)
+  end
+
+  def redirect_to_existing_review
+    review = Review.check_exists(@user, @shelter)
+    flash.notice = 'You already have a review, want to update it?'
+    redirect_to "/reviews/#{review.id}/edit"
+  end
+
+  def check_default_image
+    if params[:image] == ""
+      @review.default_image
+    end
   end
 end
