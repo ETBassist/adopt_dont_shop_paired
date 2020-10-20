@@ -2,40 +2,47 @@
   <%= link_to @shelter.name, "/shelters/#{@shelter.id}"%>
 </h2>
 
+<div class="shelter-info">
+  <p>
+    <strong>Address:</strong>
+    <%= @shelter.address %>,
+    <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %>
+  </p>
+  <p>Total Pets: <%= @shelter.pet_count %> </p>
+  <p><%= "Average Rating: #{@shelter.average_rating.round(2)}" if @shelter.average_rating %></p>
+  <p>Total Applications: <%= @shelter.application_count %> </p>
+</div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @shelter.address %>,
-  <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %>
-</p>
+<div class="shelter-links">
+  <%= link_to "New Review", "/reviews/new?shelter=#{@shelter.id}" %> |
 
-<p>Total Pets: <%= @shelter.pet_count %> </p>
-<p>Average Rating: <%= @shelter.average_rating.round(2) if @shelter.average_rating %> </p>
-<p>Total Applications: <%= @shelter.application_count %> </p>
+  <%= link_to "View Pets", "/shelters/#{@shelter.id}/pets"%> |
 
-Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
-<%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%> |
+  <%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit", class: "Update" %> |
 
-<% @reviews.each do |review| %>
-  <div>
-    <%= review.rating %> | <%= review.user.name %>
-    <p><%= review.title %></p>
-    <p><%= review.content %></p>
-    <p><%= image_tag review.image if review.image %></p>
-    <p>
-      <%= link_to 'Edit', "/reviews/#{review.id}/edit" %>
-      <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
-    </p>
+  <% if @shelter.has_approvals? %>
+    Delete Shelter
+  <% else %>
+    <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete, class: "Delete" %>
+  <% end %>
+</div>
+
+<% if @reviews.any? %>
+  <div class="review-sort">
+    Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
+    <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
   </div>
-<% end %>
-<%= link_to "New Review", "/reviews/new?shelter=#{@shelter.id}" %> |
 
-<%= link_to "View Pets", "/shelters/#{@shelter.id}/pets"%> |
-
-<%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit", class: "Update" %> |
-
-<% if @shelter.has_approvals? %>
-  <p>Delete Shelter</p>
-<% else %>
-  <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete, class: "Delete" %>
+  <% @reviews.each do |review| %>
+    <div class="review">
+      <%= review.rating %> | <%= review.user.name %>
+      <p><%= review.title %></p>
+      <p><%= review.content %></p>
+      <p><%= image_tag review.image if review.image %></p>
+      <p>
+        <%= link_to 'Edit', "/reviews/#{review.id}/edit" %>
+        <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
+      </p>
+    </div>
+  <% end %>
 <% end %>
