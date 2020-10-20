@@ -5,20 +5,20 @@ class Pet < ApplicationRecord
 
   def self.display_by(param)
     if param == "true"
-      Pet.where(adoptable: true)
+      where(adoptable: true)
     elsif param == "false"
-      Pet.where(adoptable: false)
+      where(adoptable: false)
     else
-      Pet.order(adoptable: :desc)
+      order(adoptable: :desc)
     end
   end
 
   def self.adopted_pets
-    Pet.joins(:applications).where("applications.status = 'Approved' AND pets.adoptable = 'false' ")
+    joins(:applications).where("applications.status = 'Approved' AND pets.adoptable = 'false' ")
   end
 
   def self.count_of_pets
-    Pet.count
+    count
   end
 
   def status
