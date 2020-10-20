@@ -9,8 +9,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    redirect_to "/users/#{user.id}"
+    if User.find_by(name: params[:name], zip: params[:zip])
+      flash.notice = 'User already exists!'
+      redirect_to "/users/new"
+    else
+      user = User.create(user_params)
+      redirect_to "/users/#{user.id}"
+    end
   end
 
   private
