@@ -16,13 +16,7 @@ class ApplicationsController < ApplicationController
 
   def create
     user = User.find_by('lower(name) = ?', params[:user_name].downcase)
-    if user
-      app = user.applications.create(app_params)
-      redirect_to "/applications/#{app.id}"
-    else
-      flash.notice = "Invalid User Name"
-      redirect_to "/applications/new"
-    end
+    check_user_validity(user, app_params)
   end
 
   def update
@@ -41,5 +35,15 @@ class ApplicationsController < ApplicationController
   private
   def app_params
     params.permit(:status, :description)
+  end
+
+  def check_user_validity(user, given_params)
+    if user
+      app = user.applications.create(given_params)
+      redirect_to "/applications/#{app.id}"
+    else
+      flash.notice = "Invalid User Name"
+      redirect_to "/applications/new"
+    end
   end
 end
