@@ -1,0 +1,34 @@
+<div class="pet">
+<%= image_tag pet_value.image %>
+
+<p>
+  <strong>Name:</strong>
+  <%= link_to pet_value.name, "/pets/#{pet_value.id}" %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= pet_value.description %>
+</p>
+
+
+<p>
+  <strong>Age:</strong>
+  <%= pet_value.age %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= pet_value.sex %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= pet_value.status %>
+</p>
+
+<p>
+  <strong>Shelter:</strong>
+  <%= link_to pet_value.shelter.name, "/shelters/#{pet_value.shelter.id}" %>
+</p>
+</div>
