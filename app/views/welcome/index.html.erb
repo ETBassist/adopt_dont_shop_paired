@@ -1,5 +1,11 @@
-<h1>Welcome!</h1>
-
-<%= link_to 'View All Shelters', "/shelters" %> |
-
-<%= link_to 'View All Pets', "/pets" %>
+<h2>Welcome!</h2>
+<p>We are so happy to have you here! We are here to connect you with shelters
+and their adoptable pets. Pets can bring light and joy into your life.</p>
+<div class="welcome-nav">
+  <ul>
+    <li><%= link_to "View Shelters", '/shelters' %></li>
+    <li><%= link_to 'View Pets', '/pets' %></li>
+  </ul>
+</div>
+<p><%= link_to 'Create New User', "/users/new" %></p>
+<p><%= link_to 'Create New Shelter', "/shelters/new" %></p>
