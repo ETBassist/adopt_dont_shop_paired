@@ -18,11 +18,20 @@
 
 <% if @best_review %>
   <section class="best">
+    <h3>Best Review</h3>
     <%= render partial: "show_review", locals: { review: @best_review } %>
   </section>
 
   <section class="worst">
+    <h3>Worst Review</h3>
     <%= render partial: "show_review", locals: { review: @worst_review } %>
+  </section>
+
+  <section class="all-reviews">
+    <h3>All Reviews</h3>
+    <% @user.reviews.each do |review| %>
+      <%= render partial: "show_review", locals: { review: review } %>
+    <% end %>
   </section>
 <% else %>
   <p>No Reviews to Show</p>
@@ -31,9 +40,3 @@
   <p><%= link_to "Find a Shelter", "/shelters" %></p>
   <p><%= link_to "Start an Application", "/applications/new" %></p>
 <% end %>
-
-<p>
-  <% @user.reviews.each do |review| %>
-    <%= render partial: "show_review", locals: { review: review } %>
-  <% end %>
-</p>
