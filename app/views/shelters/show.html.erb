@@ -45,7 +45,7 @@
           <p>Rating: <%= review.rating %></p>
           <p><strong><%= review.title %></strong></p>
           <p><%= review.content %></p>
-          <p><em><%= review.user.name %></em></p>
+          <p><em><%= link_to review.user.name, "/users/#{review.user_id}" %></em></p>
           <p>
             <%= link_to 'Edit', "/reviews/#{review.id}/edit" %> |
             <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
