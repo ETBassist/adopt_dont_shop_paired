@@ -2,7 +2,7 @@
   <%= link_to @shelter.name, "/shelters/#{@shelter.id}"%>
 </h2>
 
-<div>
+<div class="shelter-info">
   <p>
     <strong>Address:</strong>
     <%= @shelter.address %>,
@@ -13,7 +13,7 @@
   <p>Total Applications: <%= @shelter.application_count %> </p>
 </div>
 
-<div>
+<div class="shelter-links">
   <%= link_to "New Review", "/reviews/new?shelter=#{@shelter.id}" %> |
 
   <%= link_to "View Pets", "/shelters/#{@shelter.id}/pets"%> |
@@ -28,13 +28,13 @@
 </div>
 
 <% if @reviews.any? %>
-  <div>
+  <div class="review-sort">
     Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
     <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
   </div>
 
   <% @reviews.each do |review| %>
-    <div>
+    <div class="review">
       <%= review.rating %> | <%= review.user.name %>
       <p><%= review.title %></p>
       <p><%= review.content %></p>
