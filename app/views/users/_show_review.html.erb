@@ -1,4 +1,8 @@
-<%= review.title %>
-<%= review.rating %>
-<%= review.content %>
-<%= image_tag review.image if review.image %>
+<div class="review">
+  <%= image_tag review.image %>
+  <div class="review-info">
+    <p>Rating: <%= review.rating %></p>
+    <p><strong><%= review.title %></strong></p>
+    <p><%= review.content %></p>
+  </div>
+</div>
