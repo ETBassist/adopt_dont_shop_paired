@@ -72,7 +72,6 @@ describe 'As a visitor' do
       visit "/shelters/#{@shelter.id}"
 
       click_link 'New Review'
-      save_and_open_page
 
       fill_in :title, with: 'They are so great!'
       #fill_in :rating, with: 5
