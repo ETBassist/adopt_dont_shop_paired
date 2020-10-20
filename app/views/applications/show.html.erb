@@ -26,7 +26,11 @@
             <strong>Name:</strong>
             <%= link_to pet.name, "/pets/#{pet.id}" %>
           </p>
-          <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+          <% if @application.has_pet?(pet) %>
+            <p><strong>Already Added</strong></p>
+          <% else %>
+            <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+          <% end %>
         </div>
       <% end %>
     </p>
