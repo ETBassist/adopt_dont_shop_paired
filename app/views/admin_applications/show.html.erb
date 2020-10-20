@@ -2,7 +2,7 @@
 <p>Status: <%= @application.status %></p>
 
 <h2>Application</h2>
-<%= render partial: "partials/user_details", locals: {application: @application} %>
+<%= render partial: "shared/user_details", locals: {application: @application} %>
 
 <% @application.pets.each do |pet| %>
   <div id="pet-<%= pet.id %>">
