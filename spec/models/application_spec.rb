@@ -30,7 +30,7 @@ RSpec.describe Application, type: :model do
       application = create(:application)
 
       pet = create(:pet)
-      application.add_pet(pet)
+      application.add_pet(pet.id)
 
       expect(application.pets.last).to eq(pet)
     end
