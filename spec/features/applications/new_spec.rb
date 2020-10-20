@@ -41,5 +41,19 @@ describe 'As a visitor' do
       expect(current_path).to eq("/applications/new")
       expect(page).to have_content("Invalid User Name")
     end
+
+    it "I can find a user with a case insensitive search" do
+      uppercase_name = @user.name.upcase
+      visit '/applications/new'
+
+      fill_in :user_name, with: uppercase_name
+
+      click_button 'Submit'
+
+      expect(current_path).to eq("/applications/new")
+      expect(page).to have_content(@user.name)
+      expect(page).to have_content(@user.full_address)
+      expect(page).to have_content("In Progress")
+    end
   end
 end
