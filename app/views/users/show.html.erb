@@ -3,15 +3,18 @@
   <%= @user.name %>
 </h2>
 
-<p>
-  <strong>Address:</strong>
-  <%= @user.street_address %>,
+<p><strong>Address:</strong><br />
+  <%= @user.street_address %>,<br />
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
 
-<p>
-  Average Review Score: <%= @user.reviews.average(:rating) %>
-</p>
+<% if @user.reviews.average(:rating).nil? %>
+<% else %>
+  <p>
+    <strong>Average Review Score: </strong>
+    <%= @user.reviews.average(:rating) %>
+  </p>
+<% end %>
 
 <% if @best_review %>
   <section class="best">
@@ -38,4 +41,7 @@
     <%= review.content %>
   <% end %>
 </p>
+<h3>Ready to get started? Here are some options:</h3>
+<p><%= link_to "View Pets", "/pets" %></p>
+<p><%= link_to "Find a Shelter", "/shelters" %></p>
 <p><%= link_to "Start an Application", "/applications/new" %></p>
