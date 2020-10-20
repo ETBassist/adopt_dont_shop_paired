@@ -37,7 +37,7 @@
   </section>
 <% end %>
 
-<% if @application.has_pets? %>
+<% if @application.has_pets? && @application.status == 'In Progress' %>
 <section class="app-submit">
   <h3>Application Submission</h3>
   <%= form_tag "/applications/#{@application.id}", method: :patch do %>
@@ -47,6 +47,5 @@
     <%= hidden_field_tag :status, 'Pending' %>
     <%= submit_tag "Submit" %>
   <% end %>
-
 </section>
 <% end %>
