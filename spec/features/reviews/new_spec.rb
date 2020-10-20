@@ -97,7 +97,7 @@ describe 'As a visitor' do
       click_link 'New Review'
 
       fill_in :title, with: 'They were so great!'
-      fill_in :rating, with: 3
+      select "3", :from => "rating"
       fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great. Until recently, they have really gona downhill.'
       fill_in :user_name, with: @user.name
       click_on 'Create Review'
