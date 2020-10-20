@@ -32,18 +32,8 @@
     <p>Please select a pet or pets to add to your application.</p>
     <p class="search-results">
       <% @pets.each do |pet| %>
-        <div class="pet" id="pet-<%= pet.id %>">
-          <%= image_tag pet.image %>
-          <p>
-            <strong>Name:</strong>
-            <%= link_to pet.name, "/pets/#{pet.id}" %>
-          </p>
-          <% if @application.has_pet?(pet) %>
-            <p><strong>Already Added</strong></p>
-          <% else %>
-            <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
-          <% end %>
-        </div>
+        <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+        <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
       <% end %>
     </p>
   </section>
