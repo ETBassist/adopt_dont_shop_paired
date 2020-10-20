@@ -30,8 +30,8 @@
     <p>Please select a pet or pets to add to your application.</p>
     <p class="search-results">
       <% @pets.each do |pet| %>
-        <%= pet.name %>
         <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+        <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
       <% end %>
     </p>
   </section>

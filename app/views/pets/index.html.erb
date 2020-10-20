@@ -15,32 +15,8 @@
 
   <% @pets.each do |pet| %>
     <hr>
-    <div class="pet" id="pet-<%= pet.id %>">
-      <%= image_tag pet.image %>
-      <p>
-        <strong>Name:</strong>
-        <%= link_to pet.name, "/pets/#{pet.id}" %>
-      </p>
-
-      <p>
-        <strong>Age:</strong>
-        <%= pet.age %>
-      </p>
-
-      <p>
-        <strong>Sex:</strong>
-        <%= pet.sex %>
-      </p>
-
-      <p>
-        <strong>Status:</strong>
-        <%= pet.status %>
-      </p>
-
-      <p>
-        <strong>Shelter:</strong>
-        <%= link_to pet.shelter.name, "/shelters/#{pet.shelter.id}" %>
-      </p>
+    <div id="pet-<%= pet.id %>">
+      <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
 
       <%= link_to 'Update Pet', "/pets/#{pet.id}/edit", class: "Update" %> |
       <% if pet.has_approvals? %>
@@ -53,24 +29,7 @@
   <section class="adopted-pets">
     <h3>Adopted Pets</h3>
     <% @adopted_pets.each do |pet| %>
-      <div class="pet">
-        <%= image_tag pet.image %>
-
-        <p>
-          <strong>Name:</strong>
-          <%= link_to pet.name, "/pets/#{pet.id}" %>
-        </p>
-
-        <p>
-          <strong>Age:</strong>
-          <%= pet.age %>
-        </p>
-
-        <p>
-          <strong>Sex:</strong>
-          <%= pet.sex %>
-        </p>
-      </div>
+      <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
     <% end  %>
 
   </section>

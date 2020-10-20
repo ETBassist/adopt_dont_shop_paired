@@ -1,39 +1,6 @@
 <% content_for :title, "#{@pet.name} Information and Adoption Status" %>
 
-<div class="pet">
-  <%= image_tag @pet.image %>
-
-  <p>
-    <strong>Name:</strong>
-    <%= link_to @pet.name, "/pets/#{@pet.id}" %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @pet.description %>
-  </p>
-
-
-  <p>
-    <strong>Age:</strong>
-    <%= @pet.age %>
-  </p>
-
-  <p>
-    <strong>Sex:</strong>
-    <%= @pet.sex %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= @pet.status %>
-  </p>
-
-  <p>
-    <strong>Shelter:</strong>
-    <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %>
-  </p>
-</div>
+<%= render partial: "shared/pet_card", locals: { pet_value: @pet } %>
 
 <%= link_to 'View all Applications', "/pets/#{@pet.id}?show_apps=true" %>
 
