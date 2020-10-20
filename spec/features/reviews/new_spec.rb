@@ -28,7 +28,6 @@ describe 'As a visitor' do
       expect(current_path).to eq("/reviews/new")
 
       fill_in :title, with: 'They are so great!'
-      #fill_in :rating, with: 5
       select "5", :from => "rating"
       fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
       fill_in :user_name, with: @user.name
@@ -45,7 +44,6 @@ describe 'As a visitor' do
 
       click_link 'New Review'
 
-      #fill_in :rating, with: 5
       select "5", :from => "rating"
       fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
       fill_in :user_name, with: @user.name
@@ -60,7 +58,6 @@ describe 'As a visitor' do
       click_link 'New Review'
 
       fill_in :title, with: 'They are so great!'
-      #fill_in :rating, with: 5
       select "5", :from => "rating"
       fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
       fill_in :user_name, with: "GobbleGobble"
@@ -74,7 +71,6 @@ describe 'As a visitor' do
       click_link 'New Review'
 
       fill_in :title, with: 'They are so great!'
-      #fill_in :rating, with: 5
       select "5", :from => "rating"
       fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
       fill_in :user_name, with: @user.name
