@@ -36,7 +36,7 @@ describe 'As a visitor' do
 
       expect(current_path).to eq("/applications/#{@app.id}")
 
-      within('.search-results') do
+      within('.pet') do
         expect(page).to have_content(pet2.name)
       end
     end
