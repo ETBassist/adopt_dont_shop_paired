@@ -1,3 +1,5 @@
+<% content_for :title, "Edit Info for #{@shelter.name}" %>
+
 <h1>Edit Shelter</h1>
 
 <%= form_tag "/shelters/#{@shelter.id}", method: :patch do %>

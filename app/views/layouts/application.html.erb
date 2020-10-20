@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AdoptDontShop</title>
+    <title><%= yield(:title) %> | Adopt, Don't Shop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +10,7 @@
   </head>
 
   <header>
-    <h1>Adopt Don't Shop</h1>
+    <h1><%= link_to "Adopt Don't Shop", "/" %></h1>
     <%= link_to 'Shelters', "/shelters" %>
     <%= link_to 'Pets', "/pets" %>
   </header>

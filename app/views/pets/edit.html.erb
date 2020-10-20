@@ -1,3 +1,4 @@
+<% content_for :title, "#{@pet.name} Edit Information" %>
 <h1>Edit Pet</h1>
 
 <%= form_tag "/pets/#{@pet.id}", method: :patch do %>
