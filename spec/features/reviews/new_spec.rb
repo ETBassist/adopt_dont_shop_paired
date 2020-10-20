@@ -65,6 +65,37 @@ describe 'As a visitor' do
       expect(page).to have_content('Failed to create review: User must exist')
     end
 
+    it "I can select the user I mean in the event there is more than one" do
+      user_same = User.create!(
+        name: "William Tolde",
+        street_address: "123 Main St",
+        city: "Boulder",
+        state: "CO",
+        zip: "80309"
+      )
+
+      visit "/shelters/#{@shelter.id}"
+
+      click_link 'New Review'
+
+      fill_in :title, with: 'They are so great!'
+      fill_in :rating, with: 5
+      fill_in :content, with: 'I adopted by bun bun through this shelter and they were so great.'
+      fill_in :user_name, with: "William told"
+      click_on 'Create Review'
+
+      expect(page).to have_content('Please select the correct user and Create Review again.')
+
+      within("#user-#{user_same.id}") do
+        click_on 'Select'
+      end
+      click_on 'Create Review'
+
+      expect(current_path).to eq("/shelters/#{@shelter.id}")
+      expect(page).to have_content('They are so great!')
+      expect(page).to have_content('William Tolde')
+    end
+
     it "The image will set to a default image if no image is given" do
       visit "/shelters/#{@shelter.id}"
 
