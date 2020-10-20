@@ -13,7 +13,7 @@ RSpec.describe Application, type: :model do
       application = create(:application)
       expect(application.has_pets?).to eq(false)
 
-      pet_application = create(:pet_application, application: application)
+      create(:pet_application, application: application)
       expect(application.has_pets?).to eq(true)
     end
 
@@ -22,8 +22,17 @@ RSpec.describe Application, type: :model do
       pet = create(:pet)
       expect(application.has_pet?(pet)).to eq(false)
 
-      pet_application = create(:pet_application, application: application, pet: pet)
+      create(:pet_application, application: application, pet: pet)
       expect(application.has_pet?(pet)).to eq(true)
+    end
+
+    it ".add_pet(pet)" do
+      application = create(:application)
+
+      pet = create(:pet)
+      application.add_pet(pet)
+
+      expect(application.pets.last).to eq(pet)
     end
   end
 
