@@ -30,12 +30,16 @@
     <% end %>
     <h4>Matching Pets</h4>
     <p>Please select a pet or pets to add to your application.</p>
-    <p class="search-results">
       <% @pets.each do |pet| %>
-        <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
-        <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
+        <div id="pet-<%= pet.id %>">
+          <% if @application.has_pet?(pet) %>
+            <p><strong>Already Added</strong></p>
+          <% else %>
+            <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+          <% end %>
+          <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
+        </div>
       <% end %>
-    </p>
   </section>
 <% end %>
 
@@ -43,7 +47,7 @@
 <section class="app-submit">
   <h3>Application Submission</h3>
   <p>Ready to submit your application? Fill in why you want to adopt these pets and about your living situation. Submit, we will review, and get back to you soon!</p>
-  
+
   <%= form_tag "/applications/#{@application.id}", method: :patch do %>
     <%= label_tag :description %>
     <%= text_area_tag :description %>
