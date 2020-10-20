@@ -4,11 +4,7 @@ class ApplicationsController < ApplicationController
     if params[:pet_name]
       @pets = Pet.where('lower(name) like ?', "%#{params[:pet_name].downcase}%")
     end
-    if params[:pet_name] && !@pets.nil?
-      flash.notice = "Could not find a pet by that name"
-    else
-      @pets = []
-    end
+    check_search_results(params, @pets)
   end
 
   def new
@@ -21,13 +17,7 @@ class ApplicationsController < ApplicationController
 
   def update
     application = Application.find(params[:id])
-    if params[:pet]
-      application.add_pet(params[:pet])
-    elsif params[:description].empty?
-      flash.notice = "Required field: Description"
-    elsif params[:status]
-      application.update(app_params)
-    end
+    check_update_validity(application, params)
     redirect_to "/applications/#{application.id}"
   end
 
@@ -43,6 +33,24 @@ class ApplicationsController < ApplicationController
     else
       flash.notice = "Invalid User Name"
       redirect_to "/applications/new"
+    end
+  end
+
+  def check_update_validity(application, given_params)
+    if given_params[:pet]
+      application.add_pet(given_params[:pet])
+    elsif given_params[:description].empty?
+      flash.notice = "Required field: Description"
+    elsif given_params[:status]
+      application.update(app_params)
+    end
+  end
+
+  def check_search_results(given_params, pets)
+    if given_params[:pet_name] && !pets.nil?
+      flash.notice = "Could not find a pet by that name"
+    else
+      @pets = []
     end
   end
 end

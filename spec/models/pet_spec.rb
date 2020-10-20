@@ -36,6 +36,15 @@ describe Pet, type: :model do
 
       expect(Pet.count_of_pets).to eq(5)
     end
+
+    it '::with_names_like(name)' do
+      pet1 = create(:pet, name: "Perry The Parakeet")
+      pet2 = create(:pet, name: "Perocles")
+      pet3 = create(:pet, name: "Kerry")
+
+      expect(Pet.with_names_like("per")).to eq([pet1, pet2])
+      expect(Pet.with_names_like("ker")).to eq([pet3])
+    end
   end
 
 
