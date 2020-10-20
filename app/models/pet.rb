@@ -22,7 +22,7 @@ class Pet < ApplicationRecord
   end
 
   def self.with_names_like(name)
-    Pet.where('lower(name) like ?', "%#{name.downcase}%")
+    where('lower(name) like ?', "%#{name.downcase}%")
   end
 
   def status
