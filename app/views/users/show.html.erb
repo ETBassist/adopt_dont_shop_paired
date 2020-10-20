@@ -15,17 +15,11 @@
 
 <% if @best_review %>
   <section class="best">
-    <%= @best_review.title %>
-    <%= @best_review.rating %>
-    <%= @best_review.content %>
-    <%= image_tag @best_review.image if @best_review.image %>"
+    <%= render partial: "show_review", locals: { review: @best_review } %>
   </section>
 
   <section class="worst">
-    <%= @worst_review.title %>
-    <%= @worst_review.rating %>
-    <%= @worst_review.content %>
-    <%= image_tag @worst_review.image if @worst_review.image %>
+    <%= render partial: "show_review", locals: { review: @worst_review } %>
   </section>
 <% else %>
   <p>No Reviews to Show</p>
@@ -33,9 +27,7 @@
 
 <p>
   <% @user.reviews.each do |review| %>
-    <%= review.rating %>
-    <%= review.title %>
-    <%= review.content %>
+    <%= render partial: "show_review", locals: { review: review } %>
   <% end %>
 </p>
 <p><%= link_to "Start an Application", "/applications/new" %></p>
