@@ -14,7 +14,7 @@
       <%= link_to "Update Shelter", "/shelters/#{shelter.id}/edit", class: "Update" %> |
 
       <% if shelter.has_approvals? %>
-        <p>Delete Shelter</p>
+        Delete Shelter
       <% else %>
         <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "Delete" %>
       <% end %>
@@ -36,7 +36,7 @@
       <%= link_to "Update Shelter", "/shelters/#{shelter.id}/edit", class: "Update" %> |
 
       <% if shelter.has_approvals? %>
-        <p>Delete Shelter</p>
+        Delete Shelter
       <% else %>
         <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "Delete" %>
       <% end %>
