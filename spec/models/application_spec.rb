@@ -16,6 +16,15 @@ RSpec.describe Application, type: :model do
       pet_application = create(:pet_application, application: application)
       expect(application.has_pets?).to eq(true)
     end
+
+    it ".has_pet?(pet)" do
+      application = create(:application)
+      pet = create(:pet)
+      expect(application.has_pet?(pet)).to eq(false)
+
+      pet_application = create(:pet_application, application: application, pet: pet)
+      expect(application.has_pet?(pet)).to eq(true)
+    end
   end
 
 end

@@ -3,6 +3,9 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     if params[:pet_name]
       @pets = Pet.where('lower(name) like ?', "%#{params[:pet_name].downcase}%")
+    end
+    if params[:pet_name] && !@pets.nil?
+      flash.notice = "Could not find a pet by that name"
     else
       @pets = []
     end
