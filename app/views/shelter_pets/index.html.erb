@@ -1,3 +1,4 @@
+<% content_for :title, "Shelter Pets at #{@shelter.name}" %>
 <h1>Shelter Pets at <%= @shelter.name %></h1>
 
 <%= link_to 'Adoptable Pets', "/shelters/#{@shelter.id}/pets?adoptable=true" %> |

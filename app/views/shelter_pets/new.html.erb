@@ -1,3 +1,5 @@
+<% content_for :title, "Add New Pet to #{@shelter.name}" %>
+
 <h1>New Pet</h1>
 
 <%= form_tag "/shelters/#{@shelter.id}/pets" do %>
