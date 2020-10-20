@@ -31,11 +31,11 @@
 
 <section>
   <h2>Reviews for <%= @shelter.name %></h2>
-  <% if @reviews.any? %>
-    <div class="review-sort">
-      Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
-      <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
-    </div>
+<% if !@reviews.nil? %>
+  <div class="review-sort">
+    Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
+    <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
+  </div>
 
     <% @reviews.each do |review| %>
       <div class="review">

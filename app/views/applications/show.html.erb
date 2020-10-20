@@ -20,6 +20,7 @@
   <section>
     <h3>Add a Pet to this Application</h3>
     <p>Search for a pet name and then you will be able to select from a list of available pets.</p>
+
     <%= form_tag "/applications/#{@application.id}", method: :get do %>
       <%= label_tag :pet_name %>
       <%= search_field_tag :pet_name, 'Find Pet' %>
@@ -30,14 +31,24 @@
     <p>Please select a pet or pets to add to your application.</p>
     <p class="search-results">
       <% @pets.each do |pet| %>
-        <%= pet.name %>
-        <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+        <div class="pet" id="pet-<%= pet.id %>">
+          <%= image_tag pet.image %>
+          <p>
+            <strong>Name:</strong>
+            <%= link_to pet.name, "/pets/#{pet.id}" %>
+          </p>
+          <% if @application.has_pet?(pet) %>
+            <p><strong>Already Added</strong></p>
+          <% else %>
+            <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+          <% end %>
+        </div>
       <% end %>
     </p>
   </section>
 <% end %>
 
-<% if @application.has_pets? %>
+<% if @application.has_pets? && @application.status == 'In Progress' %>
 <section class="app-submit">
   <h3>Application Submission</h3>
   <p>Ready to submit your application? Fill in why you want to adopt these pets and about your living situation. Submit, we will review, and get back to you soon!</p>
