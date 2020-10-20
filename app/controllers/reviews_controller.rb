@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :set_review, only: [:edit, :update, :destroy]
+
   def new
   end
 
@@ -28,11 +30,9 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
   end
 
   def update
-    @review = Review.find(params[:id])
     user = User.find_by(name: params[:user_name])
     if user.nil?
       flash.notice = 'Failed to edit review: User must exist'
@@ -47,13 +47,15 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    review = Review.find(params[:id])
-    shelter_id = review.shelter.id
-    review.destroy
-    redirect_to "/shelters/#{shelter_id}"
+    @review.destroy
+    redirect_to "/shelters/#{@review.shelter.id}"
   end
 
   private
+
+  def set_review
+    @review = Review.find(params[:id])
+  end
 
   def review_params
     params.permit(:title, :content, :rating, :image)
