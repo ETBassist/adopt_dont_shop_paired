@@ -28,6 +28,28 @@
      0 6.7px 5.3px rgba(0, 0, 0, 0.048),
      0 12.5px 10px rgba(0, 0, 0, 0.06);
 }
+.shelter-extra {
+  display: flex;
+  flex-wrap: wrap;
+}
+.button {
+  order: 2;
+  height: 20px;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  color: #FFF;
+  background-color: #393E41;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  box-shadow:
+     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+     0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
+.statistics {
+  order: 1;
+}
 .shelter-links {
   padding: 1rem;
 }
@@ -36,7 +58,8 @@
 }
 .review {
   background-color: #efe6d2;
-  padding: .5rem;
+  padding: .2rem;
+  margin-top: 1rem;
   border-radius: 10px;
   box-shadow:
      0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -51,6 +74,7 @@
   font-style: italic;
   font-size: 1em;
 }
+
 .application-information {
   background-color: #efe6d2;
   padding: .5rem;

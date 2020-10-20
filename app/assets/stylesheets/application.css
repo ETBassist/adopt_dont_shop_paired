@@ -13,9 +13,29 @@
  *= require_tree .
  *= require_self
  */
- html, body {
+
+ body {
+   width: 750px;
    background-color: #F4F5F6;
    color: #393E41;
+   border-radius: 20px;
+   padding: 1rem;
+   align-items: center;
+   box-shadow:
+      0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+      0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+      0 12.5px 10px rgba(0, 0, 0, 0.06);
+ }
+
+ form {
+   width: 50%;
+   background-color: #D2EFE9;
+   border-radius: 20px;
+   padding: 1rem;
+   box-shadow:
+      0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+      0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+      0 12.5px 10px rgba(0, 0, 0, 0.06);
  }
 
  header {
@@ -43,8 +63,11 @@
       0 12.5px 10px rgba(0, 0, 0, 0.06);
  }
 
- header h1 {
-   font-size: 2rem;
+ header h1 a {
+   all: initial;
+ }
+ header h1 a:hover {
+   all: initial;
  }
 
  img {
