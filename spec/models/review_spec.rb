@@ -7,13 +7,13 @@ RSpec.describe Review, type: :model do
 
   describe "class methods" do
     it '.sorted_by' do
-      @shelter = Shelter.create
-      review1 = create(:review, shelter: @shelter, rating: 1, title: 'WTF')
-      review2 = create(:review, shelter: @shelter, rating: 1, title: 'SRSLY ppl?')
-      review3 = create(:review, shelter: @shelter, rating: 5, title: 'Wowza')
-      review4 = create(:review, shelter: @shelter, rating: 2, title: 'Meh. Sure.')
-      review5 = create(:review, shelter: @shelter, rating: 1, title: 'Run. Fast.')
-      review6 = create(:review, shelter: @shelter, rating: 5, title: 'Love it.')
+      shelter = Shelter.create
+      review1 = create(:review, shelter: shelter, rating: 1, title: 'WTF')
+      review2 = create(:review, shelter: shelter, rating: 1, title: 'SRSLY ppl?')
+      review3 = create(:review, shelter: shelter, rating: 5, title: 'Wowza')
+      review4 = create(:review, shelter: shelter, rating: 2, title: 'Meh. Sure.')
+      review5 = create(:review, shelter: shelter, rating: 1, title: 'Run. Fast.')
+      review6 = create(:review, shelter: shelter, rating: 5, title: 'Love it.')
 
       highest = [review6, review3, review4, review5, review2, review1]
       lowest = highest.reverse
@@ -22,6 +22,14 @@ RSpec.describe Review, type: :model do
       expect(Review.sorted_by("highest")).to eq(highest)
       expect(Review.sorted_by("lowest")).to eq(lowest)
       expect(Review.sorted_by(nil)).to eq(normal)
+    end
+
+    it ".check_exists" do
+      shelter = Shelter.create
+      user = User.create
+      review1 = create(:review, user: user, shelter: shelter, rating: 1, title: 'WTF')
+
+      expect(Review.check_exists(user, shelter)).to eq(review1)
     end
   end
 
