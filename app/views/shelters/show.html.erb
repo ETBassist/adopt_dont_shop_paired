@@ -40,15 +40,17 @@
 
     <% @reviews.each do |review| %>
       <div class="review">
-        <p class="review-title"><%= review.title %></p>
-        <p class="review-content"><%= review.content %></p>
         <p><%= image_tag review.image if review.image %></p>
-        <p>Rating: <%= review.rating %> by <%= review.user.name %></p>
-
-        <p>
-          <%= link_to 'Edit', "/reviews/#{review.id}/edit" %> |
-          <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
-        </p>
+        <div class="review-info">
+          <p>Rating: <%= review.rating %></p>
+          <p><strong><%= review.title %></strong></p>
+          <p><%= review.content %></p>
+          <p><em><%= review.user.name %></em></p>
+          <p>
+            <%= link_to 'Edit', "/reviews/#{review.id}/edit" %> |
+            <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
+          </p>
+        </div>
       </div>
     <% end %>
 <% else %>
