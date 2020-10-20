@@ -4,10 +4,10 @@ class Application < ApplicationRecord
   has_many :pets, through: :pet_applications
 
   def has_pets?
-    pets.any?
+    pets.exists?
   end
 
   def has_pet?(pet)
-    pets.include?(pet)
+    pets.exists?(pet.id)
   end
 end
