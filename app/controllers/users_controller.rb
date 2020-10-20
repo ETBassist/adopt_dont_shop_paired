@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if User.find_by(name: params[:name], zip: params[:zip])
+    if User.find_by(name: params[:name])
       flash.notice = 'User already exists!'
       redirect_to "/users/new"
     else
