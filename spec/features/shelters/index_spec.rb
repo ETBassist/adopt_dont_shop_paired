@@ -109,8 +109,8 @@ describe 'As a visitor' do
     end
 
     it 'I see the top three highest rated shelters highlighted' do
-      shelter_3 = create(:shelter)
-      shelter_4 = create(:shelter)
+      shelter_3 = create(:shelter, name: "Pet Love Forever")
+      shelter_4 = create(:shelter, name: "I love Pets")
       create(:review, shelter: @shelter_1, rating: 3)
       create(:review, shelter: @shelter_1, rating: 2)
       create(:review, shelter: @shelter_2, rating: 3)

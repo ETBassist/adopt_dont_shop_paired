@@ -53,27 +53,57 @@ describe 'As a visitor' do
     end
 
     it "I see the review with the highest rating by that User" do
-      review1 = create(:review, rating: 1, user: @user, shelter: @shelter)
-      review2 = create(:review, rating: 2, user: @user, shelter: @shelter)
+      review1 = create(
+        :review,
+        rating: 1,
+        title: 'They never called me!',
+        content: "I'm not even sure they are open.",
+        user: @user,
+        shelter: @shelter
+      )
+      review2 = create(
+        :review,
+        rating: 2,
+        title: 'No good pets',
+        content: "There's only one bunny.",
+        user: @user,
+        shelter: @shelter
+      )
       visit "/users/#{@user.id}"
 
       within('section.best') do
         expect(page).to have_content(@review.title)
         expect(page).to have_content(@review.rating)
         expect(page).to have_content(@review.content)
+        expect(page).to_not have_content(review2.content)
       end
 
       within('section.worst') do
         expect(page).to have_content(review1.title)
         expect(page).to have_content(review1.rating)
         expect(page).to have_content(review1.content)
+        expect(page).to_not have_content(review2.content)
       end
     end
 
     it "I cannot see reviews from deleted shelters" do
-      review1 = create(:review, rating: 1, user: @user, shelter: @shelter)
       shelter2 = create(:shelter)
-      review2 = create(:review, rating: 2, user: @user, shelter: shelter2)
+      review1 = create(
+        :review,
+        rating: 1,
+        title: 'They never called me!',
+        content: "I'm not even sure they are open.",
+        user: @user,
+        shelter: @shelter
+      )
+      review2 = create(
+        :review,
+        rating: 2,
+        title: 'No good pets',
+        content: "There's only one bunny.",
+        user: @user,
+        shelter: shelter2
+      )
 
       visit "/shelters/#{shelter2.id}"
 
