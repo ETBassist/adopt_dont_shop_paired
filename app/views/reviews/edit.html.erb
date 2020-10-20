@@ -1,3 +1,5 @@
+<% content_for :title, "Edit Review" %>
+
 <h1>Edit Review</h1>
 
 <%= form_tag("/reviews/#{@review.id}", method: :patch) do %>
