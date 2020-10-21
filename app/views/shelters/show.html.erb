@@ -1,7 +1,7 @@
 <% content_for :title, "#{@shelter.name} Information" %>
 
 
-<div class="shelter-info">
+<section class="shelter-info">
   <h2>
     <%= @shelter.name %>
   </h2>
@@ -10,18 +10,19 @@
     <%= @shelter.address %>,
     <%= @shelter.city %>, <%= @shelter.state %> <%= @shelter.zip %>
   </p>
-  <p>Total Pets: <%= @shelter.pet_count %> </p>
-  <p><%= "Average Rating: #{@shelter.average_rating.round(2)}" if @shelter.average_rating %></p>
-  <p>Total Applications: <%= @shelter.application_count %> </p>
-</div>
+  <div class="shelter-extra">
+    <div class="statistics">
+      <h3>Shelter Statistics</h3>
+      <p>Total Pets: <%= @shelter.pet_count %> <br />
+      Total Applications: <%= @shelter.application_count %><br />
+      <%= "Average Rating: #{@shelter.average_rating.round(2)}" if @shelter.average_rating %></p>
+    </div>
+    <%= link_to "View Pets", "/shelters/#{@shelter.id}/pets", class: "button" %>
+  </div>
+</section>
 
 <div class="shelter-links">
-  <%= link_to "New Review", "/reviews/new?shelter=#{@shelter.id}" %> |
-
-  <%= link_to "View Pets", "/shelters/#{@shelter.id}/pets"%> |
-
   <%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit", class: "Update" %> |
-
   <% if @shelter.has_approvals? %>
     Delete Shelter
   <% else %>
@@ -29,25 +30,30 @@
   <% end %>
 </div>
 
+<% if !@reviews.empty? %>
   <h2>Reviews for <%= @shelter.name %></h2>
-<% if !@reviews.nil? %>
-  <div class="review-sort">
-    Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
-    <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
-  </div>
+  <p><%= link_to "New Review", "/reviews/new?shelter=#{@shelter.id}" %></p>
+    <div class="review-sort">
+      Sort By: <%= link_to 'Highest Rating', "/shelters/#{@shelter.id}?sort=highest"%> |
+      <%= link_to 'Lowest Rating', "/shelters/#{@shelter.id}?sort=lowest"%>
+    </div>
 
     <% @reviews.each do |review| %>
       <div class="review">
-        <p class="review-title"><%= review.title %></p>
-        <p class="review-content"><%= review.content %></p>
         <p><%= image_tag review.image if review.image %></p>
-        <p>Rating: <%= review.rating %> by <%= review.user.name %></p>
-
-        <p>
-          <%= link_to 'Edit', "/reviews/#{review.id}/edit" %> |
-          <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
-        </p>
+        <div class="review-info">
+          <p>Rating: <%= review.rating %></p>
+          <p><strong><%= review.title %></strong></p>
+          <p><%= review.content %></p>
+          <p><em><%= link_to review.user.name, "/users/#{review.user_id}" %></em></p>
+          <p>
+            <%= link_to 'Edit', "/reviews/#{review.id}/edit" %> |
+            <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
+          </p>
+        </div>
       </div>
     <% end %>
-  <% end %>
-</section>
+<% else %>
+  <p>This shelter has no reviews! </p>
+  <p><%= link_to "Create a New Review", "/reviews/new?shelter=#{@shelter.id}" %></p>
+<% end %>

@@ -19,7 +19,9 @@ describe 'As a visitor' do
       visit "/applications/#{@app.id}"
 
       expect(page).to have_content(@app.user.name)
-      expect(page).to have_content(@app.user.full_address)
+      expect(page).to have_content(@app.user.street_address)
+      expect(page).to have_content(@app.user.city)
+      expect(page).to have_content(@app.user.zip)
       expect(page).to have_content(@app.description)
       expect(page).to have_link(@app.pets.first.name)
       expect(page).to have_content(@app.status)

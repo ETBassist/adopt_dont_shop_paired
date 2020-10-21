@@ -1,0 +1,25 @@
+.review-sort {
+  font-size: 1em;
+}
+.review {
+  background-color: #efe6d2;
+  padding: .2rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  box-shadow:
+     0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+     0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+     0 12.5px 10px rgba(0, 0, 0, 0.06);
+  display: flex;
+}
+.review-info {
+  padding: 10px;
+}
+.review-title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.review-content {
+  font-style: italic;
+  font-size: 1em;
+}

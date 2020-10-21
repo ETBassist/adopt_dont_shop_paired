@@ -23,7 +23,9 @@ describe 'As a visitor' do
       expect(current_path).to eq("/applications/#{@user.applications.last.id}")
 
       expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.full_address)
+      expect(page).to have_content(@user.city)
+      expect(page).to have_content(@user.state)
+      expect(page).to have_content(@user.zip)
       expect(page).to have_content("In Progress")
     end
 
@@ -52,7 +54,9 @@ describe 'As a visitor' do
 
       expect(current_path).to eq("/applications/#{@user.applications.last.id}")
       expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.full_address)
+      expect(page).to have_content(@user.city)
+      expect(page).to have_content(@user.state)
+      expect(page).to have_content(@user.zip)
       expect(page).to have_content("In Progress")
     end
   end

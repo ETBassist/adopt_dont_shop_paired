@@ -41,7 +41,7 @@
   <p>Ready to submit your application? Fill in why you want to adopt these pets and about your living situation. Submit, we will review, and get back to you soon!</p>
 
   <%= form_tag "/applications/#{@application.id}", method: :patch do %>
-    <%= label_tag :description %>
+    <%= label_tag :description, "Why I would make a good home:" %>
     <%= text_area_tag :description %>
     <%= hidden_field_tag :id, @application.id %>
     <%= hidden_field_tag :status, 'Pending' %>
@@ -49,3 +49,4 @@
   <% end %>
 </section>
 <% end %>
+<p><%= link_to "Admin Review", "/admin/applications/#{@application.id}" %></p>
