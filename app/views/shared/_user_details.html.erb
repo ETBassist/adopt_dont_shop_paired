@@ -1,5 +1,5 @@
 <p>Name: <%= application.user.name %></p>
-<p>Address: <%= application.user.full_address %></p>
+<p>Address: <%= "#{application.user.street_address}, #{application.user.city}, #{application.user.state} #{application.user.zip}" %></p>
 <p>Description: <%= application.description %></p>
 <p>Pets:</p>
 <ul>
