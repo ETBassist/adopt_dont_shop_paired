@@ -44,7 +44,7 @@ RSpec.describe Application, type: :model do
       create(:pet_application, application: application, pet: pet2, status: "approved")
       create(:pet_application, application: application, pet: pet3, status: "approved")
       application2 = create(:application)
-      create(:pet_application, application: application, pet: pet1, status: "pending")
+      create(:pet_application, application: application2, pet: pet1, status: "pending")
 
       expect(application.all_pet_apps_approved?).to eq(true)
       expect(application2.all_pet_apps_approved?).to eq(false)
