@@ -1,11 +1,11 @@
-<% content_for :title, "Start an Application" %>
-<p><%= link_to 'Start an Application', "/applications/new" %></p>
+<% content_for :title, 'Start an Application' %>
+<p><%= link_to 'Start an Application', '/applications/new' %></p>
 
 
 <h1>Pets</h1>
 
-<%= link_to 'Adoptable Pets', "/pets?adoptable=true" %> |
-<%= link_to 'Pets Pending Adoption', "/pets?adoptable=false" %>
+<%= link_to 'Adoptable Pets', '/pets?adoptable=true' %> |
+<%= link_to 'Pets Pending Adoption', '/pets?adoptable=false' %>
 
 <p>
   <strong>
@@ -16,14 +16,14 @@
 <div class="all-pets">
   <% @pets.each do |pet| %>
     <div id="pet-<%= pet.id %>" class="pet-container">
-      <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
+      <%= render partial: 'shared/pet_card', locals: { pet_value: pet } %>
 
       <div>
-        <%= link_to 'Update Pet', "/pets/#{pet.id}/edit", class: "Update" %> |
+        <%= link_to 'Update Pet', "/pets/#{pet.id}/edit", class: 'Update' %> |
         <% if pet.has_approvals? %>
           <p class="delete-inactive">Delete Pet</p>
         <% else %>
-          <%= link_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "Delete" %>
+          <%= link_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: 'Delete' %>
         <% end %>
       </div>
     </div>
@@ -31,9 +31,8 @@
 </div>
 
 <h3>Adopted Pets</h3>
-  <section class="adopted-pets">
-    <% @adopted_pets.each do |pet| %>
-      <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
-    <% end  %>
-
-  </section>
+<section class="adopted-pets">
+  <% @adopted_pets.each do |pet| %>
+    <%= render partial: 'shared/pet_card', locals: { pet_value: pet } %>
+  <% end  %>
+</section>

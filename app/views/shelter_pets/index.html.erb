@@ -6,22 +6,21 @@
 
 <p>
   <strong>
-    Total pets: <%= @pets.count %>
+    Total pets: <%= @pets.count_of_pets %>
   </strong>
 </p>
 
-<%= link_to 'Create Pet', "/shelters/#{@shelter.id}/pets/new", class: "Create" %>
+<%= link_to 'Create Pet', "/shelters/#{@shelter.id}/pets/new", class: 'Create' %>
 
 <div class="all-pets">
   <% @pets.each do |pet| %>
-      <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
+      <%= render partial: 'shared/pet_card', locals: { pet_value: pet } %>
   <% end %>
 </div>
 
 <h3>Adopted Pets</h3>
 <section class="adopted-pets">
   <% @adopted_pets.each do |pet| %>
-      <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
+      <%= render partial: 'shared/pet_card', locals: { pet_value: pet } %>
   <% end  %>
-
 </section>

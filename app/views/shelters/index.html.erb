@@ -1,5 +1,5 @@
-<% content_for :title, "All Shelters" %>
-<p>Do you adopt out pets? Add a <%= link_to 'New Shelter', "/shelters/new", class: "Create" %></p>
+<% content_for :title, 'All Shelters' %>
+<p>Do you adopt out pets? Add a <%= link_to 'New Shelter', '/shelters/new', class: 'Create' %></p>
 <section class="best-shelters">
   <h2>Best Shelters</h2>
   <% @best_shelters.each do |shelter| %>
@@ -7,12 +7,12 @@
       <h3>
         <%= link_to shelter.name, "/shelters/#{shelter.id}"%>
       </h3>
-      <%= link_to "Update Shelter", "/shelters/#{shelter.id}/edit", class: "Update" %> |
+      <%= link_to 'Update Shelter', "/shelters/#{shelter.id}/edit", class: "Update" %> |
 
       <% if shelter.has_approvals? %>
         <p class="delete-inactive">Delete Shelter</p>
       <% else %>
-        <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "Delete" %>
+        <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: 'Delete' %>
       <% end %>
   <% end %>
 </section>
@@ -20,8 +20,8 @@
 <br />
 <section class="all-shelters">
   <h2>All Shelters</h2>
-  <%= link_to 'Sort By: Number of Adoptable Pets', "/shelters/?sort=adoptable"%> |
-  <%= link_to 'Sort By: Alphabetical', "/shelters/?sort=alphabetical"%>
+  <%= link_to 'Sort By: Number of Adoptable Pets', '/shelters/?sort=adoptable'%> |
+  <%= link_to 'Sort By: Alphabetical', '/shelters/?sort=alphabetical'%>
 
   <% @shelters.each do |shelter| %>
     <hr>
@@ -29,12 +29,12 @@
       <h3>
         <%= link_to shelter.name, "/shelters/#{shelter.id}"%>
       </h3>
-      <%= link_to "Update Shelter", "/shelters/#{shelter.id}/edit", class: "Update" %> |
+      <%= link_to 'Update Shelter', "/shelters/#{shelter.id}/edit", class: 'Update' %> |
 
       <% if shelter.has_approvals? %>
         <p class="delete-inactive">Delete Shelter</p>
       <% else %>
-        <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: "Delete" %>
+        <%= link_to 'Delete Shelter', "/shelters/#{shelter.id}", method: :delete, class: 'Delete' %>
       <% end %>
     </div>
   <% end %>

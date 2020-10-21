@@ -8,8 +8,7 @@
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
 
-<% if @user.average_review_rating.nil? %>
-<% else %>
+<% if @user.average_review_rating %>
   <p>
     <strong>Average Review Score: </strong>
     <%= @user.average_review_rating %>
@@ -19,24 +18,24 @@
 <% if @best_review %>
   <section class="best">
     <h3>Best Review</h3>
-    <%= render partial: "show_review", locals: { review: @best_review } %>
+    <%= render partial: 'show_review', locals: { review: @best_review } %>
   </section>
 
   <section class="worst">
     <h3>Worst Review</h3>
-    <%= render partial: "show_review", locals: { review: @worst_review } %>
+    <%= render partial: 'show_review', locals: { review: @worst_review } %>
   </section>
 
   <section class="all-reviews">
     <h3>All Reviews</h3>
     <% @user.reviews.each do |review| %>
-      <%= render partial: "show_review", locals: { review: review } %>
+      <%= render partial: 'show_review', locals: { review: review } %>
     <% end %>
   </section>
 <% else %>
   <p>No Reviews to Show</p>
   <h3>Ready to get started? Here are some options:</h3>
-  <p><%= link_to "View Pets", "/pets" %></p>
-  <p><%= link_to "Find a Shelter", "/shelters" %></p>
-  <p><%= link_to "Start an Application", "/applications/new" %></p>
+  <p><%= link_to 'View Pets', '/pets' %></p>
+  <p><%= link_to 'Find a Shelter', '/shelters' %></p>
+  <p><%= link_to 'Start an Application', '/applications/new' %></p>
 <% end %>

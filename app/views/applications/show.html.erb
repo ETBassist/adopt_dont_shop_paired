@@ -1,9 +1,9 @@
-<% content_for :title, "Application Information" %>
+<% content_for :title, 'Application Information' %>
 
 <h2>Application</h2>
 <p>Pets will be added to this area once you add them to the application.</p>
 <section class="application-information">
-  <%= render partial: "shared/user_details", locals: {application: @application} %>
+  <%= render partial: 'shared/user_details', locals: {application: @application} %>
   <p>Application Status: <%= @application.status %></p>
 </section>
 
@@ -18,8 +18,9 @@
       <%= label_tag :pet_name %>
       <%= search_field_tag :pet_name, 'Find Pet' %>
       <%= hidden_field_tag :id, @application.id %>
-      <%= submit_tag "Submit" %>
+      <%= submit_tag 'Submit' %>
     <% end %>
+
     <h4>Matching Pets</h4>
     <p>Please select a pet or pets to add to your application.</p>
       <div class="all-pets">
@@ -30,7 +31,7 @@
             <% else %>
               <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
             <% end %>
-            <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
+            <%= render partial: 'shared/pet_card', locals: { pet_value: pet } %>
           </div>
         <% end %>
       </div>
@@ -38,17 +39,18 @@
 <% end %>
 
 <% if @application.has_pets? && @application.status == 'In Progress' %>
-<section class="app-submit">
-  <h3>Application Submission</h3>
-  <p>Ready to submit your application? Fill in why you want to adopt these pets and about your living situation. Submit, we will review, and get back to you soon!</p>
+  <section class="app-submit">
+    <h3>Application Submission</h3>
+    <p>Ready to submit your application? Fill in why you want to adopt these pets and about your living situation. Submit, we will review, and get back to you soon!</p>
 
-  <%= form_tag "/applications/#{@application.id}", method: :patch do %>
-    <%= label_tag :description, "Why I would make a good home:" %>
-    <%= text_area_tag :description %>
-    <%= hidden_field_tag :id, @application.id %>
-    <%= hidden_field_tag :status, 'Pending' %>
-    <%= submit_tag "Submit" %>
-  <% end %>
-</section>
+    <%= form_tag "/applications/#{@application.id}", method: :patch do %>
+      <%= label_tag :description, 'Why I would make a good home:' %>
+      <%= text_area_tag :description %>
+      <%= hidden_field_tag :id, @application.id %>
+      <%= hidden_field_tag :status, 'Pending' %>
+      <%= submit_tag 'Submit' %>
+    <% end %>
+  </section>
 <% end %>
-<p><%= link_to "Admin Review", "/admin/applications/#{@application.id}" %></p>
+
+<p><%= link_to 'Admin Review', "/admin/applications/#{@application.id}" %></p>
