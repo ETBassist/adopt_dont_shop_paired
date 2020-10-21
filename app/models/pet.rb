@@ -3,6 +3,8 @@ class Pet < ApplicationRecord
   has_many :pet_applications, dependent: :destroy
   has_many :applications, through: :pet_applications
 
+  validates_presence_of :name, :image
+
   def self.display_by(param)
     if param == 'true'
       where(adoptable: true)

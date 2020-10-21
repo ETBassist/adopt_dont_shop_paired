@@ -34,6 +34,83 @@ RSpec.describe Application, type: :model do
 
       expect(application.pets.last).to eq(pet)
     end
-  end
 
+    it '.all_pet_apps_approved?' do
+      application = create(:application)
+      pet1 = create(:pet)
+      pet2 = create(:pet)
+      pet3 = create(:pet)
+      create(:pet_application, application: application, pet: pet1, status: "approved")
+      create(:pet_application, application: application, pet: pet2, status: "approved")
+      create(:pet_application, application: application, pet: pet3, status: "approved")
+      application2 = create(:application)
+      create(:pet_application, application: application2, pet: pet1, status: "pending")
+
+      expect(application.all_pet_apps_approved?).to eq(true)
+      expect(application2.all_pet_apps_approved?).to eq(false)
+    end
+
+    it ".approve_adoption" do
+      application = create(:application)
+      pet1 = create(:pet)
+      pet2 = create(:pet)
+      pet3 = create(:pet)
+      create(:pet_application, application: application, pet: pet1, status: "approved")
+      create(:pet_application, application: application, pet: pet2, status: "approved")
+      create(:pet_application, application: application, pet: pet3, status: "approved")
+      application.approve_adoption
+      expect(application.status).to eq("Approved")
+      application.pets.each do |pet|
+        expect(pet.adoptable).to eq(false)
+      end
+    end
+
+    it ".reject_adoption" do
+      application = create(:application)
+      pet1 = create(:pet)
+      pet2 = create(:pet)
+      pet3 = create(:pet)
+      create(:pet_application, application: application, pet: pet1, status: "approved")
+      create(:pet_application, application: application, pet: pet2, status: "approved")
+      create(:pet_application, application: application, pet: pet3, status: "rejected")
+      application.reject_adoption
+      expect(application.status).to eq("Rejected")
+      application.pets.each do |pet|
+        expect(pet.adoptable).to eq(true)
+      end
+    end
+
+    it ".any_pet_app_rejected?" do
+      application = create(:application)
+      pet1 = create(:pet)
+      pet2 = create(:pet)
+      pet3 = create(:pet)
+      create(:pet_application, application: application, pet: pet1, status: "approved")
+      create(:pet_application, application: application, pet: pet2, status: "approved")
+      create(:pet_application, application: application, pet: pet3, status: "rejected")
+      expect(application.app_rejected?).to eq(true)
+    end
+
+    it '.check_status' do
+      application = create(:application)
+      pet1 = create(:pet)
+      pet2 = create(:pet)
+      pet3 = create(:pet)
+      pet4 = create(:pet)
+      create(:pet_application, application: application, pet: pet1, status: "approved")
+      create(:pet_application, application: application, pet: pet2, status: "approved")
+      create(:pet_application, application: application, pet: pet3, status: "approved")
+      application2 = create(:application)
+      create(:pet_application, application: application2, pet: pet4, status: "rejected")
+      
+      application.check_status
+      expect(application.status).to eq("Approved")
+      application.pets.each do |pet|
+        expect(pet.adoptable).to eq(false)
+      end
+      application2.check_status
+      expect(application2.status).to eq("Rejected")
+      expect(application2.pets.first.adoptable).to eq(true)
+    end
+  end
 end
