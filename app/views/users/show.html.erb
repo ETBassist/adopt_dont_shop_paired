@@ -8,11 +8,11 @@
   <%= @user.city %>, <%= @user.state %> <%= @user.zip %>
 </p>
 
-<% if @user.reviews.average(:rating).nil? %>
+<% if @user.average_review_rating.nil? %>
 <% else %>
   <p>
     <strong>Average Review Score: </strong>
-    <%= @user.reviews.average(:rating) %>
+    <%= @user.average_review_rating %>
   </p>
 <% end %>
 
