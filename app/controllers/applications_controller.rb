@@ -22,6 +22,7 @@ class ApplicationsController < ApplicationController
   end
 
   private
+
   def app_params
     params.permit(:status, :description)
   end
@@ -31,8 +32,8 @@ class ApplicationsController < ApplicationController
       app = user.applications.create(given_params)
       redirect_to "/applications/#{app.id}"
     else
-      flash.notice = "Invalid User Name"
-      redirect_to "/applications/new"
+      flash.notice = 'Invalid User Name'
+      redirect_to '/applications/new'
     end
   end
 
@@ -40,7 +41,7 @@ class ApplicationsController < ApplicationController
     if given_params[:pet]
       application.add_pet(given_params[:pet])
     elsif given_params[:description].empty?
-      flash.notice = "Required field: Description"
+      flash.notice = 'Required field: Description'
     elsif given_params[:status]
       application.update(app_params)
     end
@@ -48,7 +49,7 @@ class ApplicationsController < ApplicationController
 
   def check_search_results(given_params, pets)
     if given_params[:pet_name] && pets.empty?
-      flash.now.notice = "Could not find a pet by that name"
+      flash.now.notice = 'Could not find a pet by that name'
     elsif pets.nil?
       @pets = []
     end
