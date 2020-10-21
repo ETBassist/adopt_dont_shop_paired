@@ -3,7 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def self.sorted_by(param)
     if param == 'adoptable'
-      joins(:pets).where('pets.adoptable = true').group(:id).order('count(pets.adoptable) desc')
+      joins(:pets).where('pets.adoptable = true').group(:id).order(Arel.sql('count(pets.adoptable) desc'))
     elsif param == 'alphabetical'
       order(:name)
     elsif param == 'highest'
