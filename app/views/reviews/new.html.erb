@@ -1,6 +1,7 @@
 <% content_for :title, "Add New Review" %>
 <h1>New Review</h1>
 <p>An image is optional: all other fields are required</p>
+<p>If you are not a user yet, <%= link_to 'Create a New User', '/users/new' %> </p>
 <%= form_tag '/reviews' do %>
   <div class="actions">
     <%= label_tag :rating %>
