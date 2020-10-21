@@ -24,7 +24,7 @@
 <div class="shelter-links">
   <%= link_to "Update Shelter", "/shelters/#{@shelter.id}/edit", class: "Update" %> |
   <% if @shelter.has_approvals? %>
-    Delete Shelter
+    <p class="delete-inactive">Delete Shelter</p>
   <% else %>
     <%= link_to 'Delete Shelter', "/shelters/#{@shelter.id}", method: :delete, class: "Delete" %>
   <% end %>
