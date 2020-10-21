@@ -21,7 +21,7 @@ describe "As a visitor" do
 
       @review = Review.create!(
         title: 'They are so great!',
-        rating: 5,
+        rating: 4,
         content: 'I adopted by bun bun through this shelter and they were so great.',
         user: @user,
         shelter: @shelter
@@ -32,7 +32,7 @@ describe "As a visitor" do
       visit "/reviews/#{@review.id}/edit"
 
       expect(page).to have_field(:title, with: @review.title)
-      expect(page).to have_select(:rating, with_selected: @review.rating)
+      expect(page).to have_select(:rating, selected: @review.rating.to_s)
       expect(page).to have_field(:content, with: @review.content)
       expect(page).to have_field(:name, with: @user.name)
     end
