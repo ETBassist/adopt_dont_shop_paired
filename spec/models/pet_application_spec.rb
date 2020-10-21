@@ -7,9 +7,11 @@ RSpec.describe PetApplication, type: :model do
   end
 
   describe "model methods" do
-    application = create(:application)
-    pet = create(:pet)
-    pet_app = create(:pet_application, pet: pet, application: application)
-    expect(PetApplication.with_ids(pet.id, application.id)).to eq(pet_app)
+    it ".with_ids" do
+      application = create(:application)
+      pet = create(:pet)
+      pet_app = create(:pet_application, pet: pet, application: application)
+      expect(PetApplication.with_ids(pet.id, application.id)).to eq(pet_app)
+    end
   end
 end
