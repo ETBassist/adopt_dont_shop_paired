@@ -7,7 +7,7 @@ class AdminApplicationsController < ApplicationController
     pet_application = PetApplication.find_by(pet_id: params[:pet], application_id: params[:id])
     pet_application.update(status: params[:status])
     application = Application.find(params[:id])
-    if application.pet_applications.all? { |pet_app| pet_app.status == "approved" }
+    if application.all_pet_apps_approved?
       application.status = "Approved"
       application.pets.each do |pet|
         pet.adoptable = false
