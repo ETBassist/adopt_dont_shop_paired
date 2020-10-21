@@ -31,11 +31,5 @@ RSpec.describe User, type: :model do
       expect(user.worst_review).to eq(review2)
       expect(user.worst_review).to_not eq(review1)
     end
-
-    it "full_address" do
-      user = create(:user)
-      address = "#{user.street_address} #{user.city}, #{user.state} #{user.zip}"
-      expect(user.full_address).to eq(address)
-    end
   end
 end
