@@ -88,7 +88,7 @@ RSpec.describe Application, type: :model do
       create(:pet_application, application: application, pet: pet1, status: "approved")
       create(:pet_application, application: application, pet: pet2, status: "approved")
       create(:pet_application, application: application, pet: pet3, status: "rejected")
-      expect(application.any_pet_app_rejected?).to eq(true)
+      expect(application.app_rejected?).to eq(true)
     end
   end
 end
