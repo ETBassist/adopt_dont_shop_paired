@@ -6,6 +6,10 @@ RSpec.describe User, type: :model do
     it { should have_many :applications }
   end
 
+  describe "validations" do
+    it { should validate_presence_of :name }
+  end
+
   describe "instance methods" do
     it ".best_review" do
       user = create(:user)

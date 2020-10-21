@@ -47,9 +47,9 @@ class ApplicationsController < ApplicationController
   end
 
   def check_search_results(given_params, pets)
-    if given_params[:pet_name] && !pets.nil?
-      flash.notice = "Could not find a pet by that name"
-    else
+    if given_params[:pet_name] && pets.empty?
+      flash.now.notice = "Could not find a pet by that name"
+    elsif pets.nil?
       @pets = []
     end
   end
