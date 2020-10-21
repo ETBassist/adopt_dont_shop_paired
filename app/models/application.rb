@@ -15,6 +15,14 @@ class Application < ApplicationRecord
     pets << Pet.find(pet_id)
   end
 
+  def check_status
+    if all_pet_apps_approved?
+      approve_adoption
+    elsif app_rejected?
+      reject_adoption
+    end
+  end
+
   def all_pet_apps_approved?
     pet_applications.all? { |pet_app| pet_app.status == "approved" }
   end
