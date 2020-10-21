@@ -5,7 +5,7 @@
 <%= form_tag("/reviews/#{@review.id}", method: :patch) do %>
   <div class="actions">
     <%= label_tag :rating %>
-    <%= text_field_tag :rating, @review.rating %>
+    <%= select_tag(:rating, options_for_select([1, 2, 3, 4, 5], @review.rating)) %>
   </div>
 
   <div class="actions">
