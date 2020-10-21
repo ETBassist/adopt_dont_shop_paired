@@ -40,7 +40,7 @@
 
     <% @reviews.each do |review| %>
       <div class="review">
-        <p><%= image_tag review.image if review.image %></p>
+        <p><%= image_tag review.image, width: "280px" if review.image %></p>
         <div class="review-info">
           <p>Rating: <%= review.rating %></p>
           <p><strong><%= review.title %></strong></p>
