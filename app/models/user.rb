@@ -9,4 +9,8 @@ class User < ApplicationRecord
   def worst_review
     reviews.order(:rating).limit(1).last
   end
+
+  def average_review_rating
+    reviews.average(:rating)
+  end
 end
