@@ -8,12 +8,7 @@ class AdminApplicationsController < ApplicationController
     pet_application.update(status: params[:status])
     application = Application.find(params[:id])
     if application.all_pet_apps_approved?
-      application.status = "Approved"
-      application.pets.each do |pet|
-        pet.adoptable = false
-        pet.save
-      end
-      application.save
+      application.approve_adoption
     elsif application.pet_applications.all?(&:status)
       application.status = "Rejected"
       application.save
