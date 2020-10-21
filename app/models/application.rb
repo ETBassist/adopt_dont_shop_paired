@@ -18,4 +18,13 @@ class Application < ApplicationRecord
   def all_pet_apps_approved?
     pet_applications.all? { |pet_app| pet_app.status == "approved" }
   end
+
+  def approve_adoption
+    self.status = "Approved"
+    pets.each do |pet|
+      pet.adoptable = false
+      pet.save
+    end
+    save
+  end
 end
