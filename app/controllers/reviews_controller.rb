@@ -12,12 +12,12 @@ class ReviewsController < ApplicationController
     @review.user = @user
     check_default_image
     if @user.nil?
-      flash.notice = 'Failed to create review: User must exist'
+      flash.now.notice = 'Failed to create review: User must exist'
       render :new
     elsif @review.save
       redirect_to "/shelters/#{@shelter.id}"
     else
-      flash.notice = "Please fill out all required fields"
+      flash.now.notice = "Please fill out all required fields"
       render :new
     end
   end
@@ -27,12 +27,12 @@ class ReviewsController < ApplicationController
 
   def update
     if @user.nil?
-      flash.notice = 'Failed to edit review: User must exist'
+      flash.now.notice = 'Failed to edit review: User must exist'
       render :edit
     elsif @review.update(review_params)
       redirect_to "/shelters/#{@review.shelter.id}"
     else
-      flash.notice = "Please fill out all required fields"
+      flash.now.notice = "Please fill out all required fields"
       render :edit
     end
   end
