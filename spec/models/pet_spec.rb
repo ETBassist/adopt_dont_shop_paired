@@ -7,6 +7,10 @@ describe Pet, type: :model do
     it { should have_many(:applications).through(:pet_applications) }
   end
 
+  describe 'validations' do
+    it { should validate_presence_of :name }
+  end
+
   describe 'class methods' do
     it '.display_by' do
       pet1 = create(:pet, adoptable: true)
