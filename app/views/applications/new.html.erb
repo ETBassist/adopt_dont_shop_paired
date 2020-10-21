@@ -1,6 +1,9 @@
-<% content_for :title, "Create a New Application" %>
+<% content_for :title, 'Create a New Application' %>
+
 <h1>New Application</h1>
-<p>New with us? <%= link_to 'Create New User', "/users/new" %></p>
+
+<p>New with us? <%= link_to 'Create New User', '/users/new' %></p>
+
 <section>
   <%= form_tag '/applications' do %>
     <div class="actions">
@@ -8,11 +11,10 @@
       <%= text_field_tag :user_name %>
     </div>
 
-    <%= hidden_field_tag :status, "In Progress" %>
+    <%= hidden_field_tag :status, 'In Progress' %>
 
     <div class="actions">
       <%= submit_tag 'Submit' %>
     </div>
   <% end %>
-
 </section>
