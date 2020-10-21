@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
     elsif @review.save
       redirect_to "/shelters/#{@shelter.id}"
     else
-      flash.now.notice = "Please fill out all required fields"
+      flash.now.notice = 'Please fill out all required fields'
       render :new
     end
   end
@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
     elsif @review.update(review_params)
       redirect_to "/shelters/#{@review.shelter.id}"
     else
-      flash.now.notice = "Please fill out all required fields"
+      flash.now.notice = 'Please fill out all required fields'
       render :edit
     end
   end
@@ -67,7 +67,7 @@ class ReviewsController < ApplicationController
   end
 
   def check_default_image
-    if params[:image] == ""
+    if params[:image] == ''
       @review.default_image
     end
   end

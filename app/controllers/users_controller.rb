@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def create
     if User.find_by(name: params[:name])
       flash.notice = 'User already exists!'
-      redirect_to "/users/new"
+      redirect_to '/users/new'
     else
       user = User.create(user_params)
       redirect_to "/users/#{user.id}"
