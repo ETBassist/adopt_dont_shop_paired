@@ -3,19 +3,19 @@
 
 <h2>Application</h2>
 <p><strong>Status: <%= @application.status %></strong></p>
-<%= render partial: "shared/user_details", locals: {application: @application} %>
+<%= render partial: 'shared/user_details', locals: {application: @application} %>
 
 <h3>Pet Decisions</h3>
 <% @application.pets.each do |pet| %>
   <div id="pet-<%= pet.id %>">
-    <%= image_tag pet.image if pet.image %>
+    <%= image_tag pet.image %>
     <h4><%= pet.name %></h4>
     <% if !pet.adoptable %>
       <p>Pet Unavailable</p>
     <% elsif pet.pet_application(@application.id).status.nil? %>
       <%= button_to 'Approve', "/admin/applications/#{@application.id}?pet=#{pet.id}&status=approved", method: :patch %>
       <%= button_to 'Reject',  "/admin/applications/#{@application.id}?pet=#{pet.id}&status=rejected", method: :patch %>
-    <% elsif pet.pet_application(@application.id).status == "approved"  %>
+    <% elsif pet.pet_application(@application.id).status == 'approved'  %>
       <p>Approved</p>
     <% else %>
       <p>Rejected</p>
