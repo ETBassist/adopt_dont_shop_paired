@@ -22,16 +22,18 @@
     <% end %>
     <h4>Matching Pets</h4>
     <p>Please select a pet or pets to add to your application.</p>
-      <% @pets.each do |pet| %>
-        <div id="pet-<%= pet.id %>">
-          <% if @application.has_pet?(pet) %>
-            <p><strong>Already Added</strong></p>
-          <% else %>
-            <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
-          <% end %>
-          <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
-        </div>
-      <% end %>
+      <div class="all-pets">
+        <% @pets.each do |pet| %>
+          <div id="pet-<%= pet.id %>" class="pet-container">
+            <% if @application.has_pet?(pet) %>
+              <strong>Already Added</strong>
+            <% else %>
+              <%= button_to 'Adopt this Pet', "/applications/#{@application.id}", method: :patch, params: {pet: pet} %>
+            <% end %>
+            <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
+          </div>
+        <% end %>
+      </div>
   </section>
 <% end %>
 

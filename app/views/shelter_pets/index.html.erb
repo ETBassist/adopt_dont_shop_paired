@@ -12,13 +12,14 @@
 
 <%= link_to 'Create Pet', "/shelters/#{@shelter.id}/pets/new", class: "Create" %>
 
+<div class="all-pets">
   <% @pets.each do |pet| %>
-    <hr>
       <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
   <% end %>
+</div>
 
+<h3>Adopted Pets</h3>
 <section class="adopted-pets">
-  <h3>Adopted Pets</h3>
   <% @adopted_pets.each do |pet| %>
       <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
   <% end  %>

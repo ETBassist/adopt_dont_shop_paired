@@ -13,21 +13,25 @@
   </strong>
 </p>
 
+<div class="all-pets">
   <% @pets.each do |pet| %>
-    <hr>
-    <div id="pet-<%= pet.id %>">
+    <div id="pet-<%= pet.id %>" class="pet-container">
       <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
 
-      <%= link_to 'Update Pet', "/pets/#{pet.id}/edit", class: "Update" %> |
-      <% if pet.has_approvals? %>
-        <p>Delete Pet</p>
-      <% else %>
-        <%= link_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "Delete" %>
-      <% end %>
+      <div>
+        <%= link_to 'Update Pet', "/pets/#{pet.id}/edit", class: "Update" %> |
+        <% if pet.has_approvals? %>
+          <p class="delete-inactive">Delete Pet</p>
+        <% else %>
+          <%= link_to 'Delete Pet', "/pets/#{pet.id}", method: :delete, class: "Delete" %>
+        <% end %>
+      </div>
     </div>
   <% end %>
+</div>
+
+<h3>Adopted Pets</h3>
   <section class="adopted-pets">
-    <h3>Adopted Pets</h3>
     <% @adopted_pets.each do |pet| %>
       <%= render partial: "shared/pet_card", locals: { pet_value: pet } %>
     <% end  %>

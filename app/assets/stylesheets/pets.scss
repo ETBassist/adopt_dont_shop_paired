@@ -1,6 +1,23 @@
 // Place all the styles related to the Pets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.all-pets, .adopted-pets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.pet-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.pet-container input[type=submit] {
+  width: 280px;
+}
+
 .pet {
   background-color: #D2EFE9;
   border-radius: 20px;
@@ -15,4 +32,10 @@
 
 .pet p {
   margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.delete-inactive {
+  display: inline;
+  color: #AAA;
 }
