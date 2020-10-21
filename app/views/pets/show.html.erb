@@ -1,30 +1,32 @@
 <% content_for :title, "#{@pet.name} Information and Adoption Status" %>
+<div class="pet-container">
+  <%= render partial: "shared/pet_card", locals: { pet_value: @pet } %>
 
-<%= render partial: 'shared/pet_card', locals: { pet_value: @pet } %>
-
-<%= link_to 'View all Applications', "/pets/#{@pet.id}?show_apps=true" %>
-
-<div>
-  <% if @pet.applications.any? && @view == 'true' %>
-    <% @pet.applications.each do |app| %>
-      <p><%= link_to app.user.name, "/applications/#{app.id}" %></p>
+  <div class="pet-show-application-information">
+    <p><%= link_to 'View all Applications', "/pets/#{@pet.id}?show_apps=true" %></p>
+    <% if @pet.applications.any? && @view == "true" %>
+      <% @pet.applications.each do |app| %>
+        <hr>
+        <p><%= link_to app.user.name, "/applications/#{app.id}" %></p>
+      <% end %>
+    <% elsif @view == "true" %>
+      <p><%= @pet.name %> has no applications</p>
+      <p><%= link_to "Start an Application!", "/applications/new" %></p>
     <% end %>
-  <% elsif @view == 'true' %>
-    <p><%= @pet.name %> has no applications</p>
-    <p><%= link_to 'Start an Application!', '/applications/new' %></p>
-  <% end %>
+  </div>
+
+  <div>
+    <% if @pet.adoptable? %>
+      <%= link_to "Change to Pending Adoption", "/pets/#{@pet.id}/pending", method: :patch %> |
+    <% else %>
+      <%= link_to "Change to Adoptable", "/pets/#{@pet.id}/adoptable", method: :patch %> |
+    <% end %>
+
+    <%= link_to 'Update Pet', "/pets/#{@pet.id}/edit", class: "Update" %> |
+    <% if @pet.has_approvals? %>
+      <p class="delete-inactive">Delete Pet</p>
+    <% else %>
+      <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: "Delete" %>
+    <% end %>
+  </div>
 </div>
-
-<% if @pet.adoptable? %>
-  <%= link_to 'Change to Pending Adoption', "/pets/#{@pet.id}/pending", method: :patch %> |
-<% else %>
-  <%= link_to 'Change to Adoptable', "/pets/#{@pet.id}/adoptable", method: :patch %> |
-<% end %>
-
-<%= link_to 'Update Pet', "/pets/#{@pet.id}/edit", class: 'Update' %> |
-
-<% if @pet.has_approvals? %>
-  <p class="delete-inactive">Delete Pet</p>
-<% else %>
-  <%= link_to 'Delete Pet', "/pets/#{@pet.id}", method: :delete, class: 'Delete' %>
-<% end %>
