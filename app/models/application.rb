@@ -27,4 +27,10 @@ class Application < ApplicationRecord
     end
     save
   end
+
+  def reject_adoption
+    self.status = "Rejected"
+    save
+  end
 end
+
