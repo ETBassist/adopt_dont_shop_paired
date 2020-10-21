@@ -4,9 +4,9 @@ class Pet < ApplicationRecord
   has_many :applications, through: :pet_applications
 
   def self.display_by(param)
-    if param == "true"
+    if param == 'true'
       where(adoptable: true)
-    elsif param == "false"
+    elsif param == 'false'
       where(adoptable: false)
     else
       order(adoptable: :desc)
@@ -27,9 +27,9 @@ class Pet < ApplicationRecord
 
   def status
     if adoptable?
-      "Adoptable"
+      'Adoptable'
     else
-      "Pending Adoption"
+      'Pending Adoption'
     end
   end
 
