@@ -9,7 +9,7 @@ class AdminApplicationsController < ApplicationController
     application = Application.find(params[:id])
     if application.all_pet_apps_approved?
       application.approve_adoption
-    elsif application.pet_applications.all?(&:status)
+    elsif application.app_rejected?
       application.reject_adoption
     end
     redirect_to "/admin/applications/#{params[:id]}"
