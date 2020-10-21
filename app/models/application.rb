@@ -24,7 +24,7 @@ class Application < ApplicationRecord
   end
 
   def all_pet_apps_approved?
-    pet_applications.all? { |pet_app| pet_app.status == "approved" }
+    pet_applications.all? { |pet_app| pet_app.status == 'approved' }
   end
 
   def app_rejected?
@@ -32,7 +32,7 @@ class Application < ApplicationRecord
   end
 
   def approve_adoption
-    self.status = "Approved"
+    self.status = 'Approved'
     pets.each do |pet|
       pet.adoptable = false
       pet.save
@@ -41,7 +41,7 @@ class Application < ApplicationRecord
   end
 
   def reject_adoption
-    self.status = "Rejected"
+    self.status = 'Rejected'
     save
   end
 end
