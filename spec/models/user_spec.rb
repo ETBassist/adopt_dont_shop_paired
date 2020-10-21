@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "instance methods" do
-    it "best_review" do
+    it ".best_review" do
       user = create(:user)
 
       expect(user.best_review).to eq(nil)
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
       expect(user_2.best_review).to_not eq(review_2)
     end
 
-    it "worst_review" do
+    it ".worst_review" do
       user = create(:user)
 
       expect(user.worst_review).to eq(nil)
@@ -36,10 +36,15 @@ RSpec.describe User, type: :model do
       expect(user.worst_review).to_not eq(review1)
     end
 
-    it "full_address" do
+    it ".average_review_rating" do
       user = create(:user)
-      address = "#{user.street_address} #{user.city}, #{user.state} #{user.zip}"
-      expect(user.full_address).to eq(address)
+
+      expect(user.average_review_rating).to eq(nil)
+
+      review1 = create(:review, user: user, rating: 1)
+      review2 = create(:review, user: user, rating: 2)
+
+      expect(user.average_review_rating).to eq(1.5)
     end
   end
 end

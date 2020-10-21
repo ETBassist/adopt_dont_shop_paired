@@ -12,7 +12,7 @@ class User < ApplicationRecord
     reviews.order(:rating).limit(1).last
   end
 
-  def full_address
-    "#{self.street_address} #{self.city}, #{self.state} #{self.zip}"
+  def average_review_rating
+    reviews.average(:rating)
   end
 end
