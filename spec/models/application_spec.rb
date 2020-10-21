@@ -49,5 +49,20 @@ RSpec.describe Application, type: :model do
       expect(application.all_pet_apps_approved?).to eq(true)
       expect(application2.all_pet_apps_approved?).to eq(false)
     end
+
+    it ".approve_adoption" do
+      application = create(:application)
+      pet1 = create(:pet)
+      pet2 = create(:pet)
+      pet3 = create(:pet)
+      create(:pet_application, application: application, pet: pet1, status: "approved")
+      create(:pet_application, application: application, pet: pet2, status: "approved")
+      create(:pet_application, application: application, pet: pet3, status: "approved")
+      application.approve_adoption
+      expect(application.status).to eq("Approved")
+      application.pets.each do |pet|
+        expect(pet.adoptable).to eq(false)
+      end
+    end
   end
 end
