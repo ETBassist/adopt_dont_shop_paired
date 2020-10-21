@@ -1,13 +1,15 @@
 <% content_for :title, "Review Application #{@application.id}" %>
-<p>Status: <%= @application.status %></p>
+
 
 <h2>Application</h2>
+<p><strong>Status: <%= @application.status %></strong></p>
 <%= render partial: "shared/user_details", locals: {application: @application} %>
 
+<h3>Pet Decisions</h3>
 <% @application.pets.each do |pet| %>
   <div id="pet-<%= pet.id %>">
-    <%= pet.name %>
     <%= image_tag pet.image if pet.image %>
+    <h4><%= pet.name %></h4>
     <% if !pet.adoptable %>
       <p>Pet Unavailable</p>
     <% elsif pet.pet_application(@application.id).status.nil? %>
