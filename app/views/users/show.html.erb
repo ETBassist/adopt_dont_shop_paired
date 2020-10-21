@@ -15,6 +15,7 @@
   </p>
 <% end %>
 
+<h2>Highlighted Reviews</h2>
 <% if @best_review %>
   <section class="best">
     <h3>Best Review</h3>
@@ -27,7 +28,7 @@
   </section>
 
   <section class="all-reviews">
-    <h3>All Reviews</h3>
+    <h2>All Reviews</h2>
     <% @user.reviews.each do |review| %>
       <%= render partial: 'show_review', locals: { review: review } %>
     <% end %>
