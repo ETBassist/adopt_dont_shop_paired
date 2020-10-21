@@ -9,7 +9,7 @@ class Review < ApplicationRecord
   end
 
   def default_image
-    image = "https://cdn.iconscout.com/icon/premium/png-256-thumb/pet-117-805569.png"
+    image = 'https://cdn.iconscout.com/icon/premium/png-256-thumb/pet-117-805569.png'
     self.update(image: image)
     self.save
   end
