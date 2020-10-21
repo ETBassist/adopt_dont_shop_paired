@@ -1,22 +1,22 @@
 require 'rails_helper'
 
-describe "As a visitor" do
-  describe "when I visit the edit review path" do
+describe 'As a visitor' do
+  describe 'when I visit the edit review path' do
     before(:each) do
       @shelter = Shelter.create!(
         name: "Will's Pet Shelter",
-        address: "123 Main St",
-        city: "Boulder",
-        state: "CO",
+        address: '123 Main St',
+        city: 'Boulder',
+        state: 'CO',
         zip: "80309"
       )
 
       @user = User.create!(
-        name: "William Told",
-        street_address: "123 Main St",
-        city: "Boulder",
-        state: "CO",
-        zip: "80309"
+        name: 'William Told',
+        street_address: '123 Main St',
+        city: 'Boulder',
+        state: 'CO',
+        zip: '80309'
       )
 
       @review = Review.create!(
@@ -28,7 +28,7 @@ describe "As a visitor" do
       )
     end
 
-    it "I see a form that includes the reviews pre-populated data" do
+    it 'I see a form that includes the reviews pre-populated data' do
       visit "/reviews/#{@review.id}/edit"
 
       expect(page).to have_field(:title, with: @review.title)
@@ -37,7 +37,7 @@ describe "As a visitor" do
       expect(page).to have_field(:name, with: @user.name)
     end
 
-    it "I can fill in the form and submit changes to a review" do
+    it 'I can fill in the form and submit changes to a review' do
       visit "/reviews/#{@review.id}/edit"
 
       title = "I love my #{Faker::Creature::Dog.meme_phrase}"
@@ -46,14 +46,14 @@ describe "As a visitor" do
       fill_in :title, with: title
       fill_in :content, with: content
       
-      click_on("Update Review")
+      click_on('Update Review')
       expect(current_path).to eq("/shelters/#{@shelter.id}")
 
       expect(page).to have_content(title)
       expect(page).to have_content(content)
     end
 
-    it "I incorrectly edited a review" do
+    it 'I incorrectly edited a review' do
       visit "/shelters/#{@shelter.id}"
 
       click_link 'Edit'
@@ -69,7 +69,7 @@ describe "As a visitor" do
 
       click_link 'Edit'
 
-      fill_in :user_name, with: "GobbleGobble"
+      fill_in :user_name, with: 'GobbleGobble'
       click_on 'Update Review'
       expect(page).to have_content('Failed to edit review: User must exist')
     end
