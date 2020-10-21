@@ -42,7 +42,7 @@
 
     <% @reviews.each do |review| %>
       <div class="review">
-        <p><%= image_tag review.image, width: "280px" if review.image %></p>
+        <p><%= image_tag review.image, width: '280px' %></p>
         <div class="review-info">
           <p>Rating: <%= review.rating %></p>
           <p><strong><%= review.title %></strong></p>
@@ -50,7 +50,7 @@
           <p><em><%= link_to review.user.name, "/users/#{review.user_id}" %></em></p>
           <p>
             <%= link_to 'Edit', "/reviews/#{review.id}/edit" %> |
-            <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: "Delete" %>
+            <%= link_to 'Delete Review', "reviews/#{review.id}", method: :delete, class: 'Delete' %>
           </p>
         </div>
       </div>
