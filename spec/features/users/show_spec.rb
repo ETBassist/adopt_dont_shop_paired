@@ -71,6 +71,8 @@ describe 'As a visitor' do
       )
       visit "/users/#{@user.id}"
 
+      expect(page).to have_content('Highlighted Reviews')
+
       within('section.best') do
         expect(page).to have_content(@review.title)
         expect(page).to have_content(@review.rating)
