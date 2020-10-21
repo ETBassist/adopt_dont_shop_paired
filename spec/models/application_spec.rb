@@ -91,7 +91,7 @@ RSpec.describe Application, type: :model do
       expect(application.app_rejected?).to eq(true)
     end
 
-    it '/check_status' do
+    it '.check_status' do
       application = create(:application)
       pet1 = create(:pet)
       pet2 = create(:pet)
